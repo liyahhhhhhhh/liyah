@@ -24,14 +24,8 @@
         }
 
         body {
-            background:
-                radial-gradient(
-                    circle at 50% 0%,
-                    #ffffff 0%,
-                    #fff7fb 25%,
-                    #ffd9ea 55%,
-                    #f7a8ca 100%
-                );
+            background: #000000;
+            color: #1F51FF;
         }
 
         /* LEFT NAVIGATION */
@@ -52,7 +46,7 @@
         .navigation a {
             position: relative;
 
-            color: #555;
+            color: #1F51FF;
             text-decoration: none;
 
             font-family: "Unison Pro", Arial, sans-serif;
@@ -63,12 +57,10 @@
 
             transition:
                 color 0.25s ease,
-                opacity 0.25s ease;
+                transform 0.25s ease;
         }
 
-        /*
-        SCRATCH / STRIKE EFFECT
-        */
+        /* SCRATCH EFFECT */
 
         .navigation a::before,
         .navigation a::after {
@@ -79,7 +71,7 @@
             width: 108%;
             height: 1px;
 
-            background: #555;
+            background: #1F51FF;
 
             transform: scaleX(0);
             transform-origin: left center;
@@ -98,7 +90,8 @@
         /* HOVER */
 
         .navigation a:hover {
-            color: #777;
+            color: #135E77;
+            transform: translateX(3px);
         }
 
         .navigation a:hover::before {
@@ -109,10 +102,12 @@
             transform: scaleX(0.82);
         }
 
-        /* Slight movement when hovering */
+        /* SUBTLE BLUE GLOW */
 
         .navigation a:hover {
-            transform: translateX(3px);
+            text-shadow:
+                0 0 5px rgba(31, 81, 255, 0.6),
+                0 0 12px rgba(31, 81, 255, 0.25);
         }
     </style>
 </head>
@@ -120,16 +115,9 @@
 <body>
 
     <nav class="navigation">
-
         <a href="#">Hall Of Shame</a>
-
         <a href="#">Socials</a>
-
     </nav>
-
-</body>
-</html>
-    <div class="cloud four"></div>
 
 </body>
 </html>
