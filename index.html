@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <style>
+
+        /* =========================
+           FONTS
+           ========================= */
+
         @font-face {
             font-family: "Unison Pro";
             src: url("unison-pro-bold.otf") format("opentype");
@@ -12,6 +17,19 @@
             font-style: normal;
             font-display: swap;
         }
+
+        @font-face {
+            font-family: "Unison Pro Light";
+            src: url("unison-pro-light.otf") format("opentype");
+            font-weight: 300;
+            font-style: normal;
+            font-display: swap;
+        }
+
+
+        /* =========================
+           GENERAL
+           ========================= */
 
         * {
             margin: 0;
@@ -55,7 +73,10 @@
 
         .home-image.hidden {
             opacity: 0;
-            transform: translate(-50%, -50%) scale(0.95);
+
+            transform:
+                translate(-50%, -50%)
+                scale(0.95);
 
             pointer-events: none;
         }
@@ -72,6 +93,7 @@
             top: 35px;
 
             display: flex;
+
             flex-direction: row;
 
             align-items: center;
@@ -91,7 +113,9 @@
             color: #5975A7;
 
             font-family: "Unison Pro", sans-serif;
+
             font-size: 13px;
+
             font-weight: 700;
 
             letter-spacing: 0.08em;
@@ -107,10 +131,13 @@
         }
 
 
-        /* SCRATCH EFFECT */
+        /* =========================
+           SCRATCH EFFECT
+           ========================= */
 
         .navigation a::before,
         .navigation a::after {
+
             content: "";
 
             position: absolute;
@@ -118,6 +145,7 @@
             left: -5%;
 
             width: 110%;
+
             height: 1px;
 
             background: #5975A7;
@@ -126,7 +154,8 @@
 
             transform-origin: left center;
 
-            transition: transform 0.25s ease;
+            transition:
+                transform 0.25s ease;
         }
 
         .navigation a::before {
@@ -138,9 +167,12 @@
         }
 
 
-        /* HOVER */
+        /* =========================
+           HOVER
+           ========================= */
 
         .navigation a:hover {
+
             color: #5975A7;
 
             transform: translateX(4px);
@@ -159,7 +191,9 @@
         }
 
 
-        /* ACTIVE TAB */
+        /* =========================
+           ACTIVE TAB
+           ========================= */
 
         .navigation a.active::after {
             transform: scaleX(1);
@@ -170,22 +204,30 @@
         }
 
 
+        /* =========================
+           SEPARATOR
+           ========================= */
+
         .separator {
+
             color: #5975A7;
 
             font-family: Arial, sans-serif;
+
             font-size: 5px;
 
             display: flex;
+
             align-items: center;
         }
 
 
         /* =========================
-           CONTENT SECTIONS
+           PAGES
            ========================= */
 
         .page {
+
             position: fixed;
 
             inset: 0;
@@ -209,20 +251,25 @@
            ========================= */
 
         #shame {
+
             padding-top: 105px;
 
             padding-left: 5vw;
+
             padding-right: 5vw;
+
             padding-bottom: 80px;
 
             overflow-y: auto;
+
             overflow-x: hidden;
         }
 
 
-        /* Smaller / less overwhelming title */
+        /* TITLE STAYS BOLD */
 
         .shame-title {
+
             text-align: center;
 
             font-family: "Unison Pro", sans-serif;
@@ -242,6 +289,7 @@
            ========================= */
 
         .shame-grid {
+
             width: 100%;
 
             max-width: 1400px;
@@ -250,7 +298,8 @@
 
             display: grid;
 
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns:
+                repeat(3, 1fr);
 
             gap: 30px;
 
@@ -259,10 +308,11 @@
 
 
         /* =========================
-           BIG BOXES
+           BIG BOX
            ========================= */
 
         .shame-box {
+
             min-height: 420px;
 
             border: 1px solid #5975A7;
@@ -280,10 +330,12 @@
 
 
         /* =========================
-           NAME RECTANGLE
+           NAME BOX
+           LIGHT FONT
            ========================= */
 
         .name-box {
+
             width: 100%;
 
             height: 65px;
@@ -302,7 +354,9 @@
 
             color: #5975A7;
 
-            font-family: "Unison Pro", sans-serif;
+            font-family: "Unison Pro Light", sans-serif;
+
+            font-weight: 300;
 
             font-size: 12px;
 
@@ -311,10 +365,12 @@
 
 
         /* =========================
-           CONTEXT RECTANGLE
+           CONTEXT BOX
+           LIGHT FONT
            ========================= */
 
         .context-box {
+
             width: 100%;
 
             height: 115px;
@@ -331,7 +387,9 @@
 
             color: #5975A7;
 
-            font-family: "Unison Pro", sans-serif;
+            font-family: "Unison Pro Light", sans-serif;
+
+            font-weight: 300;
 
             font-size: 12px;
 
@@ -363,15 +421,20 @@
         @media (max-width: 850px) {
 
             #shame {
+
                 padding-left: 25px;
+
                 padding-right: 25px;
             }
 
             .shame-grid {
-                grid-template-columns: repeat(2, 1fr);
+
+                grid-template-columns:
+                    repeat(2, 1fr);
             }
 
             .shame-box {
+
                 min-height: 380px;
             }
         }
@@ -380,19 +443,24 @@
         @media (max-width: 520px) {
 
             .navigation {
+
                 left: 20px;
+
                 top: 25px;
             }
 
             #shame {
+
                 padding-top: 90px;
             }
 
             .shame-grid {
+
                 grid-template-columns: 1fr;
             }
 
             .shame-box {
+
                 min-height: 350px;
             }
         }
@@ -404,7 +472,9 @@
 <body>
 
 
-    <!-- CENTER IMAGE -->
+    <!-- =========================
+         CENTER IMAGE
+         ========================= -->
 
     <img
         src="image.jpeg"
@@ -414,24 +484,30 @@
     >
 
 
-    <!-- NAVIGATION -->
+    <!-- =========================
+         NAVIGATION
+         ========================= -->
 
     <nav class="navigation">
 
         <a
             href="#"
             id="shameTab"
-            onclick="openPage('shame', this)"
+            onclick="handleTab('shame', this)"
         >
             Hall Of Shame
         </a>
 
-        <span class="separator">●</span>
+
+        <span class="separator">
+            ●
+        </span>
+
 
         <a
             href="#"
             id="socialsTab"
-            onclick="openPage('socials', this)"
+            onclick="handleTab('socials', this)"
         >
             Socials
         </a>
@@ -439,7 +515,9 @@
     </nav>
 
 
-    <!-- HALL OF SHAME -->
+    <!-- =========================
+         HALL OF SHAME
+         ========================= -->
 
     <section
         class="page"
@@ -594,7 +672,9 @@
     </section>
 
 
-    <!-- SOCIALS -->
+    <!-- =========================
+         SOCIALS
+         ========================= -->
 
     <section
         class="page"
@@ -603,7 +683,34 @@
     </section>
 
 
+    <!-- =========================
+         JAVASCRIPT
+         ========================= -->
+
     <script>
+
+        function handleTab(pageName, clickedTab) {
+
+            /*
+             * If this tab is already active,
+             * return to the home screen.
+             */
+
+            if (clickedTab.classList.contains("active")) {
+
+                goHome();
+
+                return;
+            }
+
+
+            /*
+             * Otherwise open the selected page.
+             */
+
+            openPage(pageName, clickedTab);
+        }
+
 
         function openPage(pageName, clickedTab) {
 
@@ -619,16 +726,20 @@
             document
                 .querySelectorAll(".page")
                 .forEach(function(page) {
+
                     page.classList.remove("active");
+
                 });
 
 
-            /* Remove active state from all tabs */
+            /* Remove active state */
 
             document
                 .querySelectorAll(".navigation a")
                 .forEach(function(tab) {
+
                     tab.classList.remove("active");
+
                 });
 
 
@@ -639,14 +750,47 @@
                 .classList.add("active");
 
 
-            /* Underline selected tab */
+            /* Mark selected tab */
 
             clickedTab.classList.add("active");
+        }
 
 
-            /* Prevent jumping to top of page */
+        function goHome() {
 
-            event.preventDefault();
+            /*
+             * Show center image again
+             */
+
+            document
+                .getElementById("homeImage")
+                .classList.remove("hidden");
+
+
+            /*
+             * Hide all pages
+             */
+
+            document
+                .querySelectorAll(".page")
+                .forEach(function(page) {
+
+                    page.classList.remove("active");
+
+                });
+
+
+            /*
+             * Remove active underline
+             */
+
+            document
+                .querySelectorAll(".navigation a")
+                .forEach(function(tab) {
+
+                    tab.classList.remove("active");
+
+                });
         }
 
     </script>
