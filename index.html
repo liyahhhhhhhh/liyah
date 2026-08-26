@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,93 +10,143 @@
             src: url("unison-pro-bold.otf") format("opentype");
             font-weight: 700;
             font-style: normal;
+            font-display: swap;
         }
 
         * {
+            margin: 0;
+            padding: 0;
             box-sizing: border-box;
         }
 
-        html, body {
-            margin: 0;
+        html,
+        body {
             width: 100%;
             height: 100%;
-            overflow: hidden;
         }
 
         body {
             background: #000000;
-            color: #1F51FF;
+            overflow: hidden;
         }
 
-        /* LEFT NAVIGATION */
+        /* =========================
+           CENTER IMAGE
+           ========================= */
+
+        .home-image {
+            position: fixed;
+
+            left: 50%;
+            top: 50%;
+
+            transform: translate(-50%, -50%);
+
+            width: 400px;
+            max-width: 70vw;
+
+            transition:
+                opacity 0.5s ease,
+                transform 0.5s ease;
+
+            z-index: 5;
+        }
+
+        .home-image.hidden {
+            opacity: 0;
+            transform: translate(-50%, -50%) scale(0.95);
+
+            pointer-events: none;
+        }
+
+
+        /* =========================
+           NAVIGATION
+           ========================= */
 
         .navigation {
             position: fixed;
+
             left: 35px;
             top: 50%;
+
             transform: translateY(-50%);
 
             display: flex;
             flex-direction: column;
+
             gap: 14px;
 
-            z-index: 10;
+            z-index: 100;
         }
 
         .navigation a {
             position: relative;
 
-            color: #1F51FF;
-            text-decoration: none;
-
-            font-family: "Unison Pro", sans-serif;
-            font-weight: 700;
-            font-size: 13px;
-            letter-spacing: 0.08em;
+            display: inline-block;
 
             width: fit-content;
 
+            color: #1F51FF;
+
+            font-family: "Unison Pro", sans-serif;
+            font-size: 13px;
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
             transition:
                 color 0.25s ease,
-                transform 0.25s ease;
+                transform 0.25s ease,
+                text-shadow 0.25s ease;
         }
+
 
         /* SCRATCH EFFECT */
 
         .navigation a::before,
         .navigation a::after {
             content: "";
+
             position: absolute;
 
-            left: -4%;
-            width: 108%;
+            left: -5%;
+
+            width: 110%;
             height: 1px;
 
             background: #1F51FF;
 
             transform: scaleX(0);
+
             transform-origin: left center;
 
             transition: transform 0.25s ease;
         }
 
         .navigation a::before {
-            top: 42%;
+            top: 43%;
         }
 
         .navigation a::after {
-            top: 57%;
+            top: 58%;
         }
+
 
         /* HOVER */
 
         .navigation a:hover {
             color: #135E77;
-            transform: translateX(3px);
+
+            transform: translateX(4px);
 
             text-shadow:
                 0 0 5px rgba(31, 81, 255, 0.6),
-                0 0 12px rgba(31, 81, 255, 0.25);
+                0 0 15px rgba(31, 81, 255, 0.3);
         }
 
         .navigation a:hover::before {
@@ -104,17 +154,110 @@
         }
 
         .navigation a:hover::after {
-            transform: scaleX(0.82);
+            transform: scaleX(0.8);
         }
+
+
+        /* =========================
+           CONTENT SECTIONS
+           ========================= */
+
+        .page {
+            position: fixed;
+
+            inset: 0;
+
+            display: none;
+
+            padding: 60px;
+
+            color: #1F51FF;
+
+            font-family: "Unison Pro", sans-serif;
+        }
+
+        .page.active {
+            display: block;
+        }
+
     </style>
 </head>
 
+
 <body>
 
+
+    <!-- CENTER IMAGE -->
+
+    <img
+        src="image.jpeg"
+        class="home-image"
+        id="homeImage"
+        alt=""
+    >
+
+
+    <!-- NAVIGATION -->
+
     <nav class="navigation">
-        <a href="#">Hall Of Shame</a>
-        <a href="#">Socials</a>
+
+        <a href="#" onclick="openPage('shame')">
+            Hall Of Shame
+        </a>
+
+        <a href="#" onclick="openPage('socials')">
+            Socials
+        </a>
+
     </nav>
+
+
+    <!-- HALL OF SHAME -->
+
+    <section
+        class="page"
+        id="shame"
+    >
+    </section>
+
+
+    <!-- SOCIALS -->
+
+    <section
+        class="page"
+        id="socials"
+    >
+    </section>
+
+
+    <script>
+
+        function openPage(pageName) {
+
+            /* Hide center image */
+
+            document
+                .getElementById("homeImage")
+                .classList.add("hidden");
+
+
+            /* Hide all pages */
+
+            document
+                .querySelectorAll(".page")
+                .forEach(function(page) {
+                    page.classList.remove("active");
+                });
+
+
+            /* Show selected page */
+
+            document
+                .getElementById(pageName)
+                .classList.add("active");
+        }
+
+    </script>
 
 </body>
 </html>
