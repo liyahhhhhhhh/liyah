@@ -191,22 +191,24 @@
 
 
         /* =========================
-           HALL OF SHAME
+           HALL OF SHAME PAGE
            ========================= */
 
         #shame {
-            padding-top: 110px;
-            padding-left: 8vw;
-            padding-right: 8vw;
+            padding-top: 105px;
+            padding-left: 6vw;
+            padding-right: 6vw;
+            padding-bottom: 70px;
 
             overflow-y: auto;
+            overflow-x: hidden;
         }
 
         .shame-title {
             text-align: center;
 
             font-family: "Unison Pro", sans-serif;
-            font-size: clamp(30px, 5vw, 60px);
+            font-size: clamp(32px, 5vw, 58px);
             font-weight: 700;
 
             letter-spacing: 0.08em;
@@ -214,9 +216,14 @@
             margin-bottom: 55px;
         }
 
+
+        /* =========================
+           3 × 3 GRID
+           ========================= */
+
         .shame-grid {
             width: 100%;
-            max-width: 1200px;
+            max-width: 1250px;
 
             margin: 0 auto;
 
@@ -224,31 +231,57 @@
 
             grid-template-columns: repeat(3, 1fr);
 
-            grid-template-rows: repeat(3, 260px);
+            gap: 28px;
 
-            gap: 22px;
+            padding-bottom: 50px;
         }
 
+
+        /* =========================
+           BIG BOXES
+           ========================= */
+
         .shame-box {
-            position: relative;
+            min-height: 330px;
+
+            border: 1px solid #5975A7;
+
+            padding: 18px;
+
+            display: flex;
+            flex-direction: column;
+
+            justify-content: flex-end;
+
+            background: #000000;
+        }
+
+
+        /* =========================
+           NAME RECTANGLE
+           ========================= */
+
+        .name-box {
+            width: 100%;
+
+            height: 60px;
 
             border: 1px solid #5975A7;
 
             background: #000000;
 
-            min-width: 0;
+            margin-bottom: 12px;
         }
 
-        /* Small name/context rectangle */
 
-        .shame-info {
-            position: absolute;
+        /* =========================
+           CONTEXT RECTANGLE
+           ========================= */
 
-            left: 12px;
-            right: 12px;
-            bottom: 12px;
+        .context-box {
+            width: 100%;
 
-            height: 45px;
+            height: 100px;
 
             border: 1px solid #5975A7;
 
@@ -257,30 +290,65 @@
 
 
         /* =========================
+           SCROLLBAR
+           ========================= */
+
+        #shame::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        #shame::-webkit-scrollbar-track {
+            background: #000000;
+        }
+
+        #shame::-webkit-scrollbar-thumb {
+            background: #5975A7;
+        }
+
+        #shame::-webkit-scrollbar-thumb:hover {
+            background: #5975A7;
+        }
+
+
+        /* =========================
            MOBILE
            ========================= */
 
-        @media (max-width: 700px) {
+        @media (max-width: 800px) {
 
             #shame {
-                padding-top: 100px;
                 padding-left: 25px;
                 padding-right: 25px;
             }
 
-            .shame-title {
-                font-size: 30px;
-                margin-bottom: 35px;
-            }
-
             .shame-grid {
                 grid-template-columns: repeat(2, 1fr);
-                grid-template-rows: none;
-                gap: 15px;
+                gap: 18px;
             }
 
             .shame-box {
-                height: 220px;
+                min-height: 300px;
+            }
+        }
+
+
+        @media (max-width: 520px) {
+
+            .navigation {
+                left: 20px;
+                top: 25px;
+            }
+
+            #shame {
+                padding-top: 90px;
+            }
+
+            .shame-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .shame-box {
+                min-height: 300px;
             }
         }
 
@@ -329,43 +397,108 @@
             HALL OF SHAME
         </h1>
 
+
         <div class="shame-grid">
 
-            <div class="shame-box">
-                <div class="shame-info"></div>
-            </div>
+
+            <!-- BOX 1 -->
 
             <div class="shame-box">
-                <div class="shame-info"></div>
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
             </div>
 
-            <div class="shame-box">
-                <div class="shame-info"></div>
-            </div>
+
+            <!-- BOX 2 -->
 
             <div class="shame-box">
-                <div class="shame-info"></div>
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
             </div>
 
-            <div class="shame-box">
-                <div class="shame-info"></div>
-            </div>
+
+            <!-- BOX 3 -->
 
             <div class="shame-box">
-                <div class="shame-info"></div>
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
             </div>
 
-            <div class="shame-box">
-                <div class="shame-info"></div>
-            </div>
+
+            <!-- BOX 4 -->
 
             <div class="shame-box">
-                <div class="shame-info"></div>
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
             </div>
 
+
+            <!-- BOX 5 -->
+
             <div class="shame-box">
-                <div class="shame-info"></div>
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
             </div>
+
+
+            <!-- BOX 6 -->
+
+            <div class="shame-box">
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
+            </div>
+
+
+            <!-- BOX 7 -->
+
+            <div class="shame-box">
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
+            </div>
+
+
+            <!-- BOX 8 -->
+
+            <div class="shame-box">
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
+            </div>
+
+
+            <!-- BOX 9 -->
+
+            <div class="shame-box">
+
+                <div class="name-box"></div>
+
+                <div class="context-box"></div>
+
+            </div>
+
 
         </div>
 
