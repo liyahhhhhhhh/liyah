@@ -50,35 +50,144 @@
 
 
         /* =========================
-           CENTER IMAGE
+           START SCREEN
            ========================= */
 
-        .home-image {
+        .home-content {
             position: fixed;
 
-            left: 50%;
-            top: 50%;
+            inset: 0;
 
-            transform: translate(-50%, -50%);
+            display: flex;
 
-            width: 400px;
-            max-width: 70vw;
+            align-items: center;
+
+            justify-content: center;
+
+            gap: 7vw;
+
+            padding: 40px;
 
             transition:
                 opacity 0.5s ease,
                 transform 0.5s ease;
 
-            z-index: 5;
+            z-index: 1;
         }
 
-        .home-image.hidden {
+        .home-content.hidden {
             opacity: 0;
 
-            transform:
-                translate(-50%, -50%)
-                scale(0.95);
+            transform: scale(0.97);
 
             pointer-events: none;
+        }
+
+
+        /* =========================
+           HOME IMAGE
+           ========================= */
+
+        .home-image {
+            width: 400px;
+
+            max-width: 32vw;
+
+            height: auto;
+
+            object-fit: contain;
+
+            transition:
+                opacity 0.5s ease,
+                transform 0.5s ease;
+        }
+
+
+        /* =========================
+           HOME TEXT
+           ========================= */
+
+        .home-text {
+            display: flex;
+
+            flex-direction: column;
+
+            align-items: flex-start;
+
+            justify-content: center;
+
+            gap: 14px;
+
+            min-width: 350px;
+        }
+
+        .welcome-text {
+            font-family: "Unison Pro Light", sans-serif;
+
+            font-weight: 300;
+
+            font-size: clamp(20px, 2vw, 30px);
+
+            letter-spacing: 0.08em;
+
+            color: #5975A7;
+
+            transition:
+                text-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .hub-text {
+            font-family: "Unison Pro", sans-serif;
+
+            font-weight: 700;
+
+            font-size: clamp(35px, 4vw, 62px);
+
+            letter-spacing: 0.06em;
+
+            line-height: 0.95;
+
+            color: #5975A7;
+
+            transition:
+                text-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+        .socials-text {
+            font-family: "Unison Pro Light", sans-serif;
+
+            font-weight: 300;
+
+            font-size: clamp(16px, 1.5vw, 22px);
+
+            letter-spacing: 0.08em;
+
+            color: #5975A7;
+
+            margin-top: 12px;
+
+            transition:
+                text-shadow 0.25s ease,
+                filter 0.25s ease;
+        }
+
+
+        /* =========================
+           TEXT HOVER BRIGHTNESS
+           ========================= */
+
+        .home-text span:hover,
+        .navigation a:hover,
+        .name-box:hover,
+        .context-box:hover {
+
+            filter: brightness(1.35);
+
+            text-shadow:
+                0 0 6px rgba(89, 117, 167, 0.55),
+                0 0 16px rgba(89, 117, 167, 0.25);
         }
 
 
@@ -127,7 +236,8 @@
             transition:
                 color 0.25s ease,
                 transform 0.25s ease,
-                text-shadow 0.25s ease;
+                text-shadow 0.25s ease,
+                filter 0.25s ease;
         }
 
 
@@ -168,7 +278,7 @@
 
 
         /* =========================
-           HOVER
+           NAVIGATION HOVER
            ========================= */
 
         .navigation a:hover {
@@ -176,6 +286,8 @@
             color: #5975A7;
 
             transform: translateX(4px);
+
+            filter: brightness(1.35);
 
             text-shadow:
                 0 0 5px rgba(31, 81, 255, 0.6),
@@ -265,9 +377,6 @@
             overflow-x: hidden;
         }
 
-
-        /* TITLE STAYS BOLD */
-
         .shame-title {
 
             text-align: center;
@@ -308,7 +417,7 @@
 
 
         /* =========================
-           BIG BOX
+           BIG BOXES
            ========================= */
 
         .shame-box {
@@ -331,7 +440,6 @@
 
         /* =========================
            NAME BOX
-           LIGHT FONT
            ========================= */
 
         .name-box {
@@ -361,12 +469,15 @@
             font-size: 12px;
 
             letter-spacing: 0.08em;
+
+            transition:
+                filter 0.25s ease,
+                text-shadow 0.25s ease;
         }
 
 
         /* =========================
            CONTEXT BOX
-           LIGHT FONT
            ========================= */
 
         .context-box {
@@ -394,6 +505,10 @@
             font-size: 12px;
 
             letter-spacing: 0.08em;
+
+            transition:
+                filter 0.25s ease,
+                text-shadow 0.25s ease;
         }
 
 
@@ -420,27 +535,56 @@
 
         @media (max-width: 850px) {
 
+            .home-content {
+                gap: 35px;
+            }
+
+            .home-image {
+                max-width: 38vw;
+            }
+
+            .home-text {
+                min-width: 0;
+            }
+
             #shame {
-
                 padding-left: 25px;
-
                 padding-right: 25px;
             }
 
             .shame-grid {
-
                 grid-template-columns:
                     repeat(2, 1fr);
             }
 
             .shame-box {
-
                 min-height: 380px;
             }
         }
 
 
-        @media (max-width: 520px) {
+        @media (max-width: 600px) {
+
+            .home-content {
+
+                flex-direction: column;
+
+                gap: 30px;
+
+                text-align: center;
+            }
+
+            .home-image {
+
+                max-width: 60vw;
+
+                width: 300px;
+            }
+
+            .home-text {
+
+                align-items: center;
+            }
 
             .navigation {
 
@@ -473,15 +617,38 @@
 
 
     <!-- =========================
-         CENTER IMAGE
+         START SCREEN
          ========================= -->
 
-    <img
-        src="image.jpeg"
-        class="home-image"
-        id="homeImage"
-        alt=""
+    <div
+        class="home-content"
+        id="homeContent"
     >
+
+        <img
+            src="image.jpeg"
+            class="home-image"
+            alt=""
+        >
+
+
+        <div class="home-text">
+
+            <span class="welcome-text">
+                Welcome to
+            </span>
+
+            <span class="hub-text">
+                liyah's hub
+            </span>
+
+            <span class="socials-text">
+                check out liyah's socials:
+            </span>
+
+        </div>
+
+    </div>
 
 
     <!-- =========================
@@ -493,7 +660,7 @@
         <a
             href="#"
             id="shameTab"
-            onclick="handleTab('shame', this)"
+            onclick="handleTab('shame', this, event)"
         >
             Hall Of Shame
         </a>
@@ -507,7 +674,7 @@
         <a
             href="#"
             id="socialsTab"
-            onclick="handleTab('socials', this)"
+            onclick="handleTab('socials', this, event)"
         >
             Socials
         </a>
@@ -532,138 +699,57 @@
         <div class="shame-grid">
 
 
-            <!-- BOX 1 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 2 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 3 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 4 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 5 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 6 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 7 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 8 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
-            <!-- BOX 9 -->
-
             <div class="shame-box">
-
-                <div class="name-box">
-                    NAME
-                </div>
-
-                <div class="context-box">
-                    CONTEXT
-                </div>
-
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
             </div>
 
 
@@ -689,12 +775,13 @@
 
     <script>
 
-        function handleTab(pageName, clickedTab) {
+        function handleTab(pageName, clickedTab, event) {
 
-            /*
-             * If this tab is already active,
-             * return to the home screen.
-             */
+            event.preventDefault();
+
+
+            /* If already inside this tab,
+               return to home */
 
             if (clickedTab.classList.contains("active")) {
 
@@ -704,24 +791,20 @@
             }
 
 
-            /*
-             * Otherwise open the selected page.
-             */
-
             openPage(pageName, clickedTab);
         }
 
 
         function openPage(pageName, clickedTab) {
 
-            /* Hide center image */
+            /* Hide start screen */
 
             document
-                .getElementById("homeImage")
+                .getElementById("homeContent")
                 .classList.add("hidden");
 
 
-            /* Hide all pages */
+            /* Hide every page */
 
             document
                 .querySelectorAll(".page")
@@ -732,7 +815,7 @@
                 });
 
 
-            /* Remove active state */
+            /* Remove active tab */
 
             document
                 .querySelectorAll(".navigation a")
@@ -743,14 +826,14 @@
                 });
 
 
-            /* Show selected page */
+            /* Open selected page */
 
             document
                 .getElementById(pageName)
                 .classList.add("active");
 
 
-            /* Mark selected tab */
+            /* Underline selected tab */
 
             clickedTab.classList.add("active");
         }
@@ -758,18 +841,14 @@
 
         function goHome() {
 
-            /*
-             * Show center image again
-             */
+            /* Show start screen */
 
             document
-                .getElementById("homeImage")
+                .getElementById("homeContent")
                 .classList.remove("hidden");
 
 
-            /*
-             * Hide all pages
-             */
+            /* Hide pages */
 
             document
                 .querySelectorAll(".page")
@@ -780,9 +859,7 @@
                 });
 
 
-            /*
-             * Remove active underline
-             */
+            /* Remove tab underlines */
 
             document
                 .querySelectorAll(".navigation a")
@@ -797,4 +874,3 @@
 
 </body>
 </html>
-
