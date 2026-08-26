@@ -50,10 +50,40 @@
 
 
         /* =========================
+           TOP SITE SHADOW
+           ========================= */
+
+        body::before {
+
+            content: "";
+
+            position: fixed;
+
+            top: 0;
+            left: 0;
+
+            width: 100%;
+            height: 22px;
+
+            background: linear-gradient(
+                to bottom,
+                rgba(0, 0, 0, 0.95),
+                rgba(0, 0, 0, 0.45),
+                rgba(0, 0, 0, 0)
+            );
+
+            pointer-events: none;
+
+            z-index: 9999;
+        }
+
+
+        /* =========================
            START SCREEN
            ========================= */
 
         .home-content {
+
             position: fixed;
 
             inset: 0;
@@ -68,6 +98,10 @@
 
             padding: 40px;
 
+            overflow-y: auto;
+
+            overflow-x: hidden;
+
             transition:
                 opacity 0.5s ease,
                 transform 0.5s ease;
@@ -76,6 +110,7 @@
         }
 
         .home-content.hidden {
+
             opacity: 0;
 
             transform: scale(0.97);
@@ -89,6 +124,7 @@
            ========================= */
 
         .home-image {
+
             width: 400px;
 
             max-width: 32vw;
@@ -108,6 +144,7 @@
            ========================= */
 
         .home-text {
+
             display: flex;
 
             flex-direction: column;
@@ -122,6 +159,7 @@
         }
 
         .welcome-text {
+
             font-family: "Unison Pro Light", sans-serif;
 
             font-weight: 300;
@@ -138,6 +176,7 @@
         }
 
         .hub-text {
+
             font-family: "Unison Pro", sans-serif;
 
             font-weight: 700;
@@ -156,6 +195,7 @@
         }
 
         .socials-text {
+
             font-family: "Unison Pro Light", sans-serif;
 
             font-weight: 300;
@@ -299,6 +339,7 @@
            ========================= */
 
         .navigation {
+
             position: fixed;
 
             left: 35px;
@@ -313,26 +354,10 @@
             gap: 12px;
 
             z-index: 100;
-
-            transition:
-                box-shadow 0.3s ease;
         }
-
-
-        /* =========================
-           NAVIGATION SCROLL SHADOW
-           ========================= */
-
-        .navigation.scrolled {
-
-            box-shadow:
-                0 12px 28px rgba(0, 0, 0, 0.85),
-                0 5px 12px rgba(0, 0, 0, 0.65);
-
-        }
-
 
         .navigation a {
+
             position: relative;
 
             display: inline-block;
@@ -559,6 +584,41 @@
 
 
         /* =========================
+           FIRST BOX IMAGE
+           ========================= */
+
+        .shame-image {
+
+            width: 100%;
+
+            flex: 1;
+
+            min-height: 0;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            margin-bottom: 14px;
+        }
+
+        .shame-image img {
+
+            width: 100%;
+
+            height: 100%;
+
+            object-fit: contain;
+
+            object-position: center;
+        }
+
+
+        /* =========================
            NAME BOX
            ========================= */
 
@@ -636,15 +696,21 @@
            SCROLLBAR
            ========================= */
 
-        #shame::-webkit-scrollbar {
+        #shame::-webkit-scrollbar,
+        .home-content::-webkit-scrollbar {
+
             width: 8px;
         }
 
-        #shame::-webkit-scrollbar-track {
+        #shame::-webkit-scrollbar-track,
+        .home-content::-webkit-scrollbar-track {
+
             background: #000000;
         }
 
-        #shame::-webkit-scrollbar-thumb {
+        #shame::-webkit-scrollbar-thumb,
+        .home-content::-webkit-scrollbar-thumb {
+
             background: #5975A7;
         }
 
@@ -832,10 +898,10 @@
 
         <a
             href="#"
-            id="socialsTab"
-            onclick="handleTab('socials', this, event)"
+            id="newsTab"
+            onclick="handleTab('news', this, event)"
         >
-            Socials
+            News
         </a>
 
     </nav>
@@ -858,41 +924,29 @@
         <div class="shame-grid">
 
 
+            <!-- FIRST BOX -->
+
             <div class="shame-box">
-                <div class="name-box">NAME</div>
-                <div class="context-box">CONTEXT</div>
+
+                <div class="shame-image">
+                    <img
+                        src="image.jpg"
+                        alt="Eli"
+                    >
+                </div>
+
+                <div class="name-box">
+                    Eli
+                </div>
+
+                <div class="context-box">
+                    ELI IS A HERO
+                </div>
+
             </div>
 
 
-            <div class="shame-box">
-                <div class="name-box">NAME</div>
-                <div class="context-box">CONTEXT</div>
-            </div>
-
-
-            <div class="shame-box">
-                <div class="name-box">NAME</div>
-                <div class="context-box">CONTEXT</div>
-            </div>
-
-
-            <div class="shame-box">
-                <div class="name-box">NAME</div>
-                <div class="context-box">CONTEXT</div>
-            </div>
-
-
-            <div class="shame-box">
-                <div class="name-box">NAME</div>
-                <div class="context-box">CONTEXT</div>
-            </div>
-
-
-            <div class="shame-box">
-                <div class="name-box">NAME</div>
-                <div class="context-box">CONTEXT</div>
-            </div>
-
+            <!-- SECOND BOX -->
 
             <div class="shame-box">
                 <div class="name-box">NAME</div>
@@ -900,11 +954,55 @@
             </div>
 
 
+            <!-- THIRD BOX -->
+
             <div class="shame-box">
                 <div class="name-box">NAME</div>
                 <div class="context-box">CONTEXT</div>
             </div>
 
+
+            <!-- FOURTH BOX -->
+
+            <div class="shame-box">
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
+            </div>
+
+
+            <!-- FIFTH BOX -->
+
+            <div class="shame-box">
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
+            </div>
+
+
+            <!-- SIXTH BOX -->
+
+            <div class="shame-box">
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
+            </div>
+
+
+            <!-- SEVENTH BOX -->
+
+            <div class="shame-box">
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
+            </div>
+
+
+            <!-- EIGHTH BOX -->
+
+            <div class="shame-box">
+                <div class="name-box">NAME</div>
+                <div class="context-box">CONTEXT</div>
+            </div>
+
+
+            <!-- NINTH BOX -->
 
             <div class="shame-box">
                 <div class="name-box">NAME</div>
@@ -918,12 +1016,12 @@
 
 
     <!-- =========================
-         SOCIALS
+         NEWS
          ========================= -->
 
     <section
         class="page"
-        id="socials"
+        id="news"
     >
     </section>
 
@@ -996,11 +1094,6 @@
 
             clickedTab.classList.add("active");
 
-            /* Reset scroll shadow whenever a page opens */
-            document
-                .getElementById("shame")
-                .classList.remove("scrolled");
-
         }
 
 
@@ -1034,38 +1127,7 @@
 
                 });
 
-
-            /* Remove scroll shadow */
-
-            document
-                .querySelector(".navigation")
-                .classList.remove("scrolled");
-
         }
-
-
-        /* =========================
-           HEADER SCROLL SHADOW
-           ========================= */
-
-        const shamePage = document.getElementById("shame");
-
-        const navigation = document.querySelector(".navigation");
-
-
-        shamePage.addEventListener("scroll", function() {
-
-            if (shamePage.scrollTop > 5) {
-
-                navigation.classList.add("scrolled");
-
-            } else {
-
-                navigation.classList.remove("scrolled");
-
-            }
-
-        });
 
     </script>
 
