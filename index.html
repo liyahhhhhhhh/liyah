@@ -175,6 +175,109 @@
 
 
         /* =========================
+           SOCIAL LINKS
+           ========================= */
+
+        .social-links {
+
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+
+            margin-top: 2px;
+        }
+
+        .social-link {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 18px;
+
+            width: fit-content;
+
+            color: #5975A7;
+
+            font-family: "Unison Pro Light", sans-serif;
+
+            font-weight: 300;
+
+            font-size: clamp(15px, 1.4vw, 21px);
+
+            letter-spacing: 0.08em;
+
+            text-decoration: none;
+
+            cursor: pointer;
+
+            transition:
+                filter 0.25s ease,
+                text-shadow 0.25s ease;
+        }
+
+        .social-arrow {
+
+            display: inline-block;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .social-name {
+
+            position: relative;
+
+            display: inline-block;
+        }
+
+        .social-name::after {
+
+            content: "";
+
+            position: absolute;
+
+            left: 0;
+
+            bottom: -3px;
+
+            width: 100%;
+
+            height: 1px;
+
+            background: #5975A7;
+
+            transform: scaleX(0);
+
+            transform-origin: left center;
+
+            transition:
+                transform 0.25s ease;
+        }
+
+        .social-link:hover {
+
+            filter: brightness(1.35);
+
+            text-shadow:
+                0 0 6px rgba(89, 117, 167, 0.55),
+                0 0 16px rgba(89, 117, 167, 0.25);
+        }
+
+        .social-link:hover .social-name::after {
+
+            transform: scaleX(1);
+        }
+
+        .social-link:hover .social-arrow {
+
+            transform: translateX(4px);
+        }
+
+
+        /* =========================
            TEXT HOVER BRIGHTNESS
            ========================= */
 
@@ -645,6 +748,45 @@
             <span class="socials-text">
                 check out liyah's socials:
             </span>
+
+
+            <!-- SOCIAL LINKS -->
+
+            <div class="social-links">
+
+                <a
+                    class="social-link"
+                    href="https://discord.gg/yuketsu"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span class="social-arrow">→</span>
+                    <span class="social-name">Discord</span>
+                </a>
+
+
+                <a
+                    class="social-link"
+                    href="https://www.tiktok.com/@c4lgaryy?lang=en"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span class="social-arrow">→</span>
+                    <span class="social-name">TikTok</span>
+                </a>
+
+
+                <a
+                    class="social-link"
+                    href="https://youtube.com/c/c4lgaryy"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    <span class="social-arrow">→</span>
+                    <span class="social-name">YouTube</span>
+                </a>
+
+            </div>
 
         </div>
 
