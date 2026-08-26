@@ -189,6 +189,101 @@
             display: block;
         }
 
+
+        /* =========================
+           HALL OF SHAME
+           ========================= */
+
+        #shame {
+            padding-top: 110px;
+            padding-left: 8vw;
+            padding-right: 8vw;
+
+            overflow-y: auto;
+        }
+
+        .shame-title {
+            text-align: center;
+
+            font-family: "Unison Pro", sans-serif;
+            font-size: clamp(30px, 5vw, 60px);
+            font-weight: 700;
+
+            letter-spacing: 0.08em;
+
+            margin-bottom: 55px;
+        }
+
+        .shame-grid {
+            width: 100%;
+            max-width: 1200px;
+
+            margin: 0 auto;
+
+            display: grid;
+
+            grid-template-columns: repeat(3, 1fr);
+
+            grid-template-rows: repeat(3, 260px);
+
+            gap: 22px;
+        }
+
+        .shame-box {
+            position: relative;
+
+            border: 1px solid #5975A7;
+
+            background: #000000;
+
+            min-width: 0;
+        }
+
+        /* Small name/context rectangle */
+
+        .shame-info {
+            position: absolute;
+
+            left: 12px;
+            right: 12px;
+            bottom: 12px;
+
+            height: 45px;
+
+            border: 1px solid #5975A7;
+
+            background: #000000;
+        }
+
+
+        /* =========================
+           MOBILE
+           ========================= */
+
+        @media (max-width: 700px) {
+
+            #shame {
+                padding-top: 100px;
+                padding-left: 25px;
+                padding-right: 25px;
+            }
+
+            .shame-title {
+                font-size: 30px;
+                margin-bottom: 35px;
+            }
+
+            .shame-grid {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: none;
+                gap: 15px;
+            }
+
+            .shame-box {
+                height: 220px;
+            }
+        }
+
     </style>
 </head>
 
@@ -229,6 +324,51 @@
         class="page"
         id="shame"
     >
+
+        <h1 class="shame-title">
+            HALL OF SHAME
+        </h1>
+
+        <div class="shame-grid">
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+            <div class="shame-box">
+                <div class="shame-info"></div>
+            </div>
+
+        </div>
+
     </section>
 
 
@@ -266,13 +406,11 @@
             document
                 .getElementById(pageName)
                 .classList.add("active");
+
         }
 
     </script>
 
 </body>
 </html>
-
-
-
 
