@@ -7,8 +7,8 @@
     <style>
         @font-face {
             font-family: "Unison Pro";
-            src: url("unison-pro.woff2") format("woff2");
-            font-weight: normal;
+            src: url("unison-pro-bold.otf") format("opentype");
+            font-weight: 700;
             font-style: normal;
         }
 
@@ -49,7 +49,8 @@
             color: #1F51FF;
             text-decoration: none;
 
-            font-family: "Unison Pro", Arial, sans-serif;
+            font-family: "Unison Pro", sans-serif;
+            font-weight: 700;
             font-size: 13px;
             letter-spacing: 0.08em;
 
@@ -92,6 +93,10 @@
         .navigation a:hover {
             color: #135E77;
             transform: translateX(3px);
+
+            text-shadow:
+                0 0 5px rgba(31, 81, 255, 0.6),
+                0 0 12px rgba(31, 81, 255, 0.25);
         }
 
         .navigation a:hover::before {
@@ -100,14 +105,6 @@
 
         .navigation a:hover::after {
             transform: scaleX(0.82);
-        }
-
-        /* SUBTLE BLUE GLOW */
-
-        .navigation a:hover {
-            text-shadow:
-                0 0 5px rgba(31, 81, 255, 0.6),
-                0 0 12px rgba(31, 81, 255, 0.25);
         }
     </style>
 </head>
