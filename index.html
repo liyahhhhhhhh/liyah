@@ -1,18 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title></title>
 
     <style>
+        @font-face {
+            font-family: "Unison Pro";
+            src: url("unison-pro.woff2") format("woff2");
+            font-weight: normal;
+            font-style: normal;
+        }
+
         * {
-            margin: 0;
-            padding: 0;
             box-sizing: border-box;
         }
 
         html, body {
+            margin: 0;
             width: 100%;
             height: 100%;
             overflow: hidden;
@@ -21,126 +26,109 @@
         body {
             background:
                 radial-gradient(
-                    ellipse at center,
+                    circle at 50% 0%,
                     #ffffff 0%,
-                    #f8f8f8 45%,
-                    #eeeeee 100%
+                    #fff7fb 25%,
+                    #ffd9ea 55%,
+                    #f7a8ca 100%
                 );
-            position: relative;
         }
 
-        /* Soft atmospheric glow */
-        body::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(
-                    ellipse at 50% 20%,
-                    rgba(255,255,255,0.95),
-                    transparent 55%
-                );
-            pointer-events: none;
-        }
+        /* LEFT NAVIGATION */
 
-        .cloud {
-            position: absolute;
-            width: 260px;
-            height: 75px;
-            background: linear-gradient(
-                to bottom,
-                rgba(255,255,255,0.95),
-                rgba(205,205,205,0.65)
-            );
-            border-radius: 100px;
-            filter: blur(2px);
-            box-shadow:
-                0 20px 35px rgba(80,80,80,0.12),
-                inset 0 -10px 20px rgba(120,120,120,0.12);
-            opacity: 0.85;
-            animation: drift linear infinite;
-        }
-
-        .cloud::before,
-        .cloud::after {
-            content: "";
-            position: absolute;
-            background: linear-gradient(
-                to bottom,
-                #ffffff,
-                #d3d3d3
-            );
-            border-radius: 50%;
-        }
-
-        .cloud::before {
-            width: 125px;
-            height: 125px;
+        .navigation {
+            position: fixed;
             left: 35px;
-            bottom: 15px;
-            box-shadow:
-                65px 10px 0 10px #eeeeee,
-                115px 22px 0 -3px #e4e4e4;
+            top: 50%;
+            transform: translateY(-50%);
+
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+
+            z-index: 10;
         }
 
-        .cloud::after {
-            width: 90px;
-            height: 90px;
-            left: 125px;
-            bottom: 25px;
+        .navigation a {
+            position: relative;
+
+            color: #555;
+            text-decoration: none;
+
+            font-family: "Unison Pro", Arial, sans-serif;
+            font-size: 13px;
+            letter-spacing: 0.08em;
+
+            width: fit-content;
+
+            transition:
+                color 0.25s ease,
+                opacity 0.25s ease;
         }
 
-        .cloud.one {
-            top: 12%;
-            left: -320px;
-            transform: scale(1.1);
-            animation-duration: 45s;
+        /*
+        SCRATCH / STRIKE EFFECT
+        */
+
+        .navigation a::before,
+        .navigation a::after {
+            content: "";
+            position: absolute;
+
+            left: -4%;
+            width: 108%;
+            height: 1px;
+
+            background: #555;
+
+            transform: scaleX(0);
+            transform-origin: left center;
+
+            transition: transform 0.25s ease;
         }
 
-        .cloud.two {
-            top: 35%;
-            left: -400px;
-            transform: scale(0.75);
-            opacity: 0.6;
-            animation-duration: 65s;
-            animation-delay: -25s;
+        .navigation a::before {
+            top: 42%;
         }
 
-        .cloud.three {
-            top: 62%;
-            left: -350px;
-            transform: scale(1.35);
-            opacity: 0.5;
-            animation-duration: 55s;
-            animation-delay: -40s;
+        .navigation a::after {
+            top: 57%;
         }
 
-        .cloud.four {
-            top: 82%;
-            left: -300px;
-            transform: scale(0.6);
-            opacity: 0.45;
-            animation-duration: 75s;
-            animation-delay: -15s;
+        /* HOVER */
+
+        .navigation a:hover {
+            color: #777;
         }
 
-        @keyframes drift {
-            from {
-                left: -350px;
-            }
+        .navigation a:hover::before {
+            transform: scaleX(1);
+        }
 
-            to {
-                left: 110%;
-            }
+        .navigation a:hover::after {
+            transform: scaleX(0.82);
+        }
+
+        /* Slight movement when hovering */
+
+        .navigation a:hover {
+            transform: translateX(3px);
         }
     </style>
 </head>
 
 <body>
 
-    <div class="cloud one"></div>
-    <div class="cloud two"></div>
-    <div class="cloud three"></div>
+    <nav class="navigation">
+
+        <a href="#">Hall Of Shame</a>
+
+        <a href="#">Socials</a>
+
+    </nav>
+
+</body>
+</html>
     <div class="cloud four"></div>
 
 </body>
