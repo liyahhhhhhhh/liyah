@@ -68,14 +68,14 @@
             position: fixed;
 
             left: 35px;
-            top: 35%;
-
-            transform: translateY(-50%);
+            top: 35px;
 
             display: flex;
             flex-direction: row;
 
-            gap: 20px;
+            align-items: center;
+
+            gap: 12px;
 
             z-index: 100;
         }
@@ -157,6 +157,15 @@
             transform: scaleX(0.8);
         }
 
+        .separator {
+            color: #5975A7;
+            font-family: Arial, sans-serif;
+            font-size: 5px;
+
+            display: flex;
+            align-items: center;
+        }
+
 
         /* =========================
            CONTENT SECTIONS
@@ -204,6 +213,8 @@
         <a href="#" onclick="openPage('shame')">
             Hall Of Shame
         </a>
+
+        <span class="separator">●</span>
 
         <a href="#" onclick="openPage('socials')">
             Socials
