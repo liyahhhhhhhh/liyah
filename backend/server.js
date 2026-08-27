@@ -37,20 +37,19 @@ function getClientIP(req) {
 
 
 /* =========================================================
-   SEND NON-SENSITIVE VISIT NOTIFICATION
+   SEND VISIT NOTIFICATION
    ========================================================= */
 
 async function sendDiscordVisitNotification(logEntry) {
 
     if (!DISCORD_WEBHOOK_URL) {
 
-        console.log(
-            "DISCORD_WEBHOOK_URL is not configured."
+        console.error(
+            "DISCORD_WEBHOOK_URL is missing."
         );
 
         return;
     }
-
 
     try {
 
@@ -72,7 +71,6 @@ async function sendDiscordVisitNotification(logEntry) {
                     embeds: [
 
                         {
-
                             title:
                                 "🌐 SITE VISIT",
 
@@ -116,19 +114,17 @@ async function sendDiscordVisitNotification(logEntry) {
                             footer: {
 
                                 text:
-                                    "Detailed visitor information is kept in Render logs."
+                                    "Visitor IP and request details are kept in Render logs."
 
                             },
 
                             timestamp:
                                 logEntry.timestamp
-
                         }
 
                     ]
 
                 })
-
             }
         );
 
@@ -139,9 +135,15 @@ async function sendDiscordVisitNotification(logEntry) {
                 await response.text();
 
             console.error(
-                "Discord webhook returned:",
+                "Discord webhook error:",
                 response.status,
                 errorText
+            );
+
+        } else {
+
+            console.log(
+                "Discord visit notification sent."
             );
 
         }
@@ -149,7 +151,7 @@ async function sendDiscordVisitNotification(logEntry) {
     } catch (error) {
 
         console.error(
-            "Failed to send Discord notification:",
+            "Webhook request failed:",
             error
         );
 
@@ -159,7 +161,7 @@ async function sendDiscordVisitNotification(logEntry) {
 
 
 /* =========================================================
-   SITE VISIT ENDPOINT
+   VISITOR LOGGING
    ========================================================= */
 
 app.get("/api/visit", async (req, res) => {
@@ -190,7 +192,7 @@ app.get("/api/visit", async (req, res) => {
 
 
     /* =====================================================
-       PRIVATE SECURITY LOG
+       PRIVATE RENDER SECURITY LOG
        ===================================================== */
 
     console.log(
@@ -226,19 +228,19 @@ app.get(
 
 
         /* =================================================
-           CHECK DISCORD TOKEN
+           CHECK BOT TOKEN
            ================================================= */
 
         if (!DISCORD_BOT_TOKEN) {
 
             console.error(
-                "DISCORD_BOT_TOKEN is missing from Render environment variables."
+                "DISCORD_BOT_TOKEN is missing."
             );
 
             return res.status(500).json({
 
                 error:
-                    "Discord bot token is not configured on the server."
+                    "Discord bot token is not configured."
 
             });
 
@@ -272,7 +274,6 @@ app.get(
                 `https://discord.com/api/v10/users/${userId}`,
 
                 {
-
                     method:
                         "GET",
 
@@ -306,6 +307,7 @@ app.get(
                     response.status,
                     data
                 );
+
 
                 if (
                     response.status === 401
@@ -515,7 +517,6 @@ app.get(
                         ).toLocaleString(
                             "en-GB",
                             {
-
                                 day:
                                     "2-digit",
 
@@ -524,7 +525,6 @@ app.get(
 
                                 year:
                                     "numeric"
-
                             }
                         )
 
