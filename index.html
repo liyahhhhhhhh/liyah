@@ -1029,6 +1029,26 @@ body::before {
 }
 
 
+/* =========================
+   GENERAL OSINT RED DOT
+   ========================= */
+
+.osint-red-dot {
+
+    width: 14px;
+
+    height: 14px;
+
+    background: #ff0000;
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 8px rgba(255, 0, 0, 0.7),
+        0 0 18px rgba(255, 0, 0, 0.3);
+}
+
+
 .osint-heading {
 
     display: flex;
@@ -2423,10 +2443,7 @@ body::before {
 
             <div class="osint-icon-box">
 
-                <img
-                    src="discord-osint.png"
-                    alt="OSINT"
-                >
+                <div class="osint-red-dot"></div>
 
             </div>
 
@@ -2486,7 +2503,7 @@ body::before {
                     type="text"
                     id="osintGeneralSearchInput"
                     class="osint-search-input"
-                    placeholder="Enter search query"
+                    placeholder="Enter any Discord IDs/Usernames/IPs/Emails/Phone Numbers to start a lookup"
                     autocomplete="off"
                 >
 
