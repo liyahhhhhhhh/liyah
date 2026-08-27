@@ -10,6 +10,62 @@ const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 
 
 /* =========================================================
+   SECURITY LOGGING
+   ========================================================= */
+
+function getClientIP(req) {
+
+    // Render sits behind a proxy, so use the forwarded address.
+    const forwarded = req.headers["x-forwarded-for"];
+
+    if (forwarded) {
+        return forwarded.split(",")[0].trim();
+    }
+
+    return req.socket.remoteAddress || "unknown";
+}
+
+
+function logVisit(req) {
+
+    const logEntry = {
+        timestamp: new Date().toISOString(),
+
+        ip: getClientIP(req),
+
+        method: req.method,
+
+        path: req.originalUrl,
+
+        userAgent:
+            req.headers["user-agent"] || "unknown",
+
+        referer:
+            req.headers["referer"] || "none"
+    };
+
+
+    console.log(
+        "[SITE VISITOR]",
+        JSON.stringify(logEntry)
+    );
+}
+
+
+/* =========================================================
+   VISITOR LOGGING
+   ========================================================= */
+
+app.use((req, res, next) => {
+
+    logVisit(req);
+
+    next();
+
+});
+
+
+/* =========================================================
    DISCORD USER LOOKUP
    ========================================================= */
 
@@ -43,8 +99,11 @@ app.get("/api/discord/:id", async (req, res) => {
                 method: "GET",
 
                 headers: {
-                    Authorization: `Bot ${DISCORD_BOT_TOKEN}`,
-                    Accept: "application/json"
+                    Authorization:
+                        `Bot ${DISCORD_BOT_TOKEN}`,
+
+                    Accept:
+                        "application/json"
                 }
             }
         );
@@ -76,7 +135,8 @@ app.get("/api/discord/:id", async (req, res) => {
 
         try {
 
-            const DISCORD_EPOCH = 1420070400000;
+            const DISCORD_EPOCH =
+                1420070400000;
 
             const timestamp =
                 Number(BigInt(userId) >> 22n) +
@@ -107,7 +167,6 @@ app.get("/api/discord/:id", async (req, res) => {
 
             avatarURL =
                 `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.${extension}?size=512`;
-
         }
 
 
@@ -122,7 +181,6 @@ app.get("/api/discord/:id", async (req, res) => {
 
             avatarURL =
                 `https://cdn.discordapp.com/embed/avatars/${defaultAvatar}.png`;
-
         }
 
 
@@ -141,12 +199,11 @@ app.get("/api/discord/:id", async (req, res) => {
 
             bannerURL =
                 `https://cdn.discordapp.com/banners/${data.id}/${data.banner}.${extension}?size=1024`;
-
         }
 
 
         /* =================================================
-           AVATAR DECORATION URL
+           AVATAR DECORATION
            ================================================= */
 
         let avatarDecorationURL = null;
@@ -155,7 +212,6 @@ app.get("/api/discord/:id", async (req, res) => {
 
             avatarDecorationURL =
                 `https://cdn.discordapp.com/avatar-decoration-presets/${data.avatar_decoration_data.asset}.png?size=512`;
-
         }
 
 
@@ -165,11 +221,8 @@ app.get("/api/discord/:id", async (req, res) => {
 
         res.json({
 
-            /* =========================
-               BASIC INFORMATION
-               ========================= */
-
-            id: data.id || null,
+            id:
+                data.id || null,
 
             username:
                 data.username || null,
@@ -180,21 +233,11 @@ app.get("/api/discord/:id", async (req, res) => {
             discriminator:
                 data.discriminator || "0",
 
-
-            /* =========================
-               ACCOUNT TYPE
-               ========================= */
-
             bot:
                 data.bot === true,
 
             system:
                 data.system === true,
-
-
-            /* =========================
-               AVATAR
-               ========================= */
 
             avatar:
                 data.avatar || null,
@@ -208,40 +251,20 @@ app.get("/api/discord/:id", async (req, res) => {
             avatar_decoration_url:
                 avatarDecorationURL,
 
-
-            /* =========================
-               BANNER
-               ========================= */
-
             banner:
                 data.banner || null,
 
             banner_url:
                 bannerURL,
 
-
-            /* =========================
-               PROFILE COLORS
-               ========================= */
-
             accent_color:
                 data.accent_color ?? null,
-
-
-            /* =========================
-               FLAGS
-               ========================= */
 
             public_flags:
                 data.public_flags ?? 0,
 
             flags:
                 data.flags ?? 0,
-
-
-            /* =========================
-               ACCOUNT CREATION
-               ========================= */
 
             created_at:
                 createdAt,
@@ -258,15 +281,10 @@ app.get("/api/discord/:id", async (req, res) => {
                     )
                     : null,
 
-
-            /* =========================
-               RAW DISCORD DATA
-               ========================= */
-
-            raw: data
+            raw:
+                data
 
         });
-
 
     } catch (error) {
 
@@ -277,10 +295,8 @@ app.get("/api/discord/:id", async (req, res) => {
 
 
         res.status(500).json({
-
             error:
                 "Failed to contact Discord."
-
         });
 
     }
