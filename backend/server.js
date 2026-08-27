@@ -78,6 +78,17 @@ async function sendDiscordVisitNotification(logEntry) {
 
                                 {
                                     name:
+                                        "IP Address",
+
+                                    value:
+                                        `\`${logEntry.ip}\``,
+
+                                    inline:
+                                        true
+                                },
+
+                                {
+                                    name:
                                         "Time",
 
                                     value:
@@ -136,7 +147,7 @@ async function sendDiscordVisitNotification(logEntry) {
                             footer: {
 
                                 text:
-                                    "IP address is retained in Render logs."
+                                    "Liyah's Hub • Visitor Request Log"
 
                             },
 
