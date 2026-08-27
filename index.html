@@ -2503,37 +2503,91 @@ async function performOsintSearch() {
        LOADING
        ========================= */
 
-    status.innerHTML =
+    status.textContent =
         "SEARCHING DISCORD...";
 
 
     try {
 
+        /* =========================
+           BUILD API URL
+           ========================= */
+
+        const apiURL =
+            "https://liyah-zy3z.onrender.com/user/" +
+            encodeURIComponent(query);
+
+
+        console.log("Discord API request:", apiURL);
+
 
         /* =========================
-           CALL YOUR RENDER SERVER
+           CALL RENDER SERVER
            ========================= */
 
         const response =
-            await fetch(
-                "https://liyah-zy3z.onrender.com/user/" +
-                encodeURIComponent(query)
-            );
-
-
-        const data =
-            await response.json();
+            await fetch(apiURL, {
+                method: "GET",
+                headers: {
+                    "Accept": "application/json"
+                },
+                cache: "no-store"
+            });
 
 
         /* =========================
-           ERROR
+           GET RESPONSE TEXT FIRST
+           ========================= */
+
+        const responseText =
+            await response.text();
+
+
+        console.log(
+            "Render response status:",
+            response.status
+        );
+
+        console.log(
+            "Render response:",
+            responseText
+        );
+
+
+        /* =========================
+           TRY TO PARSE JSON
+           ========================= */
+
+        let data = null;
+
+        try {
+
+            data =
+                JSON.parse(responseText);
+
+        } catch (jsonError) {
+
+            console.error(
+                "Response was not valid JSON:",
+                jsonError
+            );
+
+            status.textContent =
+                "SERVER ERROR: Render returned an invalid response.";
+
+            return;
+        }
+
+
+        /* =========================
+           API ERROR
            ========================= */
 
         if (!response.ok) {
 
             status.textContent =
                 data.error ||
-                "Discord user not found.";
+                `SERVER ERROR: ${response.status}`;
 
             return;
         }
@@ -2547,7 +2601,7 @@ async function performOsintSearch() {
             "https://cdn.discordapp.com/embed/avatars/0.png";
 
 
-        if (data.avatar) {
+        if (data.avatar && data.id) {
 
             avatarURL =
                 `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`;
@@ -2606,7 +2660,7 @@ async function performOsintSearch() {
                         </div>
 
                         <div class="discord-info-value">
-                            ${escapeHTML(data.id)}
+                            ${escapeHTML(data.id || query)}
                         </div>
 
                     </div>
@@ -2619,7 +2673,10 @@ async function performOsintSearch() {
                         </div>
 
                         <div class="discord-info-value">
-                            ${escapeHTML(data.username || "None")}
+                            ${escapeHTML(
+                                data.username ||
+                                "None"
+                            )}
                         </div>
 
                     </div>
@@ -2648,7 +2705,9 @@ async function performOsintSearch() {
                         </div>
 
                         <div class="discord-info-value">
-                            ${data.banner ? "AVAILABLE" : "NONE"}
+                            ${data.banner
+                                ? "AVAILABLE"
+                                : "NONE"}
                         </div>
 
                     </div>
@@ -2661,7 +2720,10 @@ async function performOsintSearch() {
                         </div>
 
                         <div class="discord-info-value">
-                            ${data.accent_color || "NONE"}
+                            ${escapeHTML(
+                                data.accent_color ||
+                                "NONE"
+                            )}
                         </div>
 
                     </div>
@@ -2692,10 +2754,31 @@ async function performOsintSearch() {
 
     } catch (error) {
 
-        console.error(error);
+        console.error(
+            "Discord OSINT request failed:",
+            error
+        );
 
-        status.textContent =
-            "Could not connect to the Discord API.";
+
+        /* =========================
+           REAL CONNECTION ERROR
+           ========================= */
+
+        if (
+            error instanceof TypeError &&
+            error.message.includes("fetch")
+        ) {
+
+            status.textContent =
+                "CONNECTION ERROR: Could not reach the Render server.";
+
+        } else {
+
+            status.textContent =
+                "REQUEST ERROR: " +
+                error.message;
+
+        }
 
     }
 
