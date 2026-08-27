@@ -875,6 +875,130 @@ body::before {
 .breach-powered a {
     color: #5975A7;
 }
+
+/* deep-style result card */
+.breach-result.deep-style {
+    margin-top: 25px;
+    border: 1px solid rgba(89, 117, 167, 0.45);
+    padding: 24px;
+    background: #0a0a0a;
+    border-radius: 16px;
+}
+.breach-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+.breach-match-count {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.03em;
+    color: #fff;
+}
+.breach-match-num {
+    color: #ff4d6d;
+}
+.breach-match-sub {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: rgba(89, 117, 167, 0.7);
+    margin-top: 6px;
+}
+.breach-tier-badge {
+    flex-shrink: 0;
+    border: 1px solid rgba(255, 193, 7, 0.5);
+    background: rgba(255, 193, 7, 0.08);
+    color: #ffc107;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    padding: 6px 10px;
+    border-radius: 20px;
+}
+.breach-meta-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-bottom: 14px;
+}
+.breach-meta-card {
+    border: 1px solid rgba(89, 117, 167, 0.35);
+    border-radius: 12px;
+    padding: 14px;
+    background: #000;
+}
+.breach-meta-label {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.12em;
+    opacity: 0.55;
+    margin-bottom: 8px;
+}
+.breach-type-pill {
+    display: inline-block;
+    background: rgba(89, 117, 167, 0.2);
+    border: 1px solid #5975A7;
+    color: #5975A7;
+    font-family: "Unison Pro", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+.breach-query-val {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    word-break: break-all;
+}
+.breach-stats-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 22px;
+}
+.breach-stat-card {
+    border: 1px solid rgba(89, 117, 167, 0.3);
+    border-radius: 12px;
+    padding: 14px;
+    background: #000;
+}
+.breach-stat-card.highlight {
+    border-color: rgba(89, 117, 167, 0.6);
+    background: rgba(89, 117, 167, 0.08);
+}
+.breach-stat-label {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    opacity: 0.55;
+    margin-bottom: 6px;
+}
+.breach-stat-num {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+}
+.breach-section-label {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.14em;
+    opacity: 0.5;
+    margin: 18px 0 10px 0;
+}
+@media (max-width: 600px) {
+    .breach-meta-row,
+    .breach-stats-row {
+        grid-template-columns: 1fr;
+    }
+    .breach-top {
+        flex-direction: column;
+    }
+}
+
 /* =========================================================
    SCROLLBARS
    ========================================================= */
@@ -1814,7 +1938,7 @@ async function performOsintSearch() {
     }
 }
 /* =========================================================
-   GENERAL OSINT SEARCH (BREACH)  ← THIS IS THE REPLACED ONE
+   GENERAL OSINT SEARCH (UI like the screenshot)
    ========================================================= */
 async function performGeneralOsintSearch() {
     const input = document.getElementById("osintGeneralSearchInput");
@@ -1831,7 +1955,7 @@ async function performGeneralOsintSearch() {
         return;
     }
 
-    status.textContent = "SEARCHING BREACHES...";
+    status.textContent = "SEARCHING...";
 
     try {
         const apiURL =
@@ -1861,55 +1985,86 @@ async function performGeneralOsintSearch() {
         const sources = data.sources || [];
         const fields = data.fields || [];
         const notes = data.notes || [];
+        const typeLabel = (data.type || "unknown").toUpperCase().replace("_", " ");
+        const total = sources.length;
+        const stealer = 0;
+        const dbLeaks = total;
+
+        let sourcesHTML = "";
+        if (sources.length === 0) {
+            sourcesHTML = `<div class="breach-empty">No matching traces found in public indexes.</div>`;
+        } else {
+            sourcesHTML = sources.map(s => `
+                <div class="breach-item">
+                    <div class="breach-item-name">${escapeHTML(s.name)}</div>
+                    <div class="breach-item-meta">
+                        ${s.date ? escapeHTML(s.date) + "<br>" : ""}
+                        ${escapeHTML(s.provider || "")}
+                    </div>
+                </div>
+            `).join("");
+        }
 
         let fieldsHTML = "";
         if (fields.length) {
-            fieldsHTML =
-                `<div class="breach-fields">` +
-                fields.map(f =>
-                    `<span class="breach-field-tag">${escapeHTML(f)}</span>`
-                ).join("") +
-                `</div>`;
+            fieldsHTML = `
+                <div class="breach-section-label">INFORMATION FOUND</div>
+                <div class="breach-fields">
+                    ${fields.map(f => `<span class="breach-field-tag">${escapeHTML(f)}</span>`).join("")}
+                </div>
+            `;
         }
-
-        let listHTML = "";
-        if (sources.length === 0) {
-            listHTML = `<div class="breach-empty">No breaches found for this query in public indexes.</div>`;
-        } else {
-            listHTML =
-                `<div class="breach-list">` +
-                sources.map(s =>
-                    `<div class="breach-item">
-                        <div class="breach-item-name">${escapeHTML(s.name)}</div>
-                        <div class="breach-item-meta">
-                            ${s.date ? escapeHTML(s.date) + "<br>" : ""}
-                            ${escapeHTML(s.provider || "")}
-                        </div>
-                    </div>`
-                ).join("") +
-                `</div>`;
-        }
-
-        let notesHTML = notes.length
-            ? `<div class="breach-note">${notes.map(n => escapeHTML(n)).join(" · ")}</div>`
-            : "";
 
         status.innerHTML = `
-            <div class="breach-result">
-                <div class="breach-header">
-                    <div class="breach-title">BREACH RESULTS</div>
-                    <div class="breach-count">${sources.length} source${sources.length === 1 ? "" : "s"}</div>
+            <div class="breach-result deep-style">
+                <div class="breach-top">
+                    <div>
+                        <div class="breach-match-count">
+                            <span class="breach-match-num">${total}</span> matching traces found
+                        </div>
+                        <div class="breach-match-sub">
+                            Exposure across ${total} source${total === 1 ? "" : "s"} — censored on the free tier. Upgrade to reveal full details.
+                        </div>
+                    </div>
+                    <div class="breach-tier-badge">Censored — free tier</div>
                 </div>
-                <div class="breach-meta">
-                    Query: <strong>${escapeHTML(data.query)}</strong>
-                    &nbsp;·&nbsp; Type: ${escapeHTML(data.type || "unknown")}
+
+                <div class="breach-meta-row">
+                    <div class="breach-meta-card">
+                        <div class="breach-meta-label">Search Type</div>
+                        <div class="breach-type-pill">${escapeHTML(typeLabel)}</div>
+                    </div>
+                    <div class="breach-meta-card">
+                        <div class="breach-meta-label">Query</div>
+                        <div class="breach-query-val">${escapeHTML(data.query)}</div>
+                    </div>
                 </div>
+
+                <div class="breach-stats-row">
+                    <div class="breach-stat-card">
+                        <div class="breach-stat-label">Stealer Logs</div>
+                        <div class="breach-stat-num">${stealer}</div>
+                    </div>
+                    <div class="breach-stat-card">
+                        <div class="breach-stat-label">DB Leaks</div>
+                        <div class="breach-stat-num">${dbLeaks}</div>
+                    </div>
+                    <div class="breach-stat-card highlight">
+                        <div class="breach-stat-label">Total Results</div>
+                        <div class="breach-stat-num">${total}</div>
+                    </div>
+                </div>
+
+                <div class="breach-section-label">BREACH DATABASES</div>
+                <div class="breach-list">
+                    ${sourcesHTML}
+                </div>
+
                 ${fieldsHTML}
-                ${listHTML}
-                ${notesHTML}
+
                 <div class="breach-powered">
                     Powered by <a href="https://leakcheck.io" target="_blank" rel="noopener">LeakCheck</a>
-                    &amp; XposedOrNot
+                    &amp; XposedOrNot · free tier (names only)
                 </div>
             </div>
         `;
