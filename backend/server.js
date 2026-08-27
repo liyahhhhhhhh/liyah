@@ -7,60 +7,250 @@ app.use(cors());
 
 const PORT = process.env.PORT || 3000;
 const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
+const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
 
 
 /* =========================================================
-   SECURITY LOGGING
+   GET VISITOR IP
    ========================================================= */
 
 function getClientIP(req) {
 
-    // Render sits behind a proxy, so use the forwarded address.
     const forwarded = req.headers["x-forwarded-for"];
 
     if (forwarded) {
-        return forwarded.split(",")[0].trim();
+
+        return forwarded
+            .split(",")[0]
+            .trim();
+
     }
 
     return req.socket.remoteAddress || "unknown";
 }
 
 
-function logVisit(req) {
+/* =========================================================
+   SEND SECURITY LOG TO DISCORD
+   ========================================================= */
 
-    const logEntry = {
-        timestamp: new Date().toISOString(),
+async function sendDiscordLog(logEntry) {
 
-        ip: getClientIP(req),
+    if (!DISCORD_WEBHOOK_URL) {
 
-        method: req.method,
+        console.error(
+            "DISCORD_WEBHOOK_URL is not configured."
+        );
 
-        path: req.originalUrl,
-
-        userAgent:
-            req.headers["user-agent"] || "unknown",
-
-        referer:
-            req.headers["referer"] || "none"
-    };
+        return;
+    }
 
 
-    console.log(
-        "[SITE VISITOR]",
-        JSON.stringify(logEntry)
-    );
+    try {
+
+        const response = await fetch(
+            DISCORD_WEBHOOK_URL,
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+
+                    username:
+                        "Liyah's Hub Security",
+
+                    embeds: [
+
+                        {
+
+                            title:
+                                "🚨 SITE VISIT",
+
+                            color:
+                                5869223,
+
+                            fields: [
+
+                                {
+                                    name:
+                                        "IP Address",
+
+                                    value:
+                                        `\`${logEntry.ip}\``,
+
+                                    inline:
+                                        true
+                                },
+
+
+                                {
+                                    name:
+                                        "Timestamp",
+
+                                    value:
+                                        `\`${logEntry.timestamp}\``,
+
+                                    inline:
+                                        true
+                                },
+
+
+                                {
+                                    name:
+                                        "Method",
+
+                                    value:
+                                        `\`${logEntry.method}\``,
+
+                                    inline:
+                                        true
+                                },
+
+
+                                {
+                                    name:
+                                        "Path",
+
+                                    value:
+                                        `\`${logEntry.path}\``,
+
+                                    inline:
+                                        false
+                                },
+
+
+                                {
+                                    name:
+                                        "User Agent",
+
+                                    value:
+                                        logEntry.userAgent ||
+                                        "Unknown",
+
+                                    inline:
+                                        false
+                                },
+
+
+                                {
+                                    name:
+                                        "Referrer",
+
+                                    value:
+                                        logEntry.referer ||
+                                        "None",
+
+                                    inline:
+                                        false
+                                }
+
+                            ],
+
+
+                            footer: {
+
+                                text:
+                                    "Liyah's Hub Security Log"
+
+                            },
+
+
+                            timestamp:
+                                logEntry.timestamp
+
+                        }
+
+                    ]
+
+                })
+
+            }
+        );
+
+
+        if (!response.ok) {
+
+            console.error(
+                "Discord webhook returned:",
+                response.status
+            );
+
+        }
+
+
+    } catch (error) {
+
+        console.error(
+            "Failed to send security log to Discord:",
+            error
+        );
+
+    }
+
 }
 
 
 /* =========================================================
-   VISITOR LOGGING
+   SITE VISIT ENDPOINT
    ========================================================= */
 
-app.use((req, res, next) => {
+app.get("/api/visit", async (req, res) => {
 
-    logVisit(req);
 
-    next();
+    /* =========================
+       CREATE LOG ENTRY
+       ========================= */
+
+    const logEntry = {
+
+        timestamp:
+            new Date().toISOString(),
+
+        ip:
+            getClientIP(req),
+
+        method:
+            req.method,
+
+        path:
+            req.originalUrl,
+
+        userAgent:
+            req.headers["user-agent"] ||
+            "unknown",
+
+        referer:
+            req.headers["referer"] ||
+            "none"
+
+    };
+
+
+    /* =========================
+       RENDER LOG
+       ========================= */
+
+    console.log(
+        "[SITE VISIT]",
+        JSON.stringify(logEntry)
+    );
+
+
+    /* =========================
+       DISCORD WEBHOOK
+       ========================= */
+
+    await sendDiscordLog(logEntry);
+
+
+    /* =========================
+       EMPTY RESPONSE
+       ========================= */
+
+    res.status(204).end();
 
 });
 
@@ -81,7 +271,10 @@ app.get("/api/discord/:id", async (req, res) => {
     if (!/^\d{17,20}$/.test(userId)) {
 
         return res.status(400).json({
-            error: "Invalid Discord ID."
+
+            error:
+                "Invalid Discord ID."
+
         });
 
     }
@@ -89,27 +282,37 @@ app.get("/api/discord/:id", async (req, res) => {
 
     try {
 
+
         /* =========================
            DISCORD API REQUEST
            ========================= */
 
         const response = await fetch(
+
             `https://discord.com/api/v10/users/${userId}`,
+
             {
-                method: "GET",
+
+                method:
+                    "GET",
 
                 headers: {
+
                     Authorization:
                         `Bot ${DISCORD_BOT_TOKEN}`,
 
                     Accept:
                         "application/json"
+
                 }
+
             }
+
         );
 
 
-        const data = await response.json();
+        const data =
+            await response.json();
 
 
         /* =========================
@@ -118,10 +321,14 @@ app.get("/api/discord/:id", async (req, res) => {
 
         if (!response.ok) {
 
-            return res.status(response.status).json({
+            return res.status(
+                response.status
+            ).json({
+
                 error:
                     data.message ||
                     "Discord API error."
+
             });
 
         }
@@ -133,21 +340,32 @@ app.get("/api/discord/:id", async (req, res) => {
 
         let createdAt = null;
 
+
         try {
 
             const DISCORD_EPOCH =
                 1420070400000;
 
+
             const timestamp =
-                Number(BigInt(userId) >> 22n) +
+
+                Number(
+                    BigInt(userId) >> 22n
+                ) +
+
                 DISCORD_EPOCH;
 
+
             createdAt =
-                new Date(timestamp).toISOString();
+                new Date(
+                    timestamp
+                ).toISOString();
+
 
         } catch (error) {
 
-            createdAt = null;
+            createdAt =
+                null;
 
         }
 
@@ -156,17 +374,23 @@ app.get("/api/discord/:id", async (req, res) => {
            AVATAR URL
            ================================================= */
 
-        let avatarURL = null;
+        let avatarURL =
+            null;
+
 
         if (data.avatar) {
 
             const extension =
+
                 data.avatar.startsWith("a_")
                     ? "gif"
                     : "png";
 
+
             avatarURL =
+
                 `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.${extension}?size=512`;
+
         }
 
 
@@ -177,10 +401,16 @@ app.get("/api/discord/:id", async (req, res) => {
         if (!avatarURL) {
 
             const defaultAvatar =
-                Number(data.discriminator || 0) % 5;
+
+                Number(
+                    data.discriminator || 0
+                ) % 5;
+
 
             avatarURL =
+
                 `https://cdn.discordapp.com/embed/avatars/${defaultAvatar}.png`;
+
         }
 
 
@@ -188,17 +418,23 @@ app.get("/api/discord/:id", async (req, res) => {
            BANNER URL
            ================================================= */
 
-        let bannerURL = null;
+        let bannerURL =
+            null;
+
 
         if (data.banner) {
 
             const extension =
+
                 data.banner.startsWith("a_")
                     ? "gif"
                     : "png";
 
+
             bannerURL =
+
                 `https://cdn.discordapp.com/banners/${data.id}/${data.banner}.${extension}?size=1024`;
+
         }
 
 
@@ -206,12 +442,18 @@ app.get("/api/discord/:id", async (req, res) => {
            AVATAR DECORATION
            ================================================= */
 
-        let avatarDecorationURL = null;
+        let avatarDecorationURL =
+            null;
 
-        if (data.avatar_decoration_data?.asset) {
+
+        if (
+            data.avatar_decoration_data?.asset
+        ) {
 
             avatarDecorationURL =
+
                 `https://cdn.discordapp.com/avatar-decoration-presets/${data.avatar_decoration_data.asset}.png?size=512`;
+
         }
 
 
@@ -220,6 +462,10 @@ app.get("/api/discord/:id", async (req, res) => {
            ================================================= */
 
         res.json({
+
+            /* =========================
+               BASIC INFORMATION
+               ========================= */
 
             id:
                 data.id || null,
@@ -233,11 +479,21 @@ app.get("/api/discord/:id", async (req, res) => {
             discriminator:
                 data.discriminator || "0",
 
+
+            /* =========================
+               ACCOUNT TYPE
+               ========================= */
+
             bot:
                 data.bot === true,
 
             system:
                 data.system === true,
+
+
+            /* =========================
+               AVATAR
+               ========================= */
 
             avatar:
                 data.avatar || null,
@@ -246,10 +502,16 @@ app.get("/api/discord/:id", async (req, res) => {
                 avatarURL,
 
             avatar_decoration:
-                data.avatar_decoration_data || null,
+                data.avatar_decoration_data ||
+                null,
 
             avatar_decoration_url:
                 avatarDecorationURL,
+
+
+            /* =========================
+               BANNER
+               ========================= */
 
             banner:
                 data.banner || null,
@@ -257,8 +519,18 @@ app.get("/api/discord/:id", async (req, res) => {
             banner_url:
                 bannerURL,
 
+
+            /* =========================
+               PROFILE COLORS
+               ========================= */
+
             accent_color:
                 data.accent_color ?? null,
+
+
+            /* =========================
+               FLAGS
+               ========================= */
 
             public_flags:
                 data.public_flags ?? 0,
@@ -266,27 +538,52 @@ app.get("/api/discord/:id", async (req, res) => {
             flags:
                 data.flags ?? 0,
 
+
+            /* =========================
+               ACCOUNT CREATION
+               ========================= */
+
             created_at:
                 createdAt,
 
+
             account_created:
+
                 createdAt
-                    ? new Date(createdAt).toLocaleString(
+
+                    ? new Date(
+                        createdAt
+                    ).toLocaleString(
                         "en-GB",
                         {
-                            day: "2-digit",
-                            month: "2-digit",
-                            year: "numeric"
+
+                            day:
+                                "2-digit",
+
+                            month:
+                                "2-digit",
+
+                            year:
+                                "numeric"
+
                         }
                     )
+
                     : null,
+
+
+            /* =========================
+               RAW DISCORD DATA
+               ========================= */
 
             raw:
                 data
 
         });
 
+
     } catch (error) {
+
 
         console.error(
             "Discord lookup error:",
@@ -295,8 +592,10 @@ app.get("/api/discord/:id", async (req, res) => {
 
 
         res.status(500).json({
+
             error:
                 "Failed to contact Discord."
+
         });
 
     }
