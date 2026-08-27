@@ -430,15 +430,12 @@ app.get(
                 new Date().toISOString(),
 
             /*
-             * Keep the complete IP only in server memory
+             * Write the whole IP
              * long enough to perform the approximate
              * location lookup.
              */
 
             ip: ip,
-
-            maskedIP:
-                maskIP(ip),
 
             country:
                 location.country,
