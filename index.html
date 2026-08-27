@@ -2513,13 +2513,15 @@ async function performOsintSearch() {
            BUILD API URL
            ========================= */
 
-        const response =
-           await fetch(
+        const apiURL =
             "https://liyah-zy3z.onrender.com/api/discord/" +
             encodeURIComponent(query);
 
 
-        console.log("Discord API request:", apiURL);
+        console.log(
+            "Discord API request:",
+            apiURL
+        );
 
 
         /* =========================
