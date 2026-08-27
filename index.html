@@ -1,1 +1,1963 @@
-<!DOCTYPE html> <html lang="en"> <head> <meta charset="UTF-8"> <meta name="viewport" content="width=device-width, initial-scale=1.0"> <style> /* ========================= FONTS ========================= */ @font-face { font-family: "Unison Pro"; src: url("unison-pro-bold.otf") format("opentype"); font-weight: 700; font-style: normal; font-display: swap; } @font-face { font-family: "Unison Pro Light"; src: url("unison-pro-light.otf") format("opentype"); font-weight: 300; font-style: normal; font-display: swap; } /* ========================= GENERAL ========================= */ * { margin: 0; padding: 0; box-sizing: border-box; } html, body { width: 100%; height: 100%; } body { background: #000000; overflow: hidden; } /* ========================= TOP SITE SHADOW ========================= */ body::before { content: ""; position: fixed; top: 0; left: 0; width: 100%; height: 22px; background: linear-gradient( to bottom, rgba(0, 0, 0, 0.95), rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0) ); pointer-events: none; z-index: 9999; } /* ========================= START SCREEN ========================= */ .home-content { position: fixed; inset: 0; display: flex; align-items: center; justify-content: center; gap: 7vw; padding: 40px; overflow-y: auto; overflow-x: hidden; transition: opacity 0.5s ease, transform 0.5s ease; z-index: 1; } .home-content.hidden { opacity: 0; transform: scale(0.97); pointer-events: none; } /* ========================= HOME IMAGE ========================= */ .home-image { width: 400px; max-width: 32vw; height: auto; object-fit: contain; transition: opacity 0.5s ease, transform 0.5s ease; } /* ========================= HOME TEXT ========================= */ .home-text { display: flex; flex-direction: column; align-items: flex-start; justify-content: center; gap: 14px; min-width: 350px; } .welcome-text { font-family: "Unison Pro Light", sans-serif; font-weight: 300; font-size: clamp(20px, 2vw, 30px); letter-spacing: 0.08em; color: #5975A7; transition: text-shadow 0.25s ease, filter 0.25s ease; } .hub-text { font-family: "Unison Pro", sans-serif; font-weight: 700; font-size: clamp(35px, 4vw, 62px); letter-spacing: 0.06em; line-height: 0.95; color: #5975A7; transition: text-shadow 0.25s ease, filter 0.25s ease; } .socials-text { font-family: "Unison Pro Light", sans-serif; font-weight: 300; font-size: clamp(16px, 1.5vw, 22px); letter-spacing: 0.08em; color: #5975A7; margin-top: 12px; transition: text-shadow 0.25s ease, filter 0.25s ease; } /* ========================= SOCIAL LINKS ========================= */ .social-links { display: flex; flex-direction: column; gap: 8px; margin-top: 2px; } .social-link { display: flex; align-items: center; gap: 18px; width: fit-content; color: #5975A7; font-family: "Unison Pro Light", sans-serif; font-weight: 300; font-size: clamp(15px, 1.4vw, 21px); letter-spacing: 0.08em; text-decoration: none; cursor: pointer; transition: filter 0.25s ease, text-shadow 0.25s ease; } .social-arrow { display: inline-block; transition: transform 0.25s ease; } .social-name { position: relative; display: inline-block; } .social-name::after { content: ""; position: absolute; left: 0; bottom: -3px; width: 100%; height: 1px; background: #5975A7; transform: scaleX(0); transform-origin: left center; transition: transform 0.25s ease; } .social-link:hover { filter: brightness(1.35); text-shadow: 0 0 6px rgba(89, 117, 167, 0.55), 0 0 16px rgba(89, 117, 167, 0.25); } .social-link:hover .social-name::after { transform: scaleX(1); } .social-link:hover .social-arrow { transform: translateX(4px); } /* ========================= TEXT HOVER BRIGHTNESS ========================= */ .home-text span:hover, .navigation a:hover, .name-box:hover, .context-box:hover { filter: brightness(1.35); text-shadow: 0 0 6px rgba(89, 117, 167, 0.55), 0 0 16px rgba(89, 117, 167, 0.25); } /* ========================= NAVIGATION ========================= */ .navigation { position: fixed; left: 35px; top: 35px; display: flex; flex-direction: row; align-items: center; gap: 12px; z-index: 100; } .navigation a { position: relative; display: inline-block; width: fit-content; color: #5975A7; font-family: "Unison Pro", sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 0.08em; text-decoration: none; cursor: pointer; transition: color 0.25s ease, transform 0.25s ease, text-shadow 0.25s ease, filter 0.25s ease; } /* ========================= SCRATCH EFFECT ========================= */ .navigation a::before, .navigation a::after { content: ""; position: absolute; left: -5%; width: 110%; height: 1px; background: #5975A7; transform: scaleX(0); transform-origin: left center; transition: transform 0.25s ease; } .navigation a::before { top: 43%; } .navigation a::after { top: 58%; } /* ========================= NAVIGATION HOVER ========================= */ .navigation a:hover { color: #5975A7; transform: translateX(4px); filter: brightness(1.35); text-shadow: 0 0 5px rgba(31, 81, 255, 0.6), 0 0 15px rgba(31, 81, 255, 0.3); } .navigation a:hover::before { transform: scaleX(1); } .navigation a:hover::after { transform: scaleX(0.8); } /* ========================= ACTIVE TAB ========================= */ .navigation a.active::after { transform: scaleX(1); } .navigation a.active::before { transform: scaleX(0); } /* ========================= SEPARATOR ========================= */ .separator { color: #5975A7; font-family: Arial, sans-serif; font-size: 5px; display: flex; align-items: center; } /* ========================= PAGES ========================= */ .page { position: fixed; inset: 0; display: none; padding: 60px; color: #5975A7; font-family: "Unison Pro", sans-serif; } .page.active { display: block; } /* ========================= HALL OF SHAME ========================= */ #shame { padding-top: 80px; padding-left: 8vw; padding-right: 8vw; padding-bottom: 60px; overflow-y: auto; overflow-x: hidden; } .shame-title { text-align: center; font-family: "Unison Pro", sans-serif; font-size: clamp(20px, 2.4vw, 32px); font-weight: 700; letter-spacing: 0.08em; margin-bottom: 35px; } /* ========================= GRID ========================= */ .shame-grid { width: 100%; max-width: 1050px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; padding-bottom: 40px; } /* ========================= BIG BOXES ========================= */ .shame-box { min-height: 300px; border: 1px solid #5975A7; padding: 16px; display: flex; flex-direction: column; justify-content: flex-end; background: #000000; } /* ========================= FIRST BOX IMAGE ========================= */ .shame-image { width: 100%; flex: 1; min-height: 0; display: flex; align-items: center; justify-content: center; overflow: hidden; margin-bottom: 10px; } .shame-image img { width: 100%; height: 100%; object-fit: contain; object-position: center; } /* ========================= NAME BOX ========================= */ .name-box { width: 100%; height: 45px; border: 1px solid #5975A7; background: #000000; margin-bottom: 10px; display: flex; align-items: center; padding-left: 13px; color: #5975A7; font-family: "Unison Pro Light", sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.08em; transition: filter 0.25s ease, text-shadow 0.25s ease; } /* ========================= CONTEXT BOX ========================= */ .context-box { width: 100%; height: 80px; border: 1px solid #5975A7; background: #000000; display: flex; align-items: flex-start; padding: 13px; color: #5975A7; font-family: "Unison Pro Light", sans-serif; font-weight: 300; font-size: 10px; letter-spacing: 0.08em; transition: filter 0.25s ease, text-shadow 0.25s ease; } /* ========================= SCROLLBAR ========================= */ #shame::-webkit-scrollbar, .home-content::-webkit-scrollbar { width: 8px; } #shame::-webkit-scrollbar-track, .home-content::-webkit-scrollbar-track { background: #000000; } #shame::-webkit-scrollbar-thumb, .home-content::-webkit-scrollbar-thumb { background: #5975A7; } /* ========================= MOBILE ========================= */ @media (max-width: 850px) { .home-content { gap: 35px; } .home-image { max-width: 38vw; } .home-text { min-width: 0; } #shame { padding-top: 75px; padding-left: 25px; padding-right: 25px; } .shame-grid { grid-template-columns: repeat(2, 1fr); gap: 16px; } .shame-box { min-height: 270px; padding: 13px; } .name-box { height: 40px; font-size: 9px; } .context-box { height: 70px; font-size: 9px; padding: 11px; } } @media (max-width: 600px) { .home-content { flex-direction: column; gap: 30px; text-align: center; } .home-image { max-width: 60vw; width: 300px; } .home-text { align-items: center; } .navigation { left: 20px; top: 25px; } #shame { padding-top: 75px; padding-left: 20px; padding-right: 20px; } .shame-title { font-size: 22px; margin-bottom: 28px; } .shame-grid { grid-template-columns: 1fr; gap: 16px; } .shame-box { min-height: 250px; } } </style> </head> <body> <!-- ========================= START SCREEN ========================= --> <div class="home-content" id="homeContent" > <img src="image.jpeg" class="home-image" alt="" > <div class="home-text"> <span class="welcome-text"> Welcome to </span> <span class="hub-text"> liyah's hub </span> <span class="socials-text"> check out liyah's socials: </span> <!-- SOCIAL LINKS --> <div class="social-links"> <a class="social-link" href="https://discord.gg/yuketsu" target="_blank" rel="noopener noreferrer" > <span class="social-arrow">→</span> <span class="social-name">Discord</span> </a> <a class="social-link" href="https://www.tiktok.com/@c4lgaryy?lang=en" target="_blank" rel="noopener noreferrer" > <span class="social-arrow">→</span> <span class="social-name">TikTok</span> </a> <a class="social-link" href="https://youtube.com/c/c4lgaryy" target="_blank" rel="noopener noreferrer" > <span class="social-arrow">→</span> <span class="social-name">YouTube</span> </a> </div> </div> </div> <!-- ========================= NAVIGATION ========================= --> <nav class="navigation"> <a href="#" id="shameTab" onclick="handleTab('shame', this, event)" > Hall Of Shame </a> <span class="separator"> ● </span> <a href="#" id="newsTab" onclick="handleTab('news', this, event)" > News </a> </nav> <!-- ========================= HALL OF SHAME ========================= --> <section class="page" id="shame" > <h1 class="shame-title"> HALL OF SHAME </h1> <div class="shame-grid"> <!-- FIRST BOX --> <div class="shame-box"> <div class="shame-image"> <img src="image.jpg" alt="Eli" > </div> <div class="name-box"> Eli </div> <div class="context-box"> biggest f4g you will find on cord !! </div> </div> <!-- SECOND BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> <!-- THIRD BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> <!-- FOURTH BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> <!-- FIFTH BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> <!-- SIXTH BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> <!-- SEVENTH BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> <!-- EIGHTH BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> <!-- NINTH BOX --> <div class="shame-box"> <div class="name-box"> NAME </div> <div class="context-box"> CONTEXT </div> </div> </div> </section> <!-- ========================= NEWS ========================= --> <section class="page" id="news" > </section> <!-- ========================= JAVASCRIPT ========================= --> <script> function handleTab(pageName, clickedTab, event) { event.preventDefault(); /* If already inside this tab, return to home */ if (clickedTab.classList.contains("active")) { goHome(); return; } openPage(pageName, clickedTab); } function openPage(pageName, clickedTab) { /* Hide start screen */ document .getElementById("homeContent") .classList.add("hidden"); /* Hide every page */ document .querySelectorAll(".page") .forEach(function(page) { page.classList.remove("active"); }); /* Remove active tab */ document .querySelectorAll(".navigation a") .forEach(function(tab) { tab.classList.remove("active"); }); /* Open selected page */ document .getElementById(pageName) .classList.add("active"); /* Underline selected tab */ clickedTab.classList.add("active"); } function goHome() { /* Show start screen */ document .getElementById("homeContent") .classList.remove("hidden"); /* Hide pages */ document .querySelectorAll(".page") .forEach(function(page) { page.classList.remove("active"); }); /* Remove tab underlines */ document .querySelectorAll(".navigation a") .forEach(function(tab) { tab.classList.remove("active"); }); } </script> </body> </html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+
+/* =========================
+   FONTS
+   ========================= */
+
+@font-face {
+    font-family: "Unison Pro";
+    src: url("unison-pro-bold.otf") format("opentype");
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Unison Pro Light";
+    src: url("unison-pro-light.otf") format("opentype");
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+
+/* =========================
+   GENERAL
+   ========================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    background: #000000;
+    overflow: hidden;
+}
+
+
+/* =========================
+   TOP SITE SHADOW
+   ========================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 22px;
+
+    background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.95),
+        rgba(0, 0, 0, 0.45),
+        rgba(0, 0, 0, 0)
+    );
+
+    pointer-events: none;
+
+    z-index: 9999;
+}
+
+
+/* =========================
+   START SCREEN
+   ========================= */
+
+.home-content {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7vw;
+
+    padding: 40px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+
+    transition:
+        opacity 0.5s ease,
+        transform 0.5s ease;
+
+    z-index: 1;
+}
+
+.home-content.hidden {
+
+    opacity: 0;
+
+    transform: scale(0.97);
+
+    pointer-events: none;
+}
+
+
+/* =========================
+   HOME IMAGE
+   ========================= */
+
+.home-image {
+
+    width: 400px;
+
+    max-width: 32vw;
+
+    height: auto;
+
+    object-fit: contain;
+}
+
+
+/* =========================
+   HOME TEXT
+   ========================= */
+
+.home-text {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    justify-content: center;
+
+    gap: 14px;
+
+    min-width: 350px;
+}
+
+.welcome-text {
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-weight: 300;
+
+    font-size: clamp(20px, 2vw, 30px);
+
+    letter-spacing: 0.08em;
+
+    color: #5975A7;
+}
+
+.hub-text {
+
+    font-family: "Unison Pro", sans-serif;
+
+    font-weight: 700;
+
+    font-size: clamp(35px, 4vw, 62px);
+
+    letter-spacing: 0.06em;
+
+    line-height: 0.95;
+
+    color: #5975A7;
+}
+
+.socials-text {
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-weight: 300;
+
+    font-size: clamp(16px, 1.5vw, 22px);
+
+    letter-spacing: 0.08em;
+
+    color: #5975A7;
+
+    margin-top: 12px;
+}
+
+
+/* =========================
+   SOCIAL LINKS
+   ========================= */
+
+.social-links {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-top: 2px;
+}
+
+.social-link {
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    width: fit-content;
+
+    color: #5975A7;
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-weight: 300;
+
+    font-size: clamp(15px, 1.4vw, 21px);
+
+    letter-spacing: 0.08em;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        filter 0.25s ease,
+        text-shadow 0.25s ease;
+}
+
+.social-arrow {
+
+    display: inline-block;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.social-name {
+
+    position: relative;
+
+    display: inline-block;
+}
+
+.social-name::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+
+    bottom: -3px;
+
+    width: 100%;
+
+    height: 1px;
+
+    background: #5975A7;
+
+    transform: scaleX(0);
+
+    transform-origin: left center;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.social-link:hover {
+
+    filter: brightness(1.35);
+
+    text-shadow:
+        0 0 6px rgba(89, 117, 167, 0.55),
+        0 0 16px rgba(89, 117, 167, 0.25);
+}
+
+.social-link:hover .social-name::after {
+
+    transform: scaleX(1);
+}
+
+.social-link:hover .social-arrow {
+
+    transform: translateX(4px);
+}
+
+
+/* =========================
+   NAVIGATION
+   ========================= */
+
+.navigation {
+
+    position: fixed;
+
+    left: 35px;
+    top: 35px;
+
+    display: flex;
+
+    flex-direction: row;
+
+    align-items: center;
+
+    gap: 12px;
+
+    z-index: 100;
+}
+
+.navigation a {
+
+    position: relative;
+
+    display: inline-block;
+
+    width: fit-content;
+
+    color: #5975A7;
+
+    font-family: "Unison Pro", sans-serif;
+
+    font-size: 13px;
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    text-decoration: none;
+
+    cursor: pointer;
+
+    transition:
+        color 0.25s ease,
+        transform 0.25s ease,
+        text-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+
+/* =========================
+   SCRATCH EFFECT
+   ========================= */
+
+.navigation a::before,
+.navigation a::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: -5%;
+
+    width: 110%;
+
+    height: 1px;
+
+    background: #5975A7;
+
+    transform: scaleX(0);
+
+    transform-origin: left center;
+
+    transition:
+        transform 0.25s ease;
+}
+
+.navigation a::before {
+    top: 43%;
+}
+
+.navigation a::after {
+    top: 58%;
+}
+
+
+/* =========================
+   NAVIGATION HOVER
+   ========================= */
+
+.navigation a:hover {
+
+    transform: translateX(4px);
+
+    filter: brightness(1.35);
+
+    text-shadow:
+        0 0 5px rgba(31, 81, 255, 0.6),
+        0 0 15px rgba(31, 81, 255, 0.3);
+}
+
+.navigation a:hover::before {
+    transform: scaleX(1);
+}
+
+.navigation a:hover::after {
+    transform: scaleX(0.8);
+}
+
+
+/* =========================
+   ACTIVE TAB
+   ========================= */
+
+.navigation a.active::after {
+    transform: scaleX(1);
+}
+
+.navigation a.active::before {
+    transform: scaleX(0);
+}
+
+
+/* =========================
+   SEPARATOR
+   ========================= */
+
+.separator {
+
+    color: #5975A7;
+
+    font-family: Arial, sans-serif;
+
+    font-size: 5px;
+
+    display: flex;
+
+    align-items: center;
+}
+
+
+/* =========================
+   PAGES
+   ========================= */
+
+.page {
+
+    position: fixed;
+
+    inset: 0;
+
+    display: none;
+
+    padding: 60px;
+
+    color: #5975A7;
+
+    font-family: "Unison Pro", sans-serif;
+}
+
+.page.active {
+    display: block;
+}
+
+
+/* =========================================================
+   HALL OF SHAME
+   ========================================================= */
+
+#shame {
+
+    padding-top: 80px;
+
+    padding-left: 8vw;
+
+    padding-right: 8vw;
+
+    padding-bottom: 60px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+}
+
+.shame-title {
+
+    text-align: center;
+
+    font-family: "Unison Pro", sans-serif;
+
+    font-size: clamp(20px, 2.4vw, 32px);
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+
+    margin-bottom: 35px;
+}
+
+
+/* =========================
+   SHAME GRID
+   ========================= */
+
+.shame-grid {
+
+    width: 100%;
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    padding-bottom: 40px;
+}
+
+
+/* =========================
+   SHAME BOX
+   ========================= */
+
+.shame-box {
+
+    min-height: 300px;
+
+    border: 1px solid #5975A7;
+
+    padding: 16px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: flex-end;
+
+    background: #000000;
+}
+
+
+/* =========================
+   SHAME IMAGE
+   ========================= */
+
+.shame-image {
+
+    width: 100%;
+
+    flex: 1;
+
+    min-height: 0;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    margin-bottom: 10px;
+}
+
+.shame-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: contain;
+
+    object-position: center;
+}
+
+
+/* =========================
+   NAME BOX
+   ========================= */
+
+.name-box {
+
+    width: 100%;
+
+    height: 45px;
+
+    border: 1px solid #5975A7;
+
+    background: #000000;
+
+    margin-bottom: 10px;
+
+    display: flex;
+
+    align-items: center;
+
+    padding-left: 13px;
+
+    color: #5975A7;
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-weight: 300;
+
+    font-size: 10px;
+
+    letter-spacing: 0.08em;
+
+    transition:
+        filter 0.25s ease,
+        text-shadow 0.25s ease;
+}
+
+
+/* =========================
+   CONTEXT BOX
+   ========================= */
+
+.context-box {
+
+    width: 100%;
+
+    height: 80px;
+
+    border: 1px solid #5975A7;
+
+    background: #000000;
+
+    display: flex;
+
+    align-items: flex-start;
+
+    padding: 13px;
+
+    color: #5975A7;
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-weight: 300;
+
+    font-size: 10px;
+
+    letter-spacing: 0.08em;
+
+    transition:
+        filter 0.25s ease,
+        text-shadow 0.25s ease;
+}
+
+
+/* =========================================================
+   NEWS
+   ========================================================= */
+
+#news {
+
+    padding-top: 85px;
+
+    padding-left: 8vw;
+
+    padding-right: 8vw;
+
+    padding-bottom: 60px;
+
+    overflow-y: auto;
+
+    overflow-x: hidden;
+}
+
+
+/* =========================
+   NEWS HEADER
+   ========================= */
+
+.news-header {
+
+    max-width: 1050px;
+
+    margin: 0 auto 35px auto;
+
+    display: flex;
+
+    align-items: flex-end;
+
+    justify-content: space-between;
+
+    border-bottom: 1px solid #5975A7;
+
+    padding-bottom: 14px;
+}
+
+.news-title {
+
+    font-family: "Unison Pro", sans-serif;
+
+    font-size: clamp(25px, 3vw, 38px);
+
+    font-weight: 700;
+
+    letter-spacing: 0.08em;
+}
+
+.news-subtitle {
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-size: 11px;
+
+    font-weight: 300;
+
+    letter-spacing: 0.12em;
+
+    opacity: 0.75;
+}
+
+
+/* =========================
+   FEATURED NEWS
+   ========================= */
+
+.news-featured {
+
+    max-width: 1050px;
+
+    margin: 0 auto 22px auto;
+
+    border: 1px solid #5975A7;
+
+    display: grid;
+
+    grid-template-columns: 1.35fr 1fr;
+
+    min-height: 360px;
+
+    background: #000000;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.news-featured:hover {
+
+    transform: translateY(-3px);
+
+    filter: brightness(1.15);
+
+    box-shadow:
+        0 0 20px rgba(89, 117, 167, 0.12);
+}
+
+
+/* =========================
+   FEATURED IMAGE
+   ========================= */
+
+.featured-image {
+
+    width: 100%;
+
+    height: 100%;
+
+    min-height: 360px;
+
+    overflow: hidden;
+
+    border-right: 1px solid #5975A7;
+}
+
+.featured-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+
+/* =========================
+   FEATURED CONTENT
+   ========================= */
+
+.featured-content {
+
+    padding: 30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+}
+
+.news-meta {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 15px;
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-size: 9px;
+
+    letter-spacing: 0.12em;
+}
+
+.news-category {
+
+    font-family: "Unison Pro", sans-serif;
+
+    font-weight: 700;
+}
+
+.news-date {
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-weight: 300;
+}
+
+.featured-content h2 {
+
+    font-family: "Unison Pro", sans-serif;
+
+    font-size: clamp(25px, 3vw, 40px);
+
+    line-height: 1;
+
+    letter-spacing: 0.04em;
+
+    margin: 25px 0 15px 0;
+}
+
+.featured-content p {
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-size: 12px;
+
+    line-height: 1.6;
+
+    letter-spacing: 0.05em;
+
+    max-width: 480px;
+}
+
+.read-more {
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-size: 10px;
+
+    letter-spacing: 0.12em;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
+
+    margin-top: 25px;
+}
+
+.read-arrow {
+
+    transition:
+        transform 0.25s ease;
+}
+
+.news-featured:hover .read-arrow {
+
+    transform: translateX(5px);
+}
+
+
+/* =========================
+   NEWS GRID
+   ========================= */
+
+.news-grid {
+
+    max-width: 1050px;
+
+    margin: 0 auto;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3, 1fr);
+
+    gap: 20px;
+
+    padding-bottom: 40px;
+}
+
+
+/* =========================
+   NEWS CARD
+   ========================= */
+
+.news-card {
+
+    border: 1px solid #5975A7;
+
+    background: #000000;
+
+    min-height: 330px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    cursor: pointer;
+
+    transition:
+        transform 0.3s ease,
+        filter 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+
+    transform: translateY(-4px);
+
+    filter: brightness(1.15);
+
+    box-shadow:
+        0 0 18px rgba(89, 117, 167, 0.12);
+}
+
+
+/* =========================
+   CARD IMAGE
+   ========================= */
+
+.card-image {
+
+    width: 100%;
+
+    height: 175px;
+
+    border-bottom: 1px solid #5975A7;
+
+    overflow: hidden;
+}
+
+.card-image img {
+
+    width: 100%;
+
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+
+    transition:
+        transform 0.4s ease;
+}
+
+.news-card:hover .card-image img {
+
+    transform: scale(1.04);
+}
+
+
+/* =========================
+   CARD CONTENT
+   ========================= */
+
+.card-content {
+
+    padding: 18px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    flex: 1;
+}
+
+.card-meta {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-bottom: 14px;
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-size: 8px;
+
+    letter-spacing: 0.1em;
+}
+
+.card-category {
+
+    font-family: "Unison Pro", sans-serif;
+}
+
+.news-card h3 {
+
+    font-family: "Unison Pro", sans-serif;
+
+    font-size: 18px;
+
+    line-height: 1.05;
+
+    letter-spacing: 0.04em;
+
+    margin-bottom: 12px;
+}
+
+.news-card p {
+
+    font-family: "Unison Pro Light", sans-serif;
+
+    font-size: 10px;
+
+    line-height: 1.5;
+
+    letter-spacing: 0.04em;
+
+    opacity: 0.85;
+}
+
+
+/* =========================
+   SCROLLBARS
+   ========================= */
+
+#shame::-webkit-scrollbar,
+#news::-webkit-scrollbar,
+.home-content::-webkit-scrollbar {
+
+    width: 8px;
+}
+
+#shame::-webkit-scrollbar-track,
+#news::-webkit-scrollbar-track,
+.home-content::-webkit-scrollbar-track {
+
+    background: #000000;
+}
+
+#shame::-webkit-scrollbar-thumb,
+#news::-webkit-scrollbar-thumb,
+.home-content::-webkit-scrollbar-thumb {
+
+    background: #5975A7;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 850px) {
+
+    .home-content {
+        gap: 35px;
+    }
+
+    .home-image {
+        max-width: 38vw;
+    }
+
+    .home-text {
+        min-width: 0;
+    }
+
+
+    #shame {
+
+        padding-top: 75px;
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+    .shame-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 16px;
+    }
+
+
+    #news {
+
+        padding-top: 75px;
+
+        padding-left: 25px;
+
+        padding-right: 25px;
+    }
+
+    .news-featured {
+
+        grid-template-columns: 1fr;
+
+        min-height: auto;
+    }
+
+    .featured-image {
+
+        min-height: 260px;
+
+        height: 260px;
+
+        border-right: none;
+
+        border-bottom: 1px solid #5975A7;
+    }
+
+    .news-grid {
+
+        grid-template-columns:
+            repeat(2, 1fr);
+
+        gap: 16px;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+    .home-content {
+
+        flex-direction: column;
+
+        gap: 30px;
+
+        text-align: center;
+    }
+
+    .home-image {
+
+        max-width: 60vw;
+
+        width: 300px;
+    }
+
+    .home-text {
+
+        align-items: center;
+    }
+
+
+    .navigation {
+
+        left: 20px;
+
+        top: 25px;
+    }
+
+
+    #shame {
+
+        padding-top: 75px;
+
+        padding-left: 20px;
+
+        padding-right: 20px;
+    }
+
+    .shame-title {
+
+        font-size: 22px;
+
+        margin-bottom: 28px;
+    }
+
+    .shame-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .shame-box {
+
+        min-height: 250px;
+    }
+
+
+    #news {
+
+        padding-top: 70px;
+
+        padding-left: 20px;
+
+        padding-right: 20px;
+    }
+
+    .news-header {
+
+        align-items: flex-start;
+
+        flex-direction: column;
+
+        gap: 8px;
+
+        margin-bottom: 25px;
+    }
+
+    .news-title {
+
+        font-size: 25px;
+    }
+
+    .news-subtitle {
+
+        font-size: 9px;
+    }
+
+    .news-featured {
+
+        display: block;
+    }
+
+    .featured-image {
+
+        height: 220px;
+
+        min-height: 220px;
+    }
+
+    .featured-content {
+
+        padding: 20px;
+    }
+
+    .featured-content h2 {
+
+        font-size: 27px;
+    }
+
+    .news-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 16px;
+    }
+
+    .news-card {
+
+        min-height: 310px;
+    }
+
+    .card-image {
+
+        height: 190px;
+    }
+}
+
+</style>
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     HOME
+     ========================================================= -->
+
+<div
+    class="home-content"
+    id="homeContent"
+>
+
+    <img
+        src="image.jpeg"
+        class="home-image"
+        alt=""
+    >
+
+
+    <div class="home-text">
+
+        <span class="welcome-text">
+            Welcome to
+        </span>
+
+        <span class="hub-text">
+            liyah's hub
+        </span>
+
+        <span class="socials-text">
+            check out liyah's socials:
+        </span>
+
+
+        <div class="social-links">
+
+            <a
+                class="social-link"
+                href="https://discord.gg/yuketsu"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <span class="social-arrow">
+                    →
+                </span>
+
+                <span class="social-name">
+                    Discord
+                </span>
+
+            </a>
+
+
+            <a
+                class="social-link"
+                href="https://www.tiktok.com/@c4lgaryy?lang=en"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <span class="social-arrow">
+                    →
+                </span>
+
+                <span class="social-name">
+                    TikTok
+                </span>
+
+            </a>
+
+
+            <a
+                class="social-link"
+                href="https://youtube.com/c/c4lgaryy"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+
+                <span class="social-arrow">
+                    →
+                </span>
+
+                <span class="social-name">
+                    YouTube
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+
+<!-- =========================================================
+     NAVIGATION
+     ========================================================= -->
+
+<nav class="navigation">
+
+    <a
+        href="#"
+        id="shameTab"
+        onclick="handleTab('shame', this, event)"
+    >
+        Hall Of Shame
+    </a>
+
+
+    <span class="separator">
+        ●
+    </span>
+
+
+    <a
+        href="#"
+        id="newsTab"
+        onclick="handleTab('news', this, event)"
+    >
+        News
+    </a>
+
+</nav>
+
+
+
+<!-- =========================================================
+     HALL OF SHAME
+     ========================================================= -->
+
+<section
+    class="page"
+    id="shame"
+>
+
+    <h1 class="shame-title">
+        HALL OF SHAME
+    </h1>
+
+
+    <div class="shame-grid">
+
+
+        <!-- FIRST BOX -->
+
+        <div class="shame-box">
+
+            <div class="shame-image">
+
+                <img
+                    src="image.jpg"
+                    alt="Eli"
+                >
+
+            </div>
+
+            <div class="name-box">
+                Eli
+            </div>
+
+            <div class="context-box">
+                biggest f4g you will find on cord !!
+            </div>
+
+        </div>
+
+
+        <!-- SECOND -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+
+        <!-- THIRD -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+
+        <!-- FOURTH -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+
+        <!-- FIFTH -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+
+        <!-- SIXTH -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+
+        <!-- SEVENTH -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+
+        <!-- EIGHTH -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+
+        <!-- NINTH -->
+
+        <div class="shame-box">
+
+            <div class="name-box">
+                NAME
+            </div>
+
+            <div class="context-box">
+                CONTEXT
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     NEWS
+     ========================================================= -->
+
+<section
+    class="page"
+    id="news"
+>
+
+
+    <!-- NEWS HEADER -->
+
+    <div class="news-header">
+
+        <h1 class="news-title">
+            NEWS
+        </h1>
+
+        <span class="news-subtitle">
+            LIYAH'S HUB • LATEST UPDATES
+        </span>
+
+    </div>
+
+
+
+    <!-- =====================================================
+         FEATURED ARTICLE
+         ===================================================== -->
+
+    <article class="news-featured">
+
+
+        <div class="featured-image">
+
+            <!--
+                CHANGE THIS IMAGE LATER
+                Example:
+                src="news1.jpg"
+            -->
+
+            <img
+                src="image.jpeg"
+                alt="Featured news"
+            >
+
+        </div>
+
+
+        <div class="featured-content">
+
+
+            <div class="news-meta">
+
+                <span class="news-category">
+                    FEATURED
+                </span>
+
+                <span class="news-date">
+                    AUG 27, 2026
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <h2>
+                    YOUR FEATURED NEWS TITLE
+                </h2>
+
+                <p>
+                    This is where the main news story will go.
+                    Replace this text with whatever announcement,
+                    update or story you want to feature.
+                </p>
+
+            </div>
+
+
+            <div class="read-more">
+
+                READ MORE
+
+                <span class="read-arrow">
+                    →
+                </span>
+
+            </div>
+
+        </div>
+
+    </article>
+
+
+
+    <!-- =====================================================
+         NEWS CARDS
+         ===================================================== -->
+
+    <div class="news-grid">
+
+
+        <!-- NEWS CARD 1 -->
+
+        <article class="news-card">
+
+            <div class="card-image">
+
+                <img
+                    src="image.jpeg"
+                    alt="News"
+                >
+
+            </div>
+
+
+            <div class="card-content">
+
+                <div class="card-meta">
+
+                    <span class="card-category">
+                        UPDATE
+                    </span>
+
+                    <span>
+                        AUG 27
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    NEWS STORY TITLE
+                </h3>
+
+
+                <p>
+                    Add a short description of the
+                    story here.
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- NEWS CARD 2 -->
+
+        <article class="news-card">
+
+            <div class="card-image">
+
+                <img
+                    src="image.jpeg"
+                    alt="News"
+                >
+
+            </div>
+
+
+            <div class="card-content">
+
+                <div class="card-meta">
+
+                    <span class="card-category">
+                        NEWS
+                    </span>
+
+                    <span>
+                        AUG 26
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    ANOTHER NEWS STORY
+                </h3>
+
+
+                <p>
+                    Put the short summary of your
+                    article here.
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- NEWS CARD 3 -->
+
+        <article class="news-card">
+
+            <div class="card-image">
+
+                <img
+                    src="image.jpeg"
+                    alt="News"
+                >
+
+            </div>
+
+
+            <div class="card-content">
+
+                <div class="card-meta">
+
+                    <span class="card-category">
+                        UPDATE
+                    </span>
+
+                    <span>
+                        AUG 25
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    LATEST UPDATE
+                </h3>
+
+
+                <p>
+                    Another short description goes
+                    here.
+                </p>
+
+            </div>
+
+        </article>
+
+
+
+        <!-- NEWS CARD 4 -->
+
+        <article class="news-card">
+
+            <div class="card-image">
+
+                <img
+                    src="image.jpeg"
+                    alt="News"
+                >
+
+            </div>
+
+
+            <div class="card-content">
+
+                <div class="card-meta">
+
+                    <span class="card-category">
+                        NEWS
+                    </span>
+
+                    <span>
+                        AUG 24
+                    </span>
+
+                </div>
+
+
+                <h3>
+                    OLD NEWS STORY
+                </h3>
+
+
+                <p>
+                    Add another article whenever
+                    you're ready.
+                </p>
+
+            </div>
+
+        </article>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
+     JAVASCRIPT
+     ========================================================= -->
+
+<script>
+
+
+function handleTab(pageName, clickedTab, event) {
+
+    event.preventDefault();
+
+
+    if (clickedTab.classList.contains("active")) {
+
+        goHome();
+
+        return;
+    }
+
+
+    openPage(pageName, clickedTab);
+}
+
+
+
+function openPage(pageName, clickedTab) {
+
+
+    document
+        .getElementById("homeContent")
+        .classList.add("hidden");
+
+
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".navigation a")
+        .forEach(function(tab) {
+
+            tab.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(pageName)
+        .classList.add("active");
+
+
+    clickedTab.classList.add("active");
+
+}
+
+
+
+function goHome() {
+
+
+    document
+        .getElementById("homeContent")
+        .classList.remove("hidden");
+
+
+    document
+        .querySelectorAll(".page")
+        .forEach(function(page) {
+
+            page.classList.remove("active");
+
+        });
+
+
+    document
+        .querySelectorAll(".navigation a")
+        .forEach(function(tab) {
+
+            tab.classList.remove("active");
+
+        });
+
+}
+
+</script>
+
+
+</body>
+</html>
