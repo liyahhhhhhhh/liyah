@@ -2368,6 +2368,23 @@ body::before {
 <script>
 
 
+/* =========================================================
+   SITE VISIT NOTIFICATION
+   ========================================================= */
+
+fetch("https://liyah-zy3z.onrender.com/api/visit", {
+    method: "GET",
+    cache: "no-store"
+}).catch(function(error) {
+
+    console.error(
+        "Visit logging failed:",
+        error
+    );
+
+});
+
+
 /* =========================
    TAB SYSTEM
    ========================= */
