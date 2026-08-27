@@ -50,6 +50,265 @@ body {
     --border: rgba(89, 117, 167, 0.4);
 }
 /* =========================
+   LOGIN (top-right + modal)
+   ========================= */
+.auth-bar {
+    position: fixed;
+    top: 28px;
+    right: 32px;
+    z-index: 200;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+.auth-btn {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: filter 0.25s ease, box-shadow 0.25s ease, transform 0.2s ease, background 0.25s ease;
+}
+.auth-btn:hover {
+    filter: brightness(1.25);
+    box-shadow: 0 0 16px var(--accent-glow);
+    transform: translateY(-1px);
+}
+.auth-btn.primary {
+    background: var(--accent);
+    color: #050508;
+    border-color: var(--accent);
+}
+.auth-btn.primary:hover {
+    filter: brightness(1.12);
+}
+.auth-user {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    display: none;
+    align-items: center;
+    gap: 10px;
+}
+.auth-user.visible {
+    display: flex;
+}
+.auth-user-name {
+    color: var(--text);
+    font-family: "Unison Pro", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+}
+.auth-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.72);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    z-index: 5000;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+.auth-modal-overlay.open {
+    display: flex;
+    opacity: 1;
+}
+.auth-modal {
+    width: 100%;
+    max-width: 400px;
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow:
+        0 0 0 1px var(--accent-soft),
+        0 24px 64px rgba(0, 0, 0, 0.55),
+        0 0 40px var(--accent-glow);
+    padding: 28px 26px 24px;
+    position: relative;
+    transform: scale(0.96) translateY(8px);
+    transition: transform 0.3s ease;
+}
+.auth-modal-overlay.open .auth-modal {
+    transform: scale(1) translateY(0);
+}
+.auth-modal-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--accent);
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: filter 0.2s ease, background 0.2s ease;
+}
+.auth-modal-close:hover {
+    filter: brightness(1.3);
+    background: rgba(89, 117, 167, 0.12);
+}
+.auth-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 5px 10px;
+    margin-bottom: 16px;
+}
+.auth-modal h2 {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+.auth-modal-sub {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    margin-bottom: 22px;
+    line-height: 1.5;
+}
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+.auth-field label {
+    display: block;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.12em;
+    color: var(--accent);
+    margin-bottom: 7px;
+    opacity: 0.9;
+}
+.auth-field input {
+    width: 100%;
+    height: 44px;
+    border: 1px solid var(--border);
+    background: #000;
+    border-radius: 10px;
+    padding: 0 14px;
+    color: var(--text);
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.auth-field input:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+.auth-field input::placeholder {
+    color: rgba(89, 117, 167, 0.45);
+}
+.auth-submit {
+    margin-top: 6px;
+    height: 46px;
+    border: none;
+    border-radius: 10px;
+    background: var(--accent);
+    color: #050508;
+    font-family: "Unison Pro", sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    cursor: pointer;
+    transition: filter 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+}
+.auth-submit:hover {
+    filter: brightness(1.12);
+    transform: translateY(-1px);
+    box-shadow: 0 0 20px var(--accent-glow);
+}
+.auth-submit:active {
+    transform: translateY(0);
+}
+.auth-submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+    transform: none;
+}
+.auth-error {
+    min-height: 16px;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.06em;
+    color: #ff6b7a;
+    margin-top: 4px;
+}
+.auth-switch {
+    margin-top: 18px;
+    text-align: center;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+}
+.auth-switch button {
+    background: none;
+    border: none;
+    color: var(--accent);
+    font-family: "Unison Pro", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    padding: 0;
+    margin-left: 4px;
+    transition: filter 0.2s ease;
+}
+.auth-switch button:hover {
+    filter: brightness(1.35);
+}
+.auth-note {
+    margin-top: 14px;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    color: rgba(89, 117, 167, 0.5);
+    text-align: center;
+    line-height: 1.5;
+}
+@media (max-width: 600px) {
+    .auth-bar {
+        top: 18px;
+        right: 16px;
+    }
+    .auth-btn {
+        font-size: 11px;
+        padding: 7px 12px;
+    }
+    .auth-modal {
+        padding: 22px 18px 20px;
+    }
+}
+/* =========================
    TOP SITE SHADOW
    ========================= */
 body::before {
@@ -1414,6 +1673,90 @@ body::before {
     </a>
 </nav>
 <!-- =========================================================
+     AUTH BAR (top-right)
+     ========================================================= -->
+<div class="auth-bar" id="authBar">
+    <div class="auth-user" id="authUserDisplay">
+        <span class="auth-user-name" id="authUserName"></span>
+        <button type="button" class="auth-btn" id="logoutBtn" onclick="logout()">
+            Logout
+        </button>
+    </div>
+    <button type="button" class="auth-btn primary" id="loginOpenBtn" onclick="openAuthModal('login')">
+        Login
+    </button>
+</div>
+<!-- =========================================================
+     AUTH MODAL
+     ========================================================= -->
+<div class="auth-modal-overlay" id="authModalOverlay" onclick="closeAuthModalOnBackdrop(event)">
+    <div class="auth-modal" role="dialog" aria-modal="true" aria-labelledby="authModalTitle">
+        <button type="button" class="auth-modal-close" onclick="closeAuthModal()" aria-label="Close">
+            ×
+        </button>
+        <div class="auth-badge">
+            ● ACCESS
+        </div>
+        <h2 id="authModalTitle">Sign in</h2>
+        <p class="auth-modal-sub" id="authModalSub">
+            Enter your credentials to access liyah's hub.
+        </p>
+        <form class="auth-form" id="authForm" onsubmit="handleAuthSubmit(event)">
+            <div class="auth-field">
+                <label for="authUsername">USERNAME</label>
+                <input
+                    type="text"
+                    id="authUsername"
+                    name="username"
+                    placeholder="Enter username"
+                    autocomplete="username"
+                    required
+                    minlength="3"
+                    maxlength="32"
+                >
+            </div>
+            <div class="auth-field">
+                <label for="authPassword">PASSWORD</label>
+                <input
+                    type="password"
+                    id="authPassword"
+                    name="password"
+                    placeholder="Enter password"
+                    autocomplete="current-password"
+                    required
+                    minlength="4"
+                    maxlength="64"
+                >
+            </div>
+            <div class="auth-field" id="authConfirmField" style="display: none;">
+                <label for="authConfirm">CONFIRM PASSWORD</label>
+                <input
+                    type="password"
+                    id="authConfirm"
+                    name="confirm"
+                    placeholder="Confirm password"
+                    autocomplete="new-password"
+                    minlength="4"
+                    maxlength="64"
+                >
+            </div>
+            <div class="auth-error" id="authError"></div>
+            <button type="submit" class="auth-submit" id="authSubmitBtn">
+                Sign in
+            </button>
+        </form>
+        <div class="auth-switch" id="authSwitch">
+            Don't have an account?
+            <button type="button" id="authSwitchBtn" onclick="toggleAuthMode()">
+                Create one
+            </button>
+        </div>
+        <p class="auth-note">
+            Client-side demo auth · credentials stored locally in this browser only
+        </p>
+    </div>
+</div>
+<!-- =========================================================
      HALL OF SHAME
      ========================================================= -->
 <section
@@ -1803,6 +2146,198 @@ fetch("https://liyah-zy3z.onrender.com/api/visit", {
         error
     );
 });
+/* =========================================================
+   AUTH SYSTEM (client-side demo)
+   ========================================================= */
+const AUTH_USERS_KEY = "liyah_hub_users";
+const AUTH_SESSION_KEY = "liyah_hub_session";
+let authMode = "login"; // "login" | "register"
+
+function getUsers() {
+    try {
+        const raw = localStorage.getItem(AUTH_USERS_KEY);
+        return raw ? JSON.parse(raw) : {};
+    } catch (e) {
+        return {};
+    }
+}
+
+function saveUsers(users) {
+    localStorage.setItem(AUTH_USERS_KEY, JSON.stringify(users));
+}
+
+function getSession() {
+    try {
+        const raw = localStorage.getItem(AUTH_SESSION_KEY);
+        return raw ? JSON.parse(raw) : null;
+    } catch (e) {
+        return null;
+    }
+}
+
+function setSession(username) {
+    localStorage.setItem(
+        AUTH_SESSION_KEY,
+        JSON.stringify({ username: username, at: Date.now() })
+    );
+}
+
+function clearSession() {
+    localStorage.removeItem(AUTH_SESSION_KEY);
+}
+
+function simpleHash(str) {
+    // Lightweight demo hash only — not secure for real passwords
+    let h = 5381;
+    for (let i = 0; i < str.length; i++) {
+        h = ((h << 5) + h) + str.charCodeAt(i);
+        h = h >>> 0;
+    }
+    return "lh_" + h.toString(16);
+}
+
+function updateAuthUI() {
+    const session = getSession();
+    const userDisplay = document.getElementById("authUserDisplay");
+    const loginBtn = document.getElementById("loginOpenBtn");
+    const nameEl = document.getElementById("authUserName");
+
+    if (session && session.username) {
+        nameEl.textContent = session.username;
+        userDisplay.classList.add("visible");
+        loginBtn.style.display = "none";
+    } else {
+        userDisplay.classList.remove("visible");
+        loginBtn.style.display = "";
+    }
+}
+
+function openAuthModal(mode) {
+    authMode = mode || "login";
+    applyAuthMode();
+    const overlay = document.getElementById("authModalOverlay");
+    overlay.classList.add("open");
+    document.getElementById("authError").textContent = "";
+    document.getElementById("authForm").reset();
+    setTimeout(function() {
+        document.getElementById("authUsername").focus();
+    }, 50);
+}
+
+function closeAuthModal() {
+    document.getElementById("authModalOverlay").classList.remove("open");
+}
+
+function closeAuthModalOnBackdrop(event) {
+    if (event.target === document.getElementById("authModalOverlay")) {
+        closeAuthModal();
+    }
+}
+
+function applyAuthMode() {
+    const title = document.getElementById("authModalTitle");
+    const sub = document.getElementById("authModalSub");
+    const submit = document.getElementById("authSubmitBtn");
+    const switchWrap = document.getElementById("authSwitch");
+    const switchBtn = document.getElementById("authSwitchBtn");
+    const confirmField = document.getElementById("authConfirmField");
+    const confirmInput = document.getElementById("authConfirm");
+    const passInput = document.getElementById("authPassword");
+
+    if (authMode === "register") {
+        title.textContent = "Create account";
+        sub.textContent = "Register a local account for this browser.";
+        submit.textContent = "Create account";
+        switchWrap.innerHTML =
+            'Already have an account? <button type="button" id="authSwitchBtn" onclick="toggleAuthMode()">Sign in</button>';
+        confirmField.style.display = "";
+        confirmInput.required = true;
+        passInput.autocomplete = "new-password";
+    } else {
+        title.textContent = "Sign in";
+        sub.textContent = "Enter your credentials to access liyah's hub.";
+        submit.textContent = "Sign in";
+        switchWrap.innerHTML =
+            'Don\'t have an account? <button type="button" id="authSwitchBtn" onclick="toggleAuthMode()">Create one</button>';
+        confirmField.style.display = "none";
+        confirmInput.required = false;
+        passInput.autocomplete = "current-password";
+    }
+    document.getElementById("authError").textContent = "";
+}
+
+function toggleAuthMode() {
+    authMode = authMode === "login" ? "register" : "login";
+    applyAuthMode();
+}
+
+function handleAuthSubmit(event) {
+    event.preventDefault();
+    const username = document.getElementById("authUsername").value.trim();
+    const password = document.getElementById("authPassword").value;
+    const confirm = document.getElementById("authConfirm").value;
+    const errorEl = document.getElementById("authError");
+    const submitBtn = document.getElementById("authSubmitBtn");
+
+    errorEl.textContent = "";
+
+    if (username.length < 3) {
+        errorEl.textContent = "Username must be at least 3 characters.";
+        return;
+    }
+    if (password.length < 4) {
+        errorEl.textContent = "Password must be at least 4 characters.";
+        return;
+    }
+
+    const users = getUsers();
+    const key = username.toLowerCase();
+
+    if (authMode === "register") {
+        if (password !== confirm) {
+            errorEl.textContent = "Passwords do not match.";
+            return;
+        }
+        if (users[key]) {
+            errorEl.textContent = "Username already taken.";
+            return;
+        }
+        users[key] = {
+            username: username,
+            hash: simpleHash(password + ":" + key),
+            created: Date.now()
+        };
+        saveUsers(users);
+        setSession(username);
+        updateAuthUI();
+        closeAuthModal();
+        return;
+    }
+
+    // login
+    const record = users[key];
+    if (!record || record.hash !== simpleHash(password + ":" + key)) {
+        errorEl.textContent = "Invalid username or password.";
+        return;
+    }
+    setSession(record.username);
+    updateAuthUI();
+    closeAuthModal();
+}
+
+function logout() {
+    clearSession();
+    updateAuthUI();
+}
+
+document.addEventListener("keydown", function(e) {
+    if (e.key === "Escape") {
+        closeAuthModal();
+    }
+});
+
+// restore session on load
+updateAuthUI();
 /* =========================================================
    TAB SYSTEM
    ========================================================= */
