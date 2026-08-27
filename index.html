@@ -1,16 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <style>
-
 /* =========================
    FONTS
    ========================= */
-
 @font-face {
     font-family: "Unison Pro";
     src: url("unison-pro-bold.otf") format("opentype");
@@ -18,7 +14,6 @@
     font-style: normal;
     font-display: swap;
 }
-
 @font-face {
     font-family: "Unison Pro Light";
     src: url("unison-pro-light.otf") format("opentype");
@@ -26,1837 +21,1143 @@
     font-style: normal;
     font-display: swap;
 }
-
-
 /* =========================
    GENERAL
    ========================= */
-
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
-
 html,
 body {
     width: 100%;
     height: 100%;
 }
-
 body {
     background: #000000;
     overflow: hidden;
 }
-
-
 /* =========================
    TOP SITE SHADOW
    ========================= */
-
 body::before {
-
     content: "";
-
     position: fixed;
-
     top: 0;
     left: 0;
-
     width: 100%;
     height: 22px;
-
     background: linear-gradient(
         to bottom,
         rgba(0, 0, 0, 0.95),
         rgba(0, 0, 0, 0.45),
         rgba(0, 0, 0, 0)
     );
-
     pointer-events: none;
-
     z-index: 9999;
 }
-
-
 /* =========================
    START SCREEN
    ========================= */
-
 .home-content {
-
     position: fixed;
-
     inset: 0;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     gap: 6vw;
-
     padding: 40px;
-
     overflow-y: auto;
-
     overflow-x: hidden;
-
     transition:
         opacity 0.5s ease,
         transform 0.5s ease;
-
     z-index: 1;
 }
-
 .home-content.hidden {
-
     opacity: 0;
-
     transform: scale(0.97);
-
     pointer-events: none;
 }
-
-
 /* =========================
    HOME IMAGE
    ========================= */
-
 .home-image {
-
     width: 430px;
-
     max-width: 34vw;
-
     height: auto;
-
     object-fit: contain;
 }
-
-
 /* =========================
    HOME TEXT
    ========================= */
-
 .home-text {
-
     display: flex;
-
     flex-direction: column;
-
     align-items: flex-start;
-
     justify-content: center;
-
     gap: 14px;
-
     min-width: 350px;
 }
-
 .welcome-text {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-weight: 300;
-
     font-size: clamp(20px, 2vw, 30px);
-
     letter-spacing: 0.08em;
-
     color: #5975A7;
 }
-
 .hub-text {
-
     font-family: "Unison Pro", sans-serif;
-
     font-weight: 700;
-
     font-size: clamp(35px, 4vw, 62px);
-
     letter-spacing: 0.06em;
-
     line-height: 0.95;
-
     color: #5975A7;
 }
-
 .socials-text {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-weight: 300;
-
     font-size: clamp(16px, 1.5vw, 22px);
-
     letter-spacing: 0.08em;
-
     color: #5975A7;
-
     margin-top: 12px;
 }
-
-
 /* =========================
    SOCIAL LINKS
    ========================= */
-
 .social-links {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 8px;
-
     margin-top: 2px;
 }
-
 .social-link {
-
     display: flex;
-
     align-items: center;
-
     gap: 18px;
-
     width: fit-content;
-
     color: #5975A7;
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-weight: 300;
-
     font-size: clamp(15px, 1.4vw, 21px);
-
     letter-spacing: 0.08em;
-
     text-decoration: none;
-
     cursor: pointer;
-
     transition:
         filter 0.25s ease,
         text-shadow 0.25s ease;
 }
-
 .social-arrow {
-
     display: inline-block;
-
     transition:
         transform 0.25s ease;
 }
-
 .social-name {
-
     position: relative;
-
     display: inline-block;
 }
-
 .social-name::after {
-
     content: "";
-
     position: absolute;
-
     left: 0;
-
     bottom: -3px;
-
     width: 100%;
-
     height: 1px;
-
     background: #5975A7;
-
     transform: scaleX(0);
-
     transform-origin: left center;
-
     transition:
         transform 0.25s ease;
 }
-
 .social-link:hover {
-
     filter: brightness(1.35);
-
     text-shadow:
         0 0 6px rgba(89, 117, 167, 0.55),
         0 0 16px rgba(89, 117, 167, 0.25);
 }
-
 .social-link:hover .social-name::after {
-
     transform: scaleX(1);
 }
-
 .social-link:hover .social-arrow {
-
     transform: translateX(4px);
 }
-
-
 /* =========================
    NAVIGATION
    ========================= */
-
 .navigation {
-
     position: fixed;
-
     left: 35px;
     top: 32px;
-
     display: flex;
-
     flex-direction: row;
-
     align-items: center;
-
     gap: 14px;
-
     z-index: 100;
 }
-
 .navigation a {
-
     position: relative;
-
     display: inline-block;
-
     width: fit-content;
-
     color: #5975A7;
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: 15px;
-
     font-weight: 700;
-
     letter-spacing: 0.08em;
-
     text-decoration: none;
-
     cursor: pointer;
-
     transition:
         color 0.25s ease,
         transform 0.25s ease,
         text-shadow 0.25s ease,
         filter 0.25s ease;
 }
-
-
 /* =========================
    SCRATCH EFFECT
    ========================= */
-
 .navigation a::before,
 .navigation a::after {
-
     content: "";
-
     position: absolute;
-
     left: -5%;
-
     width: 110%;
-
     height: 1px;
-
     background: #5975A7;
-
     transform: scaleX(0);
-
     transform-origin: left center;
-
     transition:
         transform 0.25s ease;
 }
-
 .navigation a::before {
     top: 43%;
 }
-
 .navigation a::after {
     top: 58%;
 }
-
-
 /* =========================
    NAVIGATION HOVER
    ========================= */
-
 .navigation a:hover {
-
     transform: translateX(4px);
-
     filter: brightness(1.35);
-
     text-shadow:
         0 0 5px rgba(31, 81, 255, 0.6),
         0 0 15px rgba(31, 81, 255, 0.3);
 }
-
 .navigation a:hover::before {
     transform: scaleX(1);
 }
-
 .navigation a:hover::after {
     transform: scaleX(0.8);
 }
-
-
 /* =========================
    ACTIVE TAB
    ========================= */
-
 .navigation a.active::after {
     transform: scaleX(1);
 }
-
 .navigation a.active::before {
     transform: scaleX(0);
 }
-
-
 /* =========================
    SEPARATOR
    ========================= */
-
 .separator {
-
     color: #5975A7;
-
     font-family: Arial, sans-serif;
-
     font-size: 5px;
-
     display: flex;
-
     align-items: center;
 }
-
-
 /* =========================
    PAGES
    ========================= */
-
 .page {
-
     position: fixed;
-
     inset: 0;
-
     display: none;
-
     padding: 60px;
-
     color: #5975A7;
-
     font-family: "Unison Pro", sans-serif;
 }
-
 .page.active {
     display: block;
 }
-
-
 /* =========================================================
    HALL OF SHAME
    ========================================================= */
-
 #shame {
-
     padding-top: 80px;
-
     padding-left: 8vw;
-
     padding-right: 8vw;
-
     padding-bottom: 60px;
-
     overflow-y: auto;
-
     overflow-x: hidden;
 }
-
 .shame-title {
-
     text-align: center;
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: clamp(20px, 2.4vw, 32px);
-
     font-weight: 700;
-
     letter-spacing: 0.08em;
-
     margin-bottom: 35px;
 }
-
-
 .shame-grid {
-
     width: 100%;
-
     max-width: 1050px;
-
     margin: 0 auto;
-
     display: grid;
-
     grid-template-columns:
         repeat(3, 1fr);
-
     gap: 20px;
-
     padding-bottom: 40px;
 }
-
-
 .shame-box {
-
     min-height: 300px;
-
     border: 1px solid #5975A7;
-
     padding: 16px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: flex-end;
-
     background: #000000;
-
     border-radius: 12px;
 }
-
-
 .shame-image {
-
     width: 100%;
-
     flex: 1;
-
     min-height: 0;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     overflow: hidden;
-
     margin-bottom: 10px;
 }
-
 .shame-image img {
-
     width: 100%;
-
     height: 100%;
-
     object-fit: contain;
-
     object-position: center;
 }
-
-
 .name-box {
-
     width: 100%;
-
     height: 45px;
-
     border: 1px solid #5975A7;
-
     background: #000000;
-
     margin-bottom: 10px;
-
     display: flex;
-
     align-items: center;
-
     padding-left: 13px;
-
     color: #5975A7;
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-weight: 300;
-
     font-size: 10px;
-
     letter-spacing: 0.08em;
-
     border-radius: 8px;
 }
-
-
 .context-box {
-
     width: 100%;
-
     height: 80px;
-
     border: 1px solid #5975A7;
-
     background: #000000;
-
     display: flex;
-
     align-items: flex-start;
-
     padding: 13px;
-
     color: #5975A7;
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-weight: 300;
-
     font-size: 10px;
-
     letter-spacing: 0.08em;
-
     border-radius: 8px;
 }
-
-
 /* =========================================================
    NEWS
    ========================================================= */
-
 #news {
-
     padding-top: 85px;
-
     padding-left: 8vw;
-
     padding-right: 8vw;
-
     padding-bottom: 60px;
-
     overflow-y: auto;
-
     overflow-x: hidden;
 }
-
-
 .news-header {
-
     max-width: 1050px;
-
     margin: 0 auto 35px auto;
-
     display: flex;
-
     align-items: flex-end;
-
     justify-content: space-between;
-
     border-bottom: 1px solid #5975A7;
-
     padding-bottom: 14px;
 }
-
 .news-title {
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: clamp(25px, 3vw, 38px);
-
     font-weight: 700;
-
     letter-spacing: 0.08em;
 }
-
 .news-subtitle {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 11px;
-
     font-weight: 300;
-
     letter-spacing: 0.12em;
-
     opacity: 0.75;
 }
-
-
 .news-featured {
-
     max-width: 1050px;
-
     margin: 0 auto 22px auto;
-
     border: 1px solid #5975A7;
-
     display: grid;
-
     grid-template-columns: 1.35fr 1fr;
-
     min-height: 360px;
-
     background: #000000;
-
     cursor: pointer;
-
     border-radius: 14px;
-
     overflow: hidden;
 }
-
-
 .featured-image {
-
     width: 100%;
-
     height: 100%;
-
     min-height: 360px;
-
     overflow: hidden;
-
     border-right: 1px solid #5975A7;
 }
-
 .featured-image img {
-
     width: 100%;
-
     height: 100%;
-
     object-fit: cover;
-
     display: block;
 }
-
-
 .featured-content {
-
     padding: 30px;
-
     display: flex;
-
     flex-direction: column;
-
     justify-content: space-between;
 }
-
 .news-meta {
-
     display: flex;
-
     justify-content: space-between;
-
     gap: 15px;
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 9px;
-
     letter-spacing: 0.12em;
 }
-
 .news-category {
-
     font-family: "Unison Pro", sans-serif;
-
     font-weight: 700;
 }
-
 .news-date {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-weight: 300;
 }
-
 .featured-content h2 {
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: clamp(25px, 3vw, 40px);
-
     line-height: 1;
-
     letter-spacing: 0.04em;
-
     margin: 25px 0 15px 0;
 }
-
 .featured-content p {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 12px;
-
     line-height: 1.6;
-
     letter-spacing: 0.05em;
-
     max-width: 480px;
 }
-
 .read-more {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 10px;
-
     letter-spacing: 0.12em;
-
     display: flex;
-
     align-items: center;
-
     gap: 10px;
-
     margin-top: 25px;
 }
-
-
 /* =========================
    NEWS GRID
    ========================= */
-
 .news-grid {
-
     max-width: 1050px;
-
     margin: 0 auto;
-
     display: grid;
-
     grid-template-columns:
         repeat(3, 1fr);
-
     gap: 20px;
-
     padding-bottom: 40px;
 }
-
-
 .news-card {
-
     border: 1px solid #5975A7;
-
     background: #000000;
-
     min-height: 330px;
-
     display: flex;
-
     flex-direction: column;
-
     cursor: pointer;
-
     border-radius: 12px;
-
     overflow: hidden;
 }
-
-
 .card-image {
-
     width: 100%;
-
     height: 175px;
-
     border-bottom: 1px solid #5975A7;
-
     overflow: hidden;
 }
-
 .card-image img {
-
     width: 100%;
-
     height: 100%;
-
     object-fit: cover;
-
     display: block;
 }
-
-
 .card-content {
-
     padding: 18px;
-
     display: flex;
-
     flex-direction: column;
-
     flex: 1;
 }
-
 .card-meta {
-
     display: flex;
-
     justify-content: space-between;
-
     margin-bottom: 14px;
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 8px;
-
     letter-spacing: 0.1em;
 }
-
 .card-category {
-
     font-family: "Unison Pro", sans-serif;
 }
-
 .news-card h3 {
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: 18px;
-
     line-height: 1.05;
-
     letter-spacing: 0.04em;
-
     margin-bottom: 12px;
 }
-
 .news-card p {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 10px;
-
     line-height: 1.5;
-
     letter-spacing: 0.04em;
-
     opacity: 0.85;
 }
-
-
 /* =========================================================
    DISCORD OSINT + GENERAL OSINT
    ========================================================= */
-
 #discord-osint,
 #osint {
-
     padding-top: 95px;
-
     padding-left: 7vw;
-
     padding-right: 7vw;
-
     padding-bottom: 60px;
-
     overflow-y: auto;
-
     overflow-x: hidden;
 }
-
-
 .osint-container {
-
     width: 100%;
-
     max-width: 950px;
-
     margin: 0 auto;
 }
-
-
 .osint-header {
-
     display: flex;
-
     align-items: center;
-
     gap: 18px;
-
     margin-bottom: 28px;
 }
-
-
 .osint-icon-box {
-
     width: 68px;
-
     height: 68px;
-
     border: 1px solid #5975A7;
-
     border-radius: 14px;
-
     background: #000000;
-
     display: flex;
-
     align-items: center;
-
     justify-content: center;
-
     flex-shrink: 0;
-
     overflow: hidden;
 }
-
 .osint-icon-box img {
-
     width: 43px;
-
     height: 43px;
-
     object-fit: contain;
 }
-
-
 /* =========================
    GENERAL OSINT RED DOT
    ========================= */
-
 .osint-red-dot {
-
     width: 14px;
-
     height: 14px;
-
     background: #ff0000;
-
     border-radius: 50%;
-
     box-shadow:
         0 0 8px rgba(255, 0, 0, 0.7),
         0 0 18px rgba(255, 0, 0, 0.3);
 }
-
-
 .osint-heading {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 5px;
 }
-
 .osint-heading h1 {
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: clamp(24px, 3vw, 36px);
-
     font-weight: 700;
-
     letter-spacing: 0.06em;
-
     line-height: 1;
 }
-
 .osint-heading span {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 10px;
-
     font-weight: 300;
-
     letter-spacing: 0.13em;
-
     color: rgba(89, 117, 167, 0.62);
-
     text-transform: uppercase;
 }
-
-
 .osint-track {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 11px;
-
     letter-spacing: 0.12em;
-
     color: #5975A7;
-
     margin-bottom: 12px;
 }
-
-
 .osint-line {
-
     width: 100%;
-
     height: 1px;
-
     background: #5975A7;
-
     opacity: 0.7;
-
     margin-bottom: 18px;
 }
-
-
 .osint-search-area {
-
     display: flex;
-
     align-items: stretch;
-
     width: 100%;
-
     gap: 10px;
 }
-
-
 .osint-search-box {
-
     flex: 1;
-
     height: 48px;
-
     border: 1px solid #5975A7;
-
     background: #000000;
-
     display: flex;
-
     align-items: center;
-
     padding-left: 13px;
-
     transition:
         border-color 0.25s ease,
         box-shadow 0.25s ease;
-
     border-radius: 11px;
 }
-
 .osint-search-box:focus-within {
-
     box-shadow:
         0 0 12px rgba(89, 117, 167, 0.12);
 }
-
-
 .search-icon {
-
     width: 17px;
-
     height: 17px;
-
     margin-right: 10px;
-
     flex-shrink: 0;
-
     opacity: 0.7;
 }
-
 .search-icon svg {
-
     width: 100%;
-
     height: 100%;
-
     fill: none;
-
     stroke: #5975A7;
-
     stroke-width: 1.8;
-
     stroke-linecap: round;
-
     stroke-linejoin: round;
 }
-
-
 .osint-search-input {
-
     width: 100%;
-
     height: 100%;
-
     border: none;
-
     outline: none;
-
     background: transparent;
-
     color: #5975A7;
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 11px;
-
     letter-spacing: 0.08em;
 }
-
 .osint-search-input::placeholder {
-
     color: rgba(89, 117, 167, 0.55);
 }
-
-
 .osint-search-button {
-
     height: 48px;
-
     min-width: 88px;
-
     padding: 0 20px;
-
     border: 1px solid #5975A7;
-
     background: #5975A7;
-
     color: #000000;
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: 10px;
-
     font-weight: 700;
-
     letter-spacing: 0.08em;
-
     cursor: pointer;
-
     transition:
         filter 0.25s ease,
         transform 0.25s ease;
-
     border-radius: 10px;
 }
-
 .osint-search-button:hover {
-
     filter: brightness(1.18);
-
     transform: translateY(-1px);
 }
-
 .osint-search-button:active {
-
     transform: translateY(0);
 }
-
-
 .osint-status {
-
     min-height: 18px;
-
     margin-top: 12px;
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 9px;
-
     letter-spacing: 0.08em;
-
     color: rgba(89, 117, 167, 0.65);
 }
-
-
 /* =========================================================
    DISCORD RESULT
    ========================================================= */
-
 .discord-result {
-
     margin-top: 25px;
-
     border: 1px solid #5975A7;
-
     padding: 22px;
-
     background: #000000;
-
     border-radius: 14px;
 }
-
 .discord-result-header {
-
     display: flex;
-
     align-items: center;
-
     gap: 18px;
-
     padding-bottom: 20px;
-
     border-bottom: 1px solid rgba(89, 117, 167, 0.5);
 }
-
 .discord-avatar {
-
     width: 78px;
-
     height: 78px;
-
     border-radius: 50%;
-
     object-fit: cover;
-
     border: 1px solid #5975A7;
-
     flex-shrink: 0;
 }
-
 .discord-result-name {
-
     display: flex;
-
     flex-direction: column;
-
     gap: 6px;
 }
-
 .discord-display-name {
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: 22px;
-
     letter-spacing: 0.04em;
 }
-
 .discord-username {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 10px;
-
     letter-spacing: 0.08em;
-
     opacity: 0.65;
 }
-
 .discord-info {
-
     display: grid;
-
     grid-template-columns: repeat(2, 1fr);
-
     gap: 12px;
-
     margin-top: 20px;
 }
-
 .discord-info-box {
-
     border: 1px solid rgba(89, 117, 167, 0.65);
-
     padding: 13px;
-
     min-height: 60px;
-
     border-radius: 10px;
 }
-
 .discord-info-label {
-
     font-family: "Unison Pro", sans-serif;
-
     font-size: 8px;
-
     letter-spacing: 0.1em;
-
     margin-bottom: 7px;
 }
-
 .discord-info-value {
-
     font-family: "Unison Pro Light", sans-serif;
-
     font-size: 10px;
-
     letter-spacing: 0.05em;
-
     word-break: break-all;
 }
-
-
+/* =========================================================
+   BREACH RESULTS
+   ========================================================= */
+.breach-result {
+    margin-top: 25px;
+    border: 1px solid #5975A7;
+    padding: 22px;
+    background: #000000;
+    border-radius: 14px;
+}
+.breach-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 12px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid rgba(89, 117, 167, 0.5);
+    margin-bottom: 16px;
+}
+.breach-title {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 16px;
+    letter-spacing: 0.06em;
+}
+.breach-count {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    opacity: 0.7;
+}
+.breach-meta {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.08em;
+    margin-bottom: 14px;
+    opacity: 0.75;
+}
+.breach-fields {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+}
+.breach-field-tag {
+    border: 1px solid rgba(89, 117, 167, 0.55);
+    padding: 4px 8px;
+    border-radius: 6px;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+}
+.breach-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 420px;
+    overflow-y: auto;
+}
+.breach-item {
+    border: 1px solid rgba(89, 117, 167, 0.45);
+    padding: 10px 12px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.breach-item-name {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+}
+.breach-item-meta {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    opacity: 0.65;
+    text-align: right;
+}
+.breach-empty {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    opacity: 0.7;
+}
+.breach-note {
+    margin-top: 12px;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    opacity: 0.55;
+}
+.breach-powered {
+    margin-top: 14px;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    opacity: 0.5;
+}
+.breach-powered a {
+    color: #5975A7;
+}
 /* =========================================================
    SCROLLBARS
    ========================================================= */
-
 #shame::-webkit-scrollbar,
 #news::-webkit-scrollbar,
 #discord-osint::-webkit-scrollbar,
 #osint::-webkit-scrollbar,
 .home-content::-webkit-scrollbar {
-
     width: 8px;
 }
-
 #shame::-webkit-scrollbar-track,
 #news::-webkit-scrollbar-track,
 #discord-osint::-webkit-scrollbar-track,
 #osint::-webkit-scrollbar-track,
 .home-content::-webkit-scrollbar-track {
-
     background: #000000;
 }
-
 #shame::-webkit-scrollbar-thumb,
 #news::-webkit-scrollbar-thumb,
 #discord-osint::-webkit-scrollbar-thumb,
 #osint::-webkit-scrollbar-thumb,
 .home-content::-webkit-scrollbar-thumb {
-
     background: #5975A7;
 }
-
-
 /* =========================================================
    TABLET
    ========================================================= */
-
 @media (max-width: 850px) {
-
     .home-content {
         gap: 35px;
     }
-
     .home-image {
         max-width: 38vw;
     }
-
     .home-text {
         min-width: 0;
     }
-
-
     #shame {
-
         padding-top: 75px;
-
         padding-left: 25px;
-
         padding-right: 25px;
     }
-
     .shame-grid {
-
         grid-template-columns:
             repeat(2, 1fr);
-
         gap: 16px;
     }
-
-
     #news {
-
         padding-top: 75px;
-
         padding-left: 25px;
-
         padding-right: 25px;
     }
-
     .news-featured {
-
         grid-template-columns: 1fr;
-
         min-height: auto;
     }
-
     .featured-image {
-
         min-height: 260px;
-
         height: 260px;
-
         border-right: none;
-
         border-bottom: 1px solid #5975A7;
     }
-
     .news-grid {
-
         grid-template-columns:
             repeat(2, 1fr);
-
         gap: 16px;
     }
-
-
     #discord-osint,
     #osint {
-
         padding-left: 25px;
-
         padding-right: 25px;
     }
 }
-
-
 /* =========================================================
    MOBILE
    ========================================================= */
-
 @media (max-width: 600px) {
-
     .home-content {
-
         flex-direction: column;
-
         gap: 30px;
-
         text-align: center;
     }
-
     .home-image {
-
         max-width: 60vw;
-
         width: 300px;
     }
-
     .home-text {
-
         align-items: center;
     }
-
-
     .navigation {
-
         left: 20px;
-
         top: 25px;
-
         gap: 9px;
-
         flex-wrap: wrap;
-
         max-width: calc(100vw - 40px);
     }
-
     .navigation a {
-
         font-size: 12px;
     }
-
-
     #shame {
-
         padding-top: 75px;
-
         padding-left: 20px;
-
         padding-right: 20px;
     }
-
     .shame-title {
-
         font-size: 22px;
-
         margin-bottom: 28px;
     }
-
     .shame-grid {
-
         grid-template-columns: 1fr;
-
         gap: 16px;
     }
-
     .shame-box {
-
         min-height: 250px;
     }
-
-
     #news {
-
         padding-top: 70px;
-
         padding-left: 20px;
-
         padding-right: 20px;
     }
-
     .news-header {
-
         align-items: flex-start;
-
         flex-direction: column;
-
         gap: 8px;
-
         margin-bottom: 25px;
     }
-
     .news-title {
-
         font-size: 25px;
     }
-
     .news-subtitle {
-
         font-size: 9px;
     }
-
     .news-featured {
-
         display: block;
     }
-
     .featured-image {
-
         height: 220px;
-
         min-height: 220px;
     }
-
     .featured-content {
-
         padding: 20px;
     }
-
     .featured-content h2 {
-
         font-size: 27px;
     }
-
     .news-grid {
-
         grid-template-columns: 1fr;
-
         gap: 16px;
     }
-
     .news-card {
-
         min-height: 310px;
     }
-
     .card-image {
-
         height: 190px;
     }
-
-
     /* =========================
        MOBILE OSINT
        ========================= */
-
     #discord-osint,
     #osint {
-
         padding-top: 80px;
-
         padding-left: 20px;
-
         padding-right: 20px;
     }
-
     .osint-header {
-
         gap: 13px;
-
         margin-bottom: 25px;
     }
-
     .osint-icon-box {
-
         width: 58px;
-
         height: 58px;
-
         border-radius: 11px;
     }
-
     .osint-icon-box img {
-
         width: 37px;
-
         height: 37px;
     }
-
     .osint-heading h1 {
-
         font-size: 24px;
     }
-
     .osint-heading span {
-
         font-size: 8px;
     }
-
     .osint-search-area {
-
         gap: 7px;
     }
-
     .osint-search-box {
-
         height: 43px;
     }
-
     .osint-search-button {
-
         height: 43px;
-
         min-width: 70px;
-
         padding: 0 12px;
     }
-
     .discord-result {
-
         padding: 15px;
     }
-
     .discord-result-header {
-
         gap: 12px;
     }
-
     .discord-avatar {
-
         width: 60px;
-
         height: 60px;
     }
-
     .discord-display-name {
-
         font-size: 17px;
     }
-
     .discord-info {
-
         grid-template-columns: 1fr;
     }
 }
-
 </style>
-
 </head>
-
-
 <body>
-
-
 <!-- =========================================================
      HOME
      ========================================================= -->
-
 <div
     class="home-content"
     id="homeContent"
 >
-
     <img
         src="image.jpeg"
         class="home-image"
         alt=""
     >
-
-
     <div class="home-text">
-
         <span class="welcome-text">
             Welcome to
         </span>
-
         <span class="hub-text">
             liyah's hub
         </span>
-
         <span class="socials-text">
             check out liyah's socials:
         </span>
-
-
         <div class="social-links">
-
             <a
                 class="social-link"
                 href="https://discord.gg/yuketsu"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-
                 <span class="social-arrow">
                     →
                 </span>
-
                 <span class="social-name">
                     Discord
                 </span>
-
             </a>
-
-
             <a
                 class="social-link"
                 href="https://www.tiktok.com/@c4lgaryy?lang=en"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-
                 <span class="social-arrow">
                     →
                 </span>
-
                 <span class="social-name">
                     TikTok
                 </span>
-
             </a>
-
-
             <a
                 class="social-link"
                 href="https://youtube.com/c/c4lgaryy"
                 target="_blank"
                 rel="noopener noreferrer"
             >
-
                 <span class="social-arrow">
                     →
                 </span>
-
                 <span class="social-name">
                     YouTube
                 </span>
-
             </a>
-
         </div>
-
     </div>
-
 </div>
-
-
-
 <!-- =========================================================
      NAVIGATION
      ========================================================= -->
-
 <nav class="navigation">
-
     <a
         href="#"
         id="shameTab"
@@ -1864,13 +1165,9 @@ body::before {
     >
         Hall Of Shame
     </a>
-
-
     <span class="separator">
         ●
     </span>
-
-
     <a
         href="#"
         id="newsTab"
@@ -1878,13 +1175,9 @@ body::before {
     >
         News
     </a>
-
-
     <span class="separator">
         ●
     </span>
-
-
     <a
         href="#"
         id="discordOsintTab"
@@ -1892,13 +1185,9 @@ body::before {
     >
         Discord OSINT
     </a>
-
-
     <span class="separator">
         ●
     </span>
-
-
     <a
         href="#"
         id="osintTab"
@@ -1906,217 +1195,133 @@ body::before {
     >
         OSINT
     </a>
-
 </nav>
-
-
-
 <!-- =========================================================
      HALL OF SHAME
      ========================================================= -->
-
 <section
     class="page"
     id="shame"
 >
-
     <h1 class="shame-title">
         HALL OF SHAME
     </h1>
-
-
     <div class="shame-grid">
-
-
         <div class="shame-box">
-
             <div class="shame-image">
-
                 <img
                     src="image.jpg"
                     alt="Eli"
                 >
-
             </div>
-
             <div class="name-box">
                 Eli
             </div>
-
             <div class="context-box">
                 biggest f4g you will find on cord !!
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
-
         <div class="shame-box">
-
             <div class="name-box">
                 NAME
             </div>
-
             <div class="context-box">
                 CONTEXT
             </div>
-
         </div>
-
     </div>
-
 </section>
-
-
-
 <!-- =========================================================
      NEWS
      ========================================================= -->
-
 <section
     class="page"
     id="news"
 >
-
-
     <div class="news-header">
-
         <h1 class="news-title">
             NEWS
         </h1>
-
         <span class="news-subtitle">
             LIYAH'S HUB • LATEST UPDATES
         </span>
-
     </div>
-
-
     <article class="news-featured">
-
-
         <div class="featured-image">
-
             <img
                 src="tel.avif"
                 alt="Featured news"
             >
-
         </div>
-
-
         <div class="featured-content">
-
-
             <div class="news-meta">
-
                 <span class="news-category">
                     FEATURED
                 </span>
-
                 <span class="news-date">
                     AUG 25, 2026
                 </span>
-
             </div>
-
-
             <div>
-
                 <h2>
                     Liyah Permanently Banned From FlameHood, Threatens Owner With Doxxing
                 </h2>
-
                 <p>
                     Liyah has reportedly been permanantly banned
                     from "FlameHood" following a dispute with the community.
@@ -2125,275 +1330,162 @@ body::before {
                     since sparked further controversy surrounding the server and its
                     moderation decisions.
                 </p>
-
             </div>
-
-
             <div class="read-more">
-
                 <span class="read-arrow">
                     →
                 </span>
-
             </div>
-
         </div>
-
     </article>
-
-
     <div class="news-grid">
-
-
         <article class="news-card">
-
             <div class="card-image">
-
                 <img
                     src="image.jpeg"
                     alt="News"
                 >
-
             </div>
-
-
             <div class="card-content">
-
                 <div class="card-meta">
-
                     <span class="card-category">
                         UPDATE
                     </span>
-
                     <span>
                         AUG 27
                     </span>
-
                 </div>
-
-
                 <h3>
                     NEWS STORY TITLE
                 </h3>
-
-
                 <p>
                     Add a short description of the
                     story here.
                 </p>
-
             </div>
-
         </article>
-
-
         <article class="news-card">
-
             <div class="card-image">
-
                 <img
                     src="image.jpeg"
                     alt="News"
                 >
-
             </div>
-
-
             <div class="card-content">
-
                 <div class="card-meta">
-
                     <span class="card-category">
                         NEWS
                     </span>
-
                     <span>
                         AUG 26
                     </span>
-
                 </div>
-
-
                 <h3>
                     ANOTHER NEWS STORY
                 </h3>
-
-
                 <p>
                     Put the short summary of your
                     article here.
                 </p>
-
             </div>
-
         </article>
-
-
         <article class="news-card">
-
             <div class="card-image">
-
                 <img
                     src="image.jpeg"
                     alt="News"
                 >
-
             </div>
-
-
             <div class="card-content">
-
                 <div class="card-meta">
-
                     <span class="card-category">
                         UPDATE
                     </span>
-
                     <span>
                         AUG 25
                     </span>
-
                 </div>
-
-
                 <h3>
                     LATEST UPDATE
                 </h3>
-
-
                 <p>
                     Another short description goes
                     here.
                 </p>
-
             </div>
-
         </article>
-
-
         <article class="news-card">
-
             <div class="card-image">
-
                 <img
                     src="image.jpeg"
                     alt="News"
                 >
-
             </div>
-
-
             <div class="card-content">
-
                 <div class="card-meta">
-
                     <span class="card-category">
                         NEWS
                     </span>
-
                     <span>
                         AUG 24
                     </span>
-
                 </div>
-
-
                 <h3>
                     OLD NEWS STORY
                 </h3>
-
-
                 <p>
                     Add another article whenever
                     you're ready.
                 </p>
-
             </div>
-
         </article>
-
-
     </div>
-
 </section>
-
-
-
 <!-- =========================================================
      DISCORD OSINT
      ========================================================= -->
-
 <section
     class="page"
     id="discord-osint"
 >
-
     <div class="osint-container">
-
-
         <div class="osint-header">
-
             <div class="osint-icon-box">
-
                 <img
                     src="discord-osint.png"
                     alt="Discord OSINT"
                 >
-
             </div>
-
-
             <div class="osint-heading">
-
                 <h1>
                     Discord OSINT
                 </h1>
-
                 <span>
                     Discord intelligence lookup
                 </span>
-
             </div>
-
         </div>
-
-
         <div class="osint-track">
             Track
         </div>
-
-
         <div class="osint-line"></div>
-
-
         <div class="osint-search-area">
-
-
             <div class="osint-search-box">
-
-
                 <div class="search-icon">
-
                     <svg viewBox="0 0 24 24">
-
                         <circle
                             cx="10.8"
                             cy="10.8"
                             r="6.8"
                         ></circle>
-
                         <line
                             x1="16"
                             y1="16"
                             x2="21"
                             y2="21"
                         ></line>
-
                     </svg>
-
                 </div>
-
-
                 <input
                     type="text"
                     id="osintSearchInput"
@@ -2401,104 +1493,62 @@ body::before {
                     placeholder="Enter the targets Discord ID"
                     autocomplete="off"
                 >
-
             </div>
-
-
             <button
                 class="osint-search-button"
                 onclick="performOsintSearch()"
             >
                 Search
             </button>
-
         </div>
-
-
         <div
             class="osint-status"
             id="osintStatus"
         ></div>
-
-
     </div>
-
 </section>
-
-
-
 <!-- =========================================================
      GENERAL OSINT
      ========================================================= -->
-
 <section
     class="page"
     id="osint"
 >
-
     <div class="osint-container">
-
-
         <div class="osint-header">
-
             <div class="osint-icon-box">
-
                 <div class="osint-red-dot"></div>
-
             </div>
-
-
             <div class="osint-heading">
-
                 <h1>
                     OSINT
                 </h1>
-
                 <span>
                     Open source intelligence lookup
                 </span>
-
             </div>
-
         </div>
-
-
         <div class="osint-track">
             Track
         </div>
-
-
         <div class="osint-line"></div>
-
-
         <div class="osint-search-area">
-
-
             <div class="osint-search-box">
-
-
                 <div class="search-icon">
-
                     <svg viewBox="0 0 24 24">
-
                         <circle
                             cx="10.8"
                             cy="10.8"
                             r="6.8"
                         ></circle>
-
                         <line
                             x1="16"
                             y1="16"
                             x2="21"
                             y2="21"
                         ></line>
-
                     </svg>
-
                 </div>
-
-
                 <input
                     type="text"
                     id="osintGeneralSearchInput"
@@ -2506,216 +1556,112 @@ body::before {
                     placeholder="Enter any Discord IDs/Usernames/IPs/Emails/Phone Numbers to start a lookup"
                     autocomplete="off"
                 >
-
             </div>
-
-
             <button
                 class="osint-search-button"
                 onclick="performGeneralOsintSearch()"
             >
                 Search
             </button>
-
         </div>
-
-
         <div
             class="osint-status"
             id="osintGeneralStatus"
         ></div>
-
-
     </div>
-
 </section>
-
-
-
 <!-- =========================================================
      JAVASCRIPT
      ========================================================= -->
-
 <script>
-
-
 /* =========================================================
    SITE VISIT NOTIFICATION
    ========================================================= */
-
 fetch("https://liyah-zy3z.onrender.com/api/visit", {
     method: "GET",
     cache: "no-store"
 }).catch(function(error) {
-
     console.error(
         "Visit logging failed:",
         error
     );
-
 });
-
-
 /* =========================================================
    TAB SYSTEM
    ========================================================= */
-
 function handleTab(pageName, clickedTab, event) {
-
     event.preventDefault();
-
-
     if (clickedTab.classList.contains("active")) {
-
         goHome();
-
         return;
     }
-
-
     openPage(pageName, clickedTab);
 }
-
-
-
 function openPage(pageName, clickedTab) {
-
-
     document
         .getElementById("homeContent")
         .classList.add("hidden");
-
-
     document
         .querySelectorAll(".page")
         .forEach(function(page) {
-
             page.classList.remove("active");
-
         });
-
-
     document
         .querySelectorAll(".navigation a")
         .forEach(function(tab) {
-
             tab.classList.remove("active");
-
         });
-
-
     document
         .getElementById(pageName)
         .classList.add("active");
-
-
     clickedTab.classList.add("active");
-
 }
-
-
-
 function goHome() {
-
-
     document
         .getElementById("homeContent")
         .classList.remove("hidden");
-
-
     document
         .querySelectorAll(".page")
         .forEach(function(page) {
-
             page.classList.remove("active");
-
         });
-
-
     document
         .querySelectorAll(".navigation a")
         .forEach(function(tab) {
-
             tab.classList.remove("active");
-
         });
-
 }
-
-
 /* =========================================================
    DISCORD OSINT SEARCH
    ========================================================= */
-
 async function performOsintSearch() {
-
     const input =
         document.getElementById("osintSearchInput");
-
     const status =
         document.getElementById("osintStatus");
-
     const query =
         input.value.trim();
-
-
-    /* =========================
-       EMPTY SEARCH
-       ========================= */
-
     if (!query) {
-
         status.textContent =
             "Enter a Discord ID to search.";
-
         input.focus();
-
         return;
     }
-
-
-    /* =========================
-       CHECK DISCORD ID
-       ========================= */
-
     if (!/^\d{14,20}$/.test(query)) {
-
         status.textContent =
             "Invalid Discord ID.";
-
         return;
     }
-
-
-    /* =========================
-       LOADING
-       ========================= */
-
     status.textContent =
         "SEARCHING DISCORD...";
-
-
     try {
-
-        /* =========================
-           BUILD API URL
-           ========================= */
-
         const apiURL =
             "https://liyah-zy3z.onrender.com/api/discord/" +
             encodeURIComponent(query);
-
-
         console.log(
             "Discord API request:",
             apiURL
         );
-
-
-        /* =========================
-           CALL RENDER SERVER
-           ========================= */
-
         const response =
             await fetch(apiURL, {
                 method: "GET",
@@ -2724,102 +1670,50 @@ async function performOsintSearch() {
                 },
                 cache: "no-store"
             });
-
-
-        /* =========================
-           GET RESPONSE TEXT FIRST
-           ========================= */
-
         const responseText =
             await response.text();
-
-
         console.log(
             "Render response status:",
             response.status
         );
-
         console.log(
             "Render response:",
             responseText
         );
-
-
-        /* =========================
-           TRY TO PARSE JSON
-           ========================= */
-
         let data = null;
-
         try {
-
             data =
                 JSON.parse(responseText);
-
         } catch (jsonError) {
-
             console.error(
                 "Response was not valid JSON:",
                 jsonError
             );
-
             status.textContent =
                 "SERVER ERROR: Render returned an invalid response.";
-
             return;
         }
-
-
-        /* =========================
-           API ERROR
-           ========================= */
-
         if (!response.ok) {
-
             status.textContent =
                 data.error ||
                 `SERVER ERROR: ${response.status}`;
-
             return;
         }
-
-
-        /* =========================
-           AVATAR
-           ========================= */
-
         let avatarURL =
             "https://cdn.discordapp.com/embed/avatars/0.png";
-
-
         if (data.avatar && data.id) {
-
             avatarURL =
                 `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`;
-
         }
-
-
-        /* =========================
-           DISPLAY RESULT
-           ========================= */
-
         status.innerHTML = `
-
             <div class="discord-result">
-
                 <div class="discord-result-header">
-
-
                     <img
                         class="discord-avatar"
                         src="${avatarURL}"
                         alt="Discord Avatar"
                     >
-
-
                     <div class="discord-result-name">
-
                         <div class="discord-display-name">
                             ${escapeHTML(
                                 data.global_name ||
@@ -2827,243 +1721,240 @@ async function performOsintSearch() {
                                 "Unknown User"
                             )}
                         </div>
-
-
                         <div class="discord-username">
                             @${escapeHTML(
                                 data.username ||
                                 "unknown"
                             )}
                         </div>
-
                     </div>
-
                 </div>
-
-
                 <div class="discord-info">
-
-
                     <div class="discord-info-box">
-
                         <div class="discord-info-label">
                             USER ID
                         </div>
-
                         <div class="discord-info-value">
                             ${escapeHTML(data.id || query)}
                         </div>
-
                     </div>
-
-
                     <div class="discord-info-box">
-
                         <div class="discord-info-label">
                             USERNAME
                         </div>
-
                         <div class="discord-info-value">
                             ${escapeHTML(
                                 data.username ||
                                 "None"
                             )}
                         </div>
-
                     </div>
-
-
                     <div class="discord-info-box">
-
                         <div class="discord-info-label">
                             DISPLAY NAME
                         </div>
-
                         <div class="discord-info-value">
                             ${escapeHTML(
                                 data.global_name ||
                                 "None"
                             )}
                         </div>
-
                     </div>
-
-
                     <div class="discord-info-box">
-
                         <div class="discord-info-label">
                             BANNER
                         </div>
-
                         <div class="discord-info-value">
                             ${data.banner
                                 ? "AVAILABLE"
                                 : "NONE"}
                         </div>
-
                     </div>
-
-
                     <div class="discord-info-box">
-
                         <div class="discord-info-label">
                             ACCENT COLOR
                         </div>
-
                         <div class="discord-info-value">
                             ${escapeHTML(
                                 data.accent_color ||
                                 "NONE"
                             )}
                         </div>
-
                     </div>
-
-
                     <div class="discord-info-box">
-
                         <div class="discord-info-label">
                             DISCRIMINATOR
                         </div>
-
                         <div class="discord-info-value">
                             ${escapeHTML(
                                 data.discriminator ||
                                 "0"
                             )}
                         </div>
-
                     </div>
-
-
                 </div>
-
             </div>
-
         `;
-
-
     } catch (error) {
-
         console.error(
             "Discord OSINT request failed:",
             error
         );
-
-
         if (
             error instanceof TypeError &&
             error.message.includes("fetch")
         ) {
-
             status.textContent =
                 "CONNECTION ERROR: Could not reach the Render server.";
-
         } else {
-
             status.textContent =
                 "REQUEST ERROR: " +
                 error.message;
-
         }
-
     }
-
 }
-
-
 /* =========================================================
-   GENERAL OSINT SEARCH
+   GENERAL OSINT SEARCH (BREACH)  ← THIS IS THE REPLACED ONE
    ========================================================= */
-
-function performGeneralOsintSearch() {
-
-    const input =
-        document.getElementById(
-            "osintGeneralSearchInput"
-        );
-
-    const status =
-        document.getElementById(
-            "osintGeneralStatus"
-        );
-
-    const query =
-        input.value.trim();
-
+async function performGeneralOsintSearch() {
+    const input = document.getElementById("osintGeneralSearchInput");
+    const status = document.getElementById("osintGeneralStatus");
+    const query = input.value.trim();
 
     if (!query) {
-
-        status.textContent =
-            "Enter a search query.";
-
+        status.textContent = "Enter a search query.";
         input.focus();
-
+        return;
+    }
+    if (query.length < 3) {
+        status.textContent = "Query too short (min 3 characters).";
         return;
     }
 
+    status.textContent = "SEARCHING BREACHES...";
 
-    status.textContent =
-        "OSINT SEARCH READY — SEARCH SOURCE NOT CONFIGURED.";
+    try {
+        const apiURL =
+            "https://liyah-zy3z.onrender.com/api/breach?q=" +
+            encodeURIComponent(query);
 
+        const response = await fetch(apiURL, {
+            method: "GET",
+            headers: { Accept: "application/json" },
+            cache: "no-store"
+        });
+
+        const responseText = await response.text();
+        let data = null;
+        try {
+            data = JSON.parse(responseText);
+        } catch (e) {
+            status.textContent = "SERVER ERROR: invalid response.";
+            return;
+        }
+
+        if (!response.ok) {
+            status.textContent = data.error || `SERVER ERROR: ${response.status}`;
+            return;
+        }
+
+        const sources = data.sources || [];
+        const fields = data.fields || [];
+        const notes = data.notes || [];
+
+        let fieldsHTML = "";
+        if (fields.length) {
+            fieldsHTML =
+                `<div class="breach-fields">` +
+                fields.map(f =>
+                    `<span class="breach-field-tag">${escapeHTML(f)}</span>`
+                ).join("") +
+                `</div>`;
+        }
+
+        let listHTML = "";
+        if (sources.length === 0) {
+            listHTML = `<div class="breach-empty">No breaches found for this query in public indexes.</div>`;
+        } else {
+            listHTML =
+                `<div class="breach-list">` +
+                sources.map(s =>
+                    `<div class="breach-item">
+                        <div class="breach-item-name">${escapeHTML(s.name)}</div>
+                        <div class="breach-item-meta">
+                            ${s.date ? escapeHTML(s.date) + "<br>" : ""}
+                            ${escapeHTML(s.provider || "")}
+                        </div>
+                    </div>`
+                ).join("") +
+                `</div>`;
+        }
+
+        let notesHTML = notes.length
+            ? `<div class="breach-note">${notes.map(n => escapeHTML(n)).join(" · ")}</div>`
+            : "";
+
+        status.innerHTML = `
+            <div class="breach-result">
+                <div class="breach-header">
+                    <div class="breach-title">BREACH RESULTS</div>
+                    <div class="breach-count">${sources.length} source${sources.length === 1 ? "" : "s"}</div>
+                </div>
+                <div class="breach-meta">
+                    Query: <strong>${escapeHTML(data.query)}</strong>
+                    &nbsp;·&nbsp; Type: ${escapeHTML(data.type || "unknown")}
+                </div>
+                ${fieldsHTML}
+                ${listHTML}
+                ${notesHTML}
+                <div class="breach-powered">
+                    Powered by <a href="https://leakcheck.io" target="_blank" rel="noopener">LeakCheck</a>
+                    &amp; XposedOrNot
+                </div>
+            </div>
+        `;
+    } catch (error) {
+        console.error("General OSINT failed:", error);
+        if (error instanceof TypeError && error.message.includes("fetch")) {
+            status.textContent = "CONNECTION ERROR: Could not reach the Render server.";
+        } else {
+            status.textContent = "REQUEST ERROR: " + error.message;
+        }
+    }
 }
-
-
 /* =========================================================
    HTML SAFETY
    ========================================================= */
-
 function escapeHTML(value) {
-
     return String(value)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
-
 }
-
-
 /* =========================================================
    ENTER KEY — DISCORD OSINT
    ========================================================= */
-
 document
     .getElementById("osintSearchInput")
     .addEventListener("keydown", function(event) {
-
         if (event.key === "Enter") {
-
             event.preventDefault();
-
             performOsintSearch();
-
         }
-
     });
-
-
 /* =========================================================
    ENTER KEY — GENERAL OSINT
    ========================================================= */
-
 document
     .getElementById("osintGeneralSearchInput")
     .addEventListener("keydown", function(event) {
-
         if (event.key === "Enter") {
-
             event.preventDefault();
-
             performGeneralOsintSearch();
-
         }
-
     });
-
 </script>
-
-
 </body>
 </html>
