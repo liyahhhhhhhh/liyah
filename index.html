@@ -95,7 +95,7 @@ body::before {
 
     justify-content: center;
 
-    gap: 7vw;
+    gap: 6vw;
 
     padding: 40px;
 
@@ -126,9 +126,9 @@ body::before {
 
 .home-image {
 
-    width: 400px;
+    width: 430px;
 
-    max-width: 32vw;
+    max-width: 34vw;
 
     height: auto;
 
@@ -311,7 +311,7 @@ body::before {
     position: fixed;
 
     left: 35px;
-    top: 35px;
+    top: 32px;
 
     display: flex;
 
@@ -319,7 +319,7 @@ body::before {
 
     align-items: center;
 
-    gap: 12px;
+    gap: 14px;
 
     z-index: 100;
 }
@@ -336,7 +336,7 @@ body::before {
 
     font-family: "Unison Pro", sans-serif;
 
-    font-size: 13px;
+    font-size: 15px;
 
     font-weight: 700;
 
@@ -538,6 +538,8 @@ body::before {
     justify-content: flex-end;
 
     background: #000000;
+
+    border-radius: 12px;
 }
 
 
@@ -599,6 +601,8 @@ body::before {
     font-size: 10px;
 
     letter-spacing: 0.08em;
+
+    border-radius: 8px;
 }
 
 
@@ -627,6 +631,8 @@ body::before {
     font-size: 10px;
 
     letter-spacing: 0.08em;
+
+    border-radius: 8px;
 }
 
 
@@ -709,6 +715,10 @@ body::before {
     background: #000000;
 
     cursor: pointer;
+
+    border-radius: 14px;
+
+    overflow: hidden;
 }
 
 
@@ -855,6 +865,10 @@ body::before {
     flex-direction: column;
 
     cursor: pointer;
+
+    border-radius: 12px;
+
+    overflow: hidden;
 }
 
 
@@ -940,16 +954,17 @@ body::before {
 
 
 /* =========================================================
-   DISCORD OSINT
+   DISCORD OSINT + GENERAL OSINT
    ========================================================= */
 
-#discord-osint {
+#discord-osint,
+#osint {
 
-    padding-top: 105px;
+    padding-top: 95px;
 
-    padding-left: 8vw;
+    padding-left: 7vw;
 
-    padding-right: 8vw;
+    padding-right: 7vw;
 
     padding-bottom: 60px;
 
@@ -963,7 +978,7 @@ body::before {
 
     width: 100%;
 
-    max-width: 900px;
+    max-width: 950px;
 
     margin: 0 auto;
 }
@@ -989,7 +1004,7 @@ body::before {
 
     border: 1px solid #5975A7;
 
-    border-radius: 13px;
+    border-radius: 14px;
 
     background: #000000;
 
@@ -1096,7 +1111,7 @@ body::before {
 
     flex: 1;
 
-    height: 45px;
+    height: 48px;
 
     border: 1px solid #5975A7;
 
@@ -1111,6 +1126,8 @@ body::before {
     transition:
         border-color 0.25s ease,
         box-shadow 0.25s ease;
+
+    border-radius: 11px;
 }
 
 .osint-search-box:focus-within {
@@ -1180,11 +1197,11 @@ body::before {
 
 .osint-search-button {
 
-    height: 45px;
+    height: 48px;
 
-    min-width: 82px;
+    min-width: 88px;
 
-    padding: 0 18px;
+    padding: 0 20px;
 
     border: 1px solid #5975A7;
 
@@ -1205,6 +1222,8 @@ body::before {
     transition:
         filter 0.25s ease,
         transform 0.25s ease;
+
+    border-radius: 10px;
 }
 
 .osint-search-button:hover {
@@ -1249,6 +1268,8 @@ body::before {
     padding: 22px;
 
     background: #000000;
+
+    border-radius: 14px;
 }
 
 .discord-result-header {
@@ -1326,6 +1347,8 @@ body::before {
     padding: 13px;
 
     min-height: 60px;
+
+    border-radius: 10px;
 }
 
 .discord-info-label {
@@ -1358,6 +1381,7 @@ body::before {
 #shame::-webkit-scrollbar,
 #news::-webkit-scrollbar,
 #discord-osint::-webkit-scrollbar,
+#osint::-webkit-scrollbar,
 .home-content::-webkit-scrollbar {
 
     width: 8px;
@@ -1366,6 +1390,7 @@ body::before {
 #shame::-webkit-scrollbar-track,
 #news::-webkit-scrollbar-track,
 #discord-osint::-webkit-scrollbar-track,
+#osint::-webkit-scrollbar-track,
 .home-content::-webkit-scrollbar-track {
 
     background: #000000;
@@ -1374,6 +1399,7 @@ body::before {
 #shame::-webkit-scrollbar-thumb,
 #news::-webkit-scrollbar-thumb,
 #discord-osint::-webkit-scrollbar-thumb,
+#osint::-webkit-scrollbar-thumb,
 .home-content::-webkit-scrollbar-thumb {
 
     background: #5975A7;
@@ -1453,7 +1479,8 @@ body::before {
     }
 
 
-    #discord-osint {
+    #discord-osint,
+    #osint {
 
         padding-left: 25px;
 
@@ -1497,11 +1524,15 @@ body::before {
         top: 25px;
 
         gap: 9px;
+
+        flex-wrap: wrap;
+
+        max-width: calc(100vw - 40px);
     }
 
     .navigation a {
 
-        font-size: 11px;
+        font-size: 12px;
     }
 
 
@@ -1608,7 +1639,8 @@ body::before {
        MOBILE OSINT
        ========================= */
 
-    #discord-osint {
+    #discord-osint,
+    #osint {
 
         padding-top: 80px;
 
@@ -1839,6 +1871,20 @@ body::before {
         onclick="handleTab('discord-osint', this, event)"
     >
         Discord OSINT
+    </a>
+
+
+    <span class="separator">
+        ●
+    </span>
+
+
+    <a
+        href="#"
+        id="osintTab"
+        onclick="handleTab('osint', this, event)"
+    >
+        OSINT
     </a>
 
 </nav>
@@ -2362,6 +2408,114 @@ body::before {
 
 
 <!-- =========================================================
+     GENERAL OSINT
+     ========================================================= -->
+
+<section
+    class="page"
+    id="osint"
+>
+
+    <div class="osint-container">
+
+
+        <div class="osint-header">
+
+            <div class="osint-icon-box">
+
+                <img
+                    src="discord-osint.png"
+                    alt="OSINT"
+                >
+
+            </div>
+
+
+            <div class="osint-heading">
+
+                <h1>
+                    OSINT
+                </h1>
+
+                <span>
+                    Open source intelligence lookup
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="osint-track">
+            Track
+        </div>
+
+
+        <div class="osint-line"></div>
+
+
+        <div class="osint-search-area">
+
+
+            <div class="osint-search-box">
+
+
+                <div class="search-icon">
+
+                    <svg viewBox="0 0 24 24">
+
+                        <circle
+                            cx="10.8"
+                            cy="10.8"
+                            r="6.8"
+                        ></circle>
+
+                        <line
+                            x1="16"
+                            y1="16"
+                            x2="21"
+                            y2="21"
+                        ></line>
+
+                    </svg>
+
+                </div>
+
+
+                <input
+                    type="text"
+                    id="osintGeneralSearchInput"
+                    class="osint-search-input"
+                    placeholder="Enter search query"
+                    autocomplete="off"
+                >
+
+            </div>
+
+
+            <button
+                class="osint-search-button"
+                onclick="performGeneralOsintSearch()"
+            >
+                Search
+            </button>
+
+        </div>
+
+
+        <div
+            class="osint-status"
+            id="osintGeneralStatus"
+        ></div>
+
+
+    </div>
+
+</section>
+
+
+
+<!-- =========================================================
      JAVASCRIPT
      ========================================================= -->
 
@@ -2385,9 +2539,9 @@ fetch("https://liyah-zy3z.onrender.com/api/visit", {
 });
 
 
-/* =========================
+/* =========================================================
    TAB SYSTEM
-   ========================= */
+   ========================================================= */
 
 function handleTab(pageName, clickedTab, event) {
 
@@ -2780,10 +2934,6 @@ async function performOsintSearch() {
         );
 
 
-        /* =========================
-           REAL CONNECTION ERROR
-           ========================= */
-
         if (
             error instanceof TypeError &&
             error.message.includes("fetch")
@@ -2806,6 +2956,43 @@ async function performOsintSearch() {
 
 
 /* =========================================================
+   GENERAL OSINT SEARCH
+   ========================================================= */
+
+function performGeneralOsintSearch() {
+
+    const input =
+        document.getElementById(
+            "osintGeneralSearchInput"
+        );
+
+    const status =
+        document.getElementById(
+            "osintGeneralStatus"
+        );
+
+    const query =
+        input.value.trim();
+
+
+    if (!query) {
+
+        status.textContent =
+            "Enter a search query.";
+
+        input.focus();
+
+        return;
+    }
+
+
+    status.textContent =
+        "OSINT SEARCH READY — SEARCH SOURCE NOT CONFIGURED.";
+
+}
+
+
+/* =========================================================
    HTML SAFETY
    ========================================================= */
 
@@ -2821,9 +3008,9 @@ function escapeHTML(value) {
 }
 
 
-/* =========================
-   ENTER KEY SEARCH
-   ========================= */
+/* =========================================================
+   ENTER KEY — DISCORD OSINT
+   ========================================================= */
 
 document
     .getElementById("osintSearchInput")
@@ -2834,6 +3021,25 @@ document
             event.preventDefault();
 
             performOsintSearch();
+
+        }
+
+    });
+
+
+/* =========================================================
+   ENTER KEY — GENERAL OSINT
+   ========================================================= */
+
+document
+    .getElementById("osintGeneralSearchInput")
+    .addEventListener("keydown", function(event) {
+
+        if (event.key === "Enter") {
+
+            event.preventDefault();
+
+            performGeneralOsintSearch();
 
         }
 
