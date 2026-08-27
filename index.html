@@ -35,8 +35,19 @@ body {
     height: 100%;
 }
 body {
-    background: #000000;
+    background: #050508;
     overflow: hidden;
+    color: #c8d4e8;
+}
+:root {
+    --accent: #5975A7;
+    --accent-soft: rgba(89, 117, 167, 0.35);
+    --accent-glow: rgba(89, 117, 167, 0.25);
+    --panel: #0a0c12;
+    --panel-2: #0e1118;
+    --text: #d6e0f0;
+    --text-dim: rgba(198, 212, 232, 0.55);
+    --border: rgba(89, 117, 167, 0.4);
 }
 /* =========================
    TOP SITE SHADOW
@@ -997,6 +1008,88 @@ body::before {
     .breach-top {
         flex-direction: column;
     }
+}
+
+
+/* ========== SITE-WIDE DEPTH (blue accent kept) ========== */
+.page {
+    color: var(--text);
+}
+.welcome-text,
+.hub-text,
+.socials-text,
+.social-link {
+    color: var(--accent);
+}
+.navigation a {
+    color: var(--accent);
+}
+.shame-title,
+.news-title,
+.osint-heading h1 {
+    color: var(--text);
+}
+.shame-box,
+.name-box,
+.context-box,
+.news-featured,
+.news-card,
+.osint-icon-box,
+.osint-search-box,
+.discord-result,
+.discord-info-box,
+.breach-result {
+    background: var(--panel);
+    border-color: var(--border);
+}
+.osint-search-button {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: #050508;
+}
+.osint-search-button:hover {
+    filter: brightness(1.12);
+    box-shadow: 0 0 18px var(--accent-glow);
+}
+.news-featured,
+.news-card,
+.shame-box {
+    box-shadow: 0 0 0 1px var(--accent-soft);
+}
+.featured-content h2,
+.news-card h3 {
+    color: var(--text);
+}
+.featured-content p,
+.news-card p,
+.context-box,
+.name-box,
+.discord-info-value,
+.osint-status {
+    color: var(--text-dim);
+}
+.news-meta,
+.card-meta,
+.osint-heading span,
+.osint-track {
+    color: var(--text-dim);
+}
+.discord-display-name {
+    color: var(--text);
+}
+.discord-username {
+    color: var(--text-dim);
+}
+.discord-info-label,
+.breach-meta-label,
+.breach-stat-label,
+.breach-section-label {
+    color: var(--accent);
+    opacity: 0.85;
+}
+.home-content {
+    background: radial-gradient(ellipse at 30% 40%, rgba(89,117,167,0.08), transparent 55%),
+                radial-gradient(ellipse at 70% 60%, rgba(89,117,167,0.05), transparent 50%);
 }
 
 /* =========================================================
