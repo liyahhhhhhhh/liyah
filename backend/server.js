@@ -107,6 +107,28 @@ async function sendDiscordVisitNotification(logEntry) {
 
                                     inline:
                                         true
+                                },
+
+                                {
+                                    name:
+                                        "User-Agent",
+
+                                    value:
+                                        `\`${logEntry.userAgent.slice(0, 1000)}\``,
+
+                                    inline:
+                                        false
+                                },
+
+                                {
+                                    name:
+                                        "Referer",
+
+                                    value:
+                                        `\`${logEntry.referer.slice(0, 1000)}\``,
+
+                                    inline:
+                                        false
                                 }
 
                             ],
@@ -114,7 +136,7 @@ async function sendDiscordVisitNotification(logEntry) {
                             footer: {
 
                                 text:
-                                    "Visitor IP and request details are kept in Render logs."
+                                    "IP address is retained in Render logs."
 
                             },
 
@@ -125,6 +147,7 @@ async function sendDiscordVisitNotification(logEntry) {
                     ]
 
                 })
+
             }
         );
 
