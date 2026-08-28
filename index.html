@@ -1044,6 +1044,261 @@ body::before {
     word-break: break-all;
 }
 /* =========================================================
+   CORDCAT-STYLE FULL REPORT (Discord OSINT)
+   ========================================================= */
+.cord-report {
+    margin-top: 25px;
+    border: 1px solid var(--border);
+    background: var(--panel);
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 0 0 1px var(--accent-soft);
+}
+.cord-report-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 22px;
+    border-bottom: 1px solid rgba(89, 117, 167, 0.45);
+}
+.cord-avatar {
+    width: 78px;
+    height: 78px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+}
+.cord-name-block {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    flex: 1;
+}
+.cord-display-name {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+}
+.cord-username {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+}
+.cord-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 4px;
+}
+.cord-badge {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    border: 1px solid rgba(89, 117, 167, 0.55);
+    border-radius: 20px;
+    padding: 4px 9px;
+    color: var(--accent);
+    background: rgba(89, 117, 167, 0.1);
+}
+.cord-score-pill {
+    flex-shrink: 0;
+    border: 1px solid rgba(89, 117, 167, 0.5);
+    border-radius: 12px;
+    padding: 10px 14px;
+    text-align: center;
+    background: #000;
+}
+.cord-score-num {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 20px;
+    letter-spacing: 0.04em;
+    color: var(--text);
+}
+.cord-score-label {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    margin-top: 4px;
+    text-transform: uppercase;
+}
+.cord-score-pill.risk-low .cord-score-num { color: #6bcb8b; }
+.cord-score-pill.risk-elevated .cord-score-num { color: #ffc107; }
+.cord-score-pill.risk-high .cord-score-num { color: #ff6b7a; }
+.cord-tabs {
+    display: flex;
+    gap: 0;
+    border-bottom: 1px solid rgba(89, 117, 167, 0.4);
+    padding: 0 12px;
+    overflow-x: auto;
+}
+.cord-tab {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.1em;
+    color: var(--text-dim);
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid transparent;
+    padding: 14px 16px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: color 0.2s ease, border-color 0.2s ease;
+}
+.cord-tab:hover {
+    color: var(--accent);
+}
+.cord-tab.active {
+    color: var(--accent);
+    border-bottom-color: var(--accent);
+}
+.cord-tab-count {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 9px;
+    margin-left: 6px;
+    opacity: 0.7;
+}
+.cord-panel {
+    display: none;
+    padding: 22px;
+}
+.cord-panel.active {
+    display: block;
+}
+.cord-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+.cord-info-box {
+    border: 1px solid rgba(89, 117, 167, 0.55);
+    padding: 13px;
+    min-height: 60px;
+    border-radius: 10px;
+    background: #000;
+}
+.cord-info-label {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: var(--accent);
+    margin-bottom: 7px;
+    opacity: 0.9;
+}
+.cord-info-value {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.05em;
+    color: var(--text-dim);
+    word-break: break-all;
+}
+.cord-section-title {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.14em;
+    color: var(--text-dim);
+    margin: 0 0 12px 0;
+    text-transform: uppercase;
+}
+.cord-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 380px;
+    overflow-y: auto;
+}
+.cord-item {
+    border: 1px solid rgba(89, 117, 167, 0.4);
+    padding: 12px 14px;
+    border-radius: 10px;
+    background: #000;
+}
+.cord-item-title {
+    font-family: "Unison Pro", sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    color: var(--text);
+    margin-bottom: 6px;
+}
+.cord-item-meta {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    line-height: 1.5;
+}
+.cord-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 8px;
+}
+.cord-tag {
+    border: 1px solid rgba(89, 117, 167, 0.5);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+}
+.cord-empty {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    color: var(--text-dim);
+    opacity: 0.8;
+    padding: 8px 0;
+}
+.cord-powered {
+    margin-top: 16px;
+    padding-top: 12px;
+    border-top: 1px solid rgba(89, 117, 167, 0.3);
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 8px;
+    letter-spacing: 0.1em;
+    color: rgba(89, 117, 167, 0.55);
+}
+.cord-powered a {
+    color: var(--accent);
+}
+.cord-signals {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-top: 12px;
+}
+.cord-signal {
+    font-family: "Unison Pro Light", sans-serif;
+    font-size: 9px;
+    letter-spacing: 0.06em;
+    color: var(--text-dim);
+    padding: 8px 10px;
+    border: 1px solid rgba(89, 117, 167, 0.3);
+    border-radius: 8px;
+    background: #000;
+}
+@media (max-width: 600px) {
+    .cord-report-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    .cord-grid {
+        grid-template-columns: 1fr;
+    }
+    .cord-tabs {
+        padding: 0 8px;
+    }
+    .cord-tab {
+        padding: 12px 10px;
+        font-size: 9px;
+    }
+}
+/* =========================================================
    BREACH RESULTS
    ========================================================= */
 .breach-result {
@@ -1995,7 +2250,7 @@ body::before {
                     Discord OSINT
                 </h1>
                 <span>
-                    Discord intelligence lookup
+                    CordCat · Profile · Breaches · FiveM · DSA
                 </span>
             </div>
         </div>
@@ -2024,7 +2279,7 @@ body::before {
                     type="text"
                     id="osintSearchInput"
                     class="osint-search-input"
-                    placeholder="Enter the targets Discord ID"
+                    placeholder="Enter Discord snowflake ID (17–20 digits)"
                     autocomplete="off"
                 >
             </div>
@@ -2504,187 +2759,283 @@ function goHome() {
         });
 }
 /* =========================================================
-   DISCORD OSINT SEARCH
+   DISCORD OSINT SEARCH — CordCat (dis.cord.cat)
    ========================================================= */
+const PUBLIC_FLAGS = [
+    [1 << 0, "Staff"],
+    [1 << 1, "Partner"],
+    [1 << 2, "HypeSquad Events"],
+    [1 << 3, "Bug Hunter L1"],
+    [1 << 6, "HypeSquad Bravery"],
+    [1 << 7, "HypeSquad Brilliance"],
+    [1 << 8, "HypeSquad Balance"],
+    [1 << 9, "Early Supporter"],
+    [1 << 10, "Team User"],
+    [1 << 14, "Bug Hunter L2"],
+    [1 << 16, "Verified Bot"],
+    [1 << 17, "Early Verified Bot Dev"],
+    [1 << 18, "Moderator Programs Alumni"],
+    [1 << 19, "Bot HTTP Interactions"],
+    [1 << 22, "Active Developer"]
+];
+
+function decodePublicFlags(flags) {
+    const n = Number(flags) || 0;
+    const out = [];
+    for (const [bit, name] of PUBLIC_FLAGS) {
+        if (n & bit) out.push(name);
+    }
+    return out;
+}
+
+function formatAccountAge(iso) {
+    if (!iso) return "—";
+    try {
+        const created = new Date(iso);
+        const now = new Date();
+        let months = (now.getFullYear() - created.getFullYear()) * 12 + (now.getMonth() - created.getMonth());
+        if (now.getDate() < created.getDate()) months -= 1;
+        const years = Math.floor(months / 12);
+        const rem = months % 12;
+        if (years <= 0) return rem + "m";
+        if (rem === 0) return years + "y";
+        return years + "y " + rem + "m";
+    } catch (e) {
+        return "—";
+    }
+}
+
+function switchCordTab(btn, panelId) {
+    const root = btn.closest(".cord-report");
+    if (!root) return;
+    root.querySelectorAll(".cord-tab").forEach(function(t) { t.classList.remove("active"); });
+    root.querySelectorAll(".cord-panel").forEach(function(p) { p.classList.remove("active"); });
+    btn.classList.add("active");
+    const panel = root.querySelector("#" + panelId);
+    if (panel) panel.classList.add("active");
+}
+
 async function performOsintSearch() {
-    const input =
-        document.getElementById("osintSearchInput");
-    const status =
-        document.getElementById("osintStatus");
-    const query =
-        input.value.trim();
+    const input = document.getElementById("osintSearchInput");
+    const status = document.getElementById("osintStatus");
+    const query = input.value.trim();
+
     if (!query) {
-        status.textContent =
-            "Enter a Discord ID to search.";
+        status.textContent = "Enter a Discord ID to search.";
         input.focus();
         return;
     }
-    if (!/^\d{14,20}$/.test(query)) {
-        status.textContent =
-            "Invalid Discord ID.";
+    if (!/^\d{17,20}$/.test(query)) {
+        status.textContent = "Invalid Discord ID (17–20 digits).";
         return;
     }
-    status.textContent =
-        "SEARCHING DISCORD...";
+
+    status.textContent = "SEARCHING CORDCAT…";
+
     try {
         const apiURL =
-            "https://liyah-zy3z.onrender.com/api/discord/" +
+            "https://liyah-zy3z.onrender.com/api/cordcat/" +
             encodeURIComponent(query);
-        console.log(
-            "Discord API request:",
-            apiURL
-        );
-        const response =
-            await fetch(apiURL, {
-                method: "GET",
-                headers: {
-                    "Accept": "application/json"
-                },
-                cache: "no-store"
-            });
-        const responseText =
-            await response.text();
-        console.log(
-            "Render response status:",
-            response.status
-        );
-        console.log(
-            "Render response:",
-            responseText
-        );
+
+        const response = await fetch(apiURL, {
+            method: "GET",
+            headers: { Accept: "application/json" },
+            cache: "no-store"
+        });
+
+        const responseText = await response.text();
         let data = null;
         try {
-            data =
-                JSON.parse(responseText);
+            data = JSON.parse(responseText);
         } catch (jsonError) {
-            console.error(
-                "Response was not valid JSON:",
-                jsonError
-            );
-            status.textContent =
-                "SERVER ERROR: Render returned an invalid response.";
+            status.textContent = "SERVER ERROR: invalid response.";
             return;
         }
+
         if (!response.ok) {
-            status.textContent =
-                data.error ||
-                `SERVER ERROR: ${response.status}`;
+            status.textContent = data.error || ("SERVER ERROR: " + response.status);
             return;
         }
-        let avatarURL =
-            "https://cdn.discordapp.com/embed/avatars/0.png";
-        if (data.avatar && data.id) {
-            avatarURL =
-                `https://cdn.discordapp.com/avatars/${data.id}/${data.avatar}.png?size=256`;
+
+        const user = data.userInfo || {};
+        const breach = data.breach || {};
+        const fivem = data.fivem || {};
+        const statements = Array.isArray(data.statements) ? data.statements : [];
+        const score = data.score || {};
+
+        let avatarURL = user.avatar_url || "https://cdn.discordapp.com/embed/avatars/0.png";
+        if (!user.avatar_url && user.avatar && user.id) {
+            const ext = String(user.avatar).startsWith("a_") ? "gif" : "png";
+            avatarURL = "https://cdn.discordapp.com/avatars/" + user.id + "/" + user.avatar + "." + ext + "?size=512";
         }
-        status.innerHTML = `
-            <div class="discord-result">
-                <div class="discord-result-header">
-                    <img
-                        class="discord-avatar"
-                        src="${avatarURL}"
-                        alt="Discord Avatar"
-                    >
-                    <div class="discord-result-name">
-                        <div class="discord-display-name">
-                            ${escapeHTML(
-                                data.global_name ||
-                                data.username ||
-                                "Unknown User"
-                            )}
-                        </div>
-                        <div class="discord-username">
-                            @${escapeHTML(
-                                data.username ||
-                                "unknown"
-                            )}
-                        </div>
-                    </div>
-                </div>
-                <div class="discord-info">
-                    <div class="discord-info-box">
-                        <div class="discord-info-label">
-                            USER ID
-                        </div>
-                        <div class="discord-info-value">
-                            ${escapeHTML(data.id || query)}
-                        </div>
-                    </div>
-                    <div class="discord-info-box">
-                        <div class="discord-info-label">
-                            USERNAME
-                        </div>
-                        <div class="discord-info-value">
-                            ${escapeHTML(
-                                data.username ||
-                                "None"
-                            )}
-                        </div>
-                    </div>
-                    <div class="discord-info-box">
-                        <div class="discord-info-label">
-                            DISPLAY NAME
-                        </div>
-                        <div class="discord-info-value">
-                            ${escapeHTML(
-                                data.global_name ||
-                                "None"
-                            )}
-                        </div>
-                    </div>
-                    <div class="discord-info-box">
-                        <div class="discord-info-label">
-                            BANNER
-                        </div>
-                        <div class="discord-info-value">
-                            ${data.banner
-                                ? "AVAILABLE"
-                                : "NONE"}
-                        </div>
-                    </div>
-                    <div class="discord-info-box">
-                        <div class="discord-info-label">
-                            ACCENT COLOR
-                        </div>
-                        <div class="discord-info-value">
-                            ${escapeHTML(
-                                data.accent_color ||
-                                "NONE"
-                            )}
-                        </div>
-                    </div>
-                    <div class="discord-info-box">
-                        <div class="discord-info-label">
-                            DISCRIMINATOR
-                        </div>
-                        <div class="discord-info-value">
-                            ${escapeHTML(
-                                data.discriminator ||
-                                "0"
-                            )}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    } catch (error) {
-        console.error(
-            "Discord OSINT request failed:",
-            error
-        );
-        if (
-            error instanceof TypeError &&
-            error.message.includes("fetch")
-        ) {
-            status.textContent =
-                "CONNECTION ERROR: Could not reach the Render server.";
+
+        const badges = decodePublicFlags(user.public_flags);
+        const badgesHTML = badges.length
+            ? badges.map(function(b) { return '<span class="cord-badge">' + escapeHTML(b) + "</span>"; }).join("")
+            : "";
+
+        const riskLevel = (score.level || "low").toLowerCase();
+        const riskClass = "risk-" + (riskLevel === "elevated" || riskLevel === "high" ? riskLevel : "low");
+        const riskNum = score.risk != null ? score.risk : "—";
+
+        const breachResults = (breach.data && Array.isArray(breach.data.results))
+            ? breach.data.results
+            : [];
+        const breachCount = breach.resultsCount != null ? breach.resultsCount : breachResults.length;
+
+        let breachHTML = "";
+        if (breachResults.length === 0) {
+            breachHTML = '<div class="cord-empty">No breach exposure found in CordCat indexes.</div>';
         } else {
-            status.textContent =
-                "REQUEST ERROR: " +
-                error.message;
+            breachHTML = breachResults.map(function(r) {
+                const cats = Array.isArray(r.categories) ? r.categories : [];
+                const fields = r.fields && typeof r.fields === "object" ? r.fields : {};
+                const fieldKeys = Object.keys(fields);
+                const tags = cats.concat(fieldKeys).map(function(t) {
+                    return '<span class="cord-tag">' + escapeHTML(String(t)) + "</span>";
+                }).join("");
+                let fieldLines = fieldKeys.map(function(k) {
+                    return escapeHTML(k) + ": " + escapeHTML(String(fields[k]));
+                }).join("<br>");
+                return (
+                    '<div class="cord-item">' +
+                    '<div class="cord-item-title">' + escapeHTML(r.source || "Unknown source") + "</div>" +
+                    (fieldLines ? '<div class="cord-item-meta">' + fieldLines + "</div>" : "") +
+                    (tags ? '<div class="cord-tags">' + tags + "</div>" : "") +
+                    "</div>"
+                );
+            }).join("");
+        }
+
+        const fivemData = fivem.data || {};
+        const fivemResults = Array.isArray(fivemData.results) ? fivemData.results : [];
+        const fivemTotal = fivemData.total != null ? fivemData.total : fivemResults.length;
+
+        let fivemHTML = "";
+        if (fivemResults.length === 0) {
+            fivemHTML = '<div class="cord-empty">No FiveM / GTA records found.</div>';
+        } else {
+            fivemHTML = fivemResults.map(function(r) {
+                const lines = [];
+                if (r.name || r.playerName || r.in_game_name) {
+                    lines.push("Name: " + escapeHTML(r.name || r.playerName || r.in_game_name));
+                }
+                if (r.license) lines.push("License: " + escapeHTML(String(r.license)));
+                if (r.steam) lines.push("Steam: " + escapeHTML(String(r.steam)));
+                if (r.source) lines.push("Source: " + escapeHTML(String(r.source)));
+                if (r.ip) lines.push("IP: " + escapeHTML(String(r.ip)));
+                Object.keys(r).forEach(function(k) {
+                    if (["name","playerName","in_game_name","license","steam","source","ip"].indexOf(k) >= 0) return;
+                    const v = r[k];
+                    if (v != null && typeof v !== "object") {
+                        lines.push(escapeHTML(k) + ": " + escapeHTML(String(v)));
+                    }
+                });
+                return (
+                    '<div class="cord-item">' +
+                    '<div class="cord-item-title">' + escapeHTML(r.source || r.name || "FiveM record") + "</div>" +
+                    '<div class="cord-item-meta">' + (lines.join("<br>") || "—") + "</div>" +
+                    "</div>"
+                );
+            }).join("");
+        }
+
+        let dsaHTML = "";
+        if (statements.length === 0) {
+            dsaHTML = '<div class="cord-empty">No EU DSA statements linked to this ID.</div>';
+        } else {
+            dsaHTML = statements.map(function(s) {
+                const title = s.title || s.category || s.type || "DSA Statement";
+                const meta = [];
+                if (s.category) meta.push("Category: " + escapeHTML(String(s.category)));
+                if (s.scope) meta.push("Scope: " + escapeHTML(String(s.scope)));
+                if (s.date || s.created_at) meta.push("Date: " + escapeHTML(String(s.date || s.created_at)));
+                if (s.facts) meta.push(escapeHTML(String(s.facts)));
+                return (
+                    '<div class="cord-item">' +
+                    '<div class="cord-item-title">' + escapeHTML(String(title)) + "</div>" +
+                    '<div class="cord-item-meta">' + (meta.join("<br>") || "—") + "</div>" +
+                    "</div>"
+                );
+            }).join("");
+        }
+
+        const signals = Array.isArray(score.signals) ? score.signals : [];
+        const signalsHTML = signals.length
+            ? '<div class="cord-signals">' + signals.map(function(s) {
+                return '<div class="cord-signal">' + escapeHTML(s.label || s.key || "Signal") +
+                    (s.points != null ? ' · +' + escapeHTML(String(s.points)) : "") + "</div>";
+            }).join("") + "</div>"
+            : "";
+
+        const bot = score.bot || {};
+        const createdISO = user.created_at || null;
+        const createdLabel = createdISO
+            ? new Date(createdISO).toLocaleString("en-GB", { day: "2-digit", month: "short", year: "numeric" })
+            : "—";
+
+        const uid = "cord_" + String(Date.now());
+
+        status.innerHTML =
+            '<div class="cord-report">' +
+            '<div class="cord-report-header">' +
+            '<img class="cord-avatar" src="' + escapeHTML(avatarURL) + '" alt="Avatar">' +
+            '<div class="cord-name-block">' +
+            '<div class="cord-display-name">' + escapeHTML(user.global_name || user.username || "Unknown") + "</div>" +
+            '<div class="cord-username">@' + escapeHTML(user.username || "unknown") +
+            " · created " + escapeHTML(formatAccountAge(createdISO)) + "</div>" +
+            (badgesHTML ? '<div class="cord-badges">' + badgesHTML + "</div>" : "") +
+            "</div>" +
+            '<div class="cord-score-pill ' + riskClass + '">' +
+            '<div class="cord-score-num">' + escapeHTML(String(riskNum)) + "</div>" +
+            '<div class="cord-score-label">Risk · ' + escapeHTML(riskLevel) + "</div>" +
+            "</div>" +
+            "</div>" +
+            '<div class="cord-tabs">' +
+            '<button type="button" class="cord-tab active" onclick="switchCordTab(this,\'' + uid + '_profile\')">Profile</button>' +
+            '<button type="button" class="cord-tab" onclick="switchCordTab(this,\'' + uid + '_breach\')">Breaches<span class="cord-tab-count">' + breachCount + "</span></button>" +
+            '<button type="button" class="cord-tab" onclick="switchCordTab(this,\'' + uid + '_fivem\')">FiveM<span class="cord-tab-count">' + fivemTotal + "</span></button>" +
+            '<button type="button" class="cord-tab" onclick="switchCordTab(this,\'' + uid + '_dsa\')">DSA<span class="cord-tab-count">' + statements.length + "</span></button>" +
+            "</div>" +
+            '<div class="cord-panel active" id="' + uid + '_profile">' +
+            '<div class="cord-section-title">Profile</div>' +
+            '<div class="cord-grid">' +
+            '<div class="cord-info-box"><div class="cord-info-label">USER ID</div><div class="cord-info-value">' + escapeHTML(user.id || query) + "</div></div>" +
+            '<div class="cord-info-box"><div class="cord-info-label">USERNAME</div><div class="cord-info-value">' + escapeHTML(user.username || "—") + "</div></div>" +
+            '<div class="cord-info-box"><div class="cord-info-label">DISPLAY NAME</div><div class="cord-info-value">' + escapeHTML(user.global_name || "—") + "</div></div>" +
+            '<div class="cord-info-box"><div class="cord-info-label">CREATED</div><div class="cord-info-value">' + escapeHTML(createdLabel) + " · " + escapeHTML(formatAccountAge(createdISO)) + "</div></div>" +
+            '<div class="cord-info-box"><div class="cord-info-label">BANNER</div><div class="cord-info-value">' + (user.banner ? "AVAILABLE" : "NONE") + "</div></div>" +
+            '<div class="cord-info-box"><div class="cord-info-label">BOT LIKELIHOOD</div><div class="cord-info-value">' + escapeHTML((bot.level || "—") + (bot.isBot ? " · flagged" : "")) + "</div></div>" +
+            "</div>" +
+            signalsHTML +
+            "</div>" +
+            '<div class="cord-panel" id="' + uid + '_breach">' +
+            '<div class="cord-section-title">Breach exposure · ' + breachCount + " record(s)</div>" +
+            '<div class="cord-list">' + breachHTML + "</div>" +
+            "</div>" +
+            '<div class="cord-panel" id="' + uid + '_fivem">' +
+            '<div class="cord-section-title">FiveM / GTA · ' + fivemTotal + " record(s)</div>" +
+            '<div class="cord-list">' + fivemHTML + "</div>" +
+            "</div>" +
+            '<div class="cord-panel" id="' + uid + '_dsa">' +
+            '<div class="cord-section-title">EU DSA sanctions · ' + statements.length + "</div>" +
+            '<div class="cord-list">' + dsaHTML + "</div>" +
+            "</div>" +
+            '<div style="padding:0 22px 18px">' +
+            '<div class="cord-powered">Powered by <a href="https://dis.cord.cat" target="_blank" rel="noopener">CordCat</a> · Profile · Breaches · FiveM · DSA</div>' +
+            "</div>" +
+            "</div>";
+
+    } catch (error) {
+        console.error("Discord OSINT (CordCat) failed:", error);
+        if (error instanceof TypeError && error.message.includes("fetch")) {
+            status.textContent = "CONNECTION ERROR: Could not reach the Render server.";
+        } else {
+            status.textContent = "REQUEST ERROR: " + error.message;
         }
     }
 }
+
 /* =========================================================
    GENERAL OSINT SEARCH (UI like the screenshot)
    ========================================================= */
