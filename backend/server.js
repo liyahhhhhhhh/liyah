@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 3000;
 
 const DISCORD_BOT_TOKEN = process.env.DISCORD_BOT_TOKEN;
 const DISCORD_WEBHOOK_URL = process.env.DISCORD_WEBHOOK_URL;
-const CORDCAT_API_KEY = process.env.CORDCAT_API_KEY;
 
 
 /* =========================================================
@@ -553,13 +552,11 @@ app.get(
                         method: "GET",
 
                         headers: {
-
                             Authorization:
                                 `Bot ${DISCORD_BOT_TOKEN}`,
 
                             Accept:
                                 "application/json"
-
                         }
 
                     }
@@ -817,242 +814,6 @@ app.get(
                 .json({
                     error:
                         "Failed to contact Discord."
-                });
-
-        }
-
-    }
-);
-
-
-/* =========================================================
-   CORDCAT FULL LOOKUP (dis.cord.cat / cord.cat)
-   Proxies https://api.cord.cat/api/v2/query/:id
-   Requires CORDCAT_API_KEY env var (get free key at cord.cat)
-   ========================================================= */
-
-app.get(
-    "/api/cordcat/:id",
-    async (req, res) => {
-
-        const userId =
-            req.params.id;
-
-
-        if (!/^\d{17,20}$/.test(userId)) {
-
-            return res
-                .status(400)
-                .json({
-                    error:
-                        "Invalid Discord ID."
-                });
-
-        }
-
-
-        if (!CORDCAT_API_KEY) {
-
-            return res
-                .status(503)
-                .json({
-                    error:
-                        "CordCat API key is not configured. Set CORDCAT_API_KEY in your environment (get a free key at https://cord.cat/register).",
-                    code: "CORDCAT_KEY_MISSING"
-                });
-
-        }
-
-
-        try {
-
-            const refresh =
-                req.query.refresh === "1" ||
-                req.query.refresh === "true"
-                    ? "?refresh=1"
-                    : "";
-
-
-            const response =
-                await fetch(
-                    `https://api.cord.cat/api/v2/query/${encodeURIComponent(userId)}${refresh}`,
-                    {
-                        method: "GET",
-                        headers: {
-                            "X-API-Key":
-                                CORDCAT_API_KEY,
-                            Accept:
-                                "application/json"
-                        },
-                        cache: "no-store"
-                    }
-                );
-
-
-            const text =
-                await response.text();
-
-
-            let data = null;
-
-            try {
-
-                data =
-                    JSON.parse(text);
-
-            } catch (e) {
-
-                console.error(
-                    "CordCat returned non-JSON:",
-                    text.slice(0, 300)
-                );
-
-                return res
-                    .status(502)
-                    .json({
-                        error:
-                            "CordCat returned an invalid response."
-                    });
-
-            }
-
-
-            if (!response.ok) {
-
-                console.error(
-                    "CordCat API error:",
-                    response.status,
-                    data
-                );
-
-
-                if (response.status === 401) {
-
-                    return res
-                        .status(502)
-                        .json({
-                            error:
-                                "CordCat API key is invalid or expired. Check CORDCAT_API_KEY."
-                        });
-
-                }
-
-
-                if (response.status === 404) {
-
-                    return res
-                        .status(404)
-                        .json({
-                            error:
-                                data.message ||
-                                data.error ||
-                                "Discord user not found on CordCat."
-                        });
-
-                }
-
-
-                if (response.status === 429) {
-
-                    return res
-                        .status(429)
-                        .json({
-                            error:
-                                "CordCat rate limit exceeded. Try again later."
-                        });
-
-                }
-
-
-                return res
-                    .status(response.status)
-                    .json({
-                        error:
-                            data.message ||
-                            data.error ||
-                            "CordCat API error."
-                    });
-
-            }
-
-
-            /* Enrich avatar / banner URLs if missing */
-
-            if (data.userInfo) {
-
-                const u =
-                    data.userInfo;
-
-
-                if (u.avatar && u.id && !u.avatar_url) {
-
-                    const ext =
-                        String(u.avatar).startsWith("a_")
-                            ? "gif"
-                            : "png";
-
-                    u.avatar_url =
-                        `https://cdn.discordapp.com/avatars/${u.id}/${u.avatar}.${ext}?size=512`;
-
-                }
-
-
-                if (u.banner && u.id && !u.banner_url) {
-
-                    const ext =
-                        String(u.banner).startsWith("a_")
-                            ? "gif"
-                            : "png";
-
-                    u.banner_url =
-                        `https://cdn.discordapp.com/banners/${u.id}/${u.banner}.${ext}?size=1024`;
-
-                }
-
-
-                /* Account created from snowflake */
-
-                if (!u.created_at && u.id) {
-
-                    try {
-
-                        const DISCORD_EPOCH =
-                            1420070400000;
-
-                        const ts =
-                            Number(
-                                BigInt(u.id) >> 22n
-                            ) +
-                            DISCORD_EPOCH;
-
-                        u.created_at =
-                            new Date(ts).toISOString();
-
-                    } catch (e) {
-                        /* ignore */
-                    }
-
-                }
-
-            }
-
-
-            res.json(data);
-
-
-        } catch (error) {
-
-            console.error(
-                "CordCat proxy error:",
-                error
-            );
-
-
-            res
-                .status(500)
-                .json({
-                    error:
-                        "Failed to contact CordCat."
                 });
 
         }
@@ -1450,14 +1211,6 @@ app.listen(
             DISCORD_WEBHOOK_URL
                 ? "CONFIGURED"
                 : "MISSING"
-        );
-
-
-        console.log(
-            "CordCat API key:",
-            CORDCAT_API_KEY
-                ? "CONFIGURED"
-                : "MISSING (set CORDCAT_API_KEY for full Discord OSINT)"
         );
 
     }
